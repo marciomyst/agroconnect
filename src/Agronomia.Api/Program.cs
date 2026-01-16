@@ -1,39 +1,29 @@
 
-namespace Agronomia.Api
+using Agronomia.Api.Extensions;
+
+namespace Agronomia.Api;
+
+/// <summary>
+/// Entry point for the Agronomia API application.
+/// </summary>
+/// <remarks>
+/// Bootstraps the web host, registers dependencies via <see cref="ProgramExtensions.AddDependencies(WebApplicationBuilder)"/>,
+/// builds the app, wires middlewares/endpoints, and starts the HTTP server.
+/// </remarks>
+public class Program
 {
-    public class Program
+    /// <summary>
+    /// Application entry point.
+    /// </summary>
+    /// <param name="args">Command-line arguments.</param>
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+        builder.AddDependencies();
 
-            // Add services to the container.
+        WebApplication app = builder.Build();
+        app.AddMiddlewares();
 
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
-
-            var app = builder.Build();
-
-            app.UseDefaultFiles();
-            app.MapStaticAssets();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.MapOpenApi();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.MapFallbackToFile("/index.html");
-
-            app.Run();
-        }
+        app.Run();
     }
 }

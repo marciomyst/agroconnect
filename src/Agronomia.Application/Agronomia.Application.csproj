@@ -4,4 +4,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Agronomia.Crosscutting\Agronomia.Crosscutting.csproj" />
+      <ProjectReference Include="..\Agronomia.Domain\Agronomia.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" />
+      <PackageReference Include="FluentValidation" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    </ItemGroup>
+
 </Project>
