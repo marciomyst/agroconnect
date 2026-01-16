@@ -1,44 +1,68 @@
-<div class="flex flex-col" *ngIf="activeSlide as slide">
-  <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl shadow-2xl max-w-lg" [ngClass]="cardClass">
-    <ng-container *ngIf="isTestimonial(slide); else featureSlide">
-      <h3 class="text-xl font-bold text-white" *ngIf="slide.title">{{ slide.title }}</h3>
-      <div class="flex gap-1 mb-4" *ngIf="slide.rating">
-        <span class="material-symbols-outlined text-primary" *ngFor="let _ of getStars(slide.rating)">star</span>
+@if (activeSlide; as slide) {
+  <div class="flex flex-col">
+    <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl shadow-2xl max-w-lg" [ngClass]="cardClass">
+      @if (isTestimonial(slide)) {
+        @if (slide.title) {
+          <h3 class="text-xl font-bold text-white">{{ slide.title }}</h3>
+        }
+        @if (slide.rating) {
+          <div class="flex gap-1 mb-4">
+            @for (_ of getStars(slide.rating); track _) {
+              <span class="material-symbols-outlined text-primary">star</span>
+            }
+          </div>
+        }
+        @if (slide.quote) {
+          <blockquote class="text-xl font-medium text-white mb-4 leading-relaxed">
+            "{{ slide.quote }}"
+          </blockquote>
+        }
+        @if (slide.author || slide.authorRole || slide.authorImage) {
+          <div class="flex items-center gap-4">
+            @if (slide.authorImage) {
+              <div class="size-12 rounded-full overflow-hidden border-2 border-primary">
+                <img class="h-full w-full object-cover" [alt]="slide.author || 'Pessoa'" [src]="slide.authorImage"/>
+              </div>
+            }
+            <div>
+              @if (slide.author) {
+                <p class="font-bold text-white text-lg">{{ slide.author }}</p>
+              }
+              @if (slide.authorRole) {
+                <p class="text-white/80 text-sm">{{ slide.authorRole }}</p>
+              }
+            </div>
+          </div>
+        }
+      } @else {
+        @if (slide.title) {
+          <h3 class="text-xl font-bold text-white">{{ slide.title }}</h3>
+        }
+        @if (slide.bullets?.length) {
+          <div class="mt-6 grid gap-4 text-white/90 text-sm">
+            @for (bullet of slide.bullets; track trackByBullet($index, bullet)) {
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary">{{ bullet.icon }}</span>
+                {{ bullet.text }}
+              </div>
+            }
+          </div>
+        }
+      }
+    </div>
+    @if (showIndicators && slides.length) {
+      <div class="flex items-center gap-3" [ngClass]="indicatorClass">
+        @for (item of slides; track trackBySlide(i, item); let i = $index) {
+          <button
+            class="h-1.5 rounded-full transition-all"
+            type="button"
+            [ngClass]="i === activeIndex ? 'w-12 bg-primary' : 'w-3 bg-white/30'"
+            [attr.aria-current]="i === activeIndex"
+            [attr.aria-label]="'Slide ' + (i + 1)"
+            (click)="selectSlide(i)"
+          ></button>
+        }
       </div>
-      <blockquote class="text-xl font-medium text-white mb-4 leading-relaxed" *ngIf="slide.quote">
-        "{{ slide.quote }}"
-      </blockquote>
-      <div class="flex items-center gap-4" *ngIf="slide.author || slide.authorRole || slide.authorImage">
-        <div class="size-12 rounded-full overflow-hidden border-2 border-primary" *ngIf="slide.authorImage">
-          <img class="h-full w-full object-cover" [alt]="slide.author || 'Pessoa'" [src]="slide.authorImage"/>
-        </div>
-        <div>
-          <p class="font-bold text-white text-lg" *ngIf="slide.author">{{ slide.author }}</p>
-          <p class="text-white/80 text-sm" *ngIf="slide.authorRole">{{ slide.authorRole }}</p>
-        </div>
-      </div>
-    </ng-container>
-
-    <ng-template #featureSlide>
-      <h3 class="text-xl font-bold text-white" *ngIf="slide.title">{{ slide.title }}</h3>
-      <div class="mt-6 grid gap-4 text-white/90 text-sm" *ngIf="slide.bullets?.length">
-        <div class="flex items-start gap-3" *ngFor="let bullet of slide.bullets; trackBy: trackByBullet">
-          <span class="material-symbols-outlined text-primary">{{ bullet.icon }}</span>
-          {{ bullet.text }}
-        </div>
-      </div>
-    </ng-template>
+    }
   </div>
-
-  <div class="flex items-center gap-3" [ngClass]="indicatorClass" *ngIf="showIndicators && slides.length">
-    <button
-      class="h-1.5 rounded-full transition-all"
-      type="button"
-      *ngFor="let item of slides; index as i; trackBy: trackBySlide"
-      [ngClass]="i === activeIndex ? 'w-12 bg-primary' : 'w-3 bg-white/30'"
-      [attr.aria-current]="i === activeIndex"
-      [attr.aria-label]="'Slide ' + (i + 1)"
-      (click)="selectSlide(i)"
-    ></button>
-  </div>
-</div>
+}
