@@ -9,7 +9,7 @@ public static class AuthenticationExtensions
 {
     public static WebApplicationBuilder AddAuthenticationServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddOptions<JwtTokenSettings>()
+		builder.Services.AddOptions<JwtTokenSettings>()
             .Bind(builder.Configuration.GetSection("Jwt"))
             .ValidateFluentValidation()
             .ValidateOnStart();

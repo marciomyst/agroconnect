@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Agronomia.Application.Users.GetCurrentUser;
+namespace Agronomia.Application.Features.Users.GetCurrentUser;
 
 /// <summary>
 /// Validates <see cref="GetCurrentUserQuery"/> requests.

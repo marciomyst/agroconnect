@@ -1,6 +1,6 @@
 using Agronomia.Domain.Aggregates.Users.ValueObjects;
 
-namespace Agronomia.Application.Users;
+namespace Agronomia.Application.Features.Users;
 
 /// <summary>
 /// Lightweight projection of a user used by queries.

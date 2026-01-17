@@ -1,6 +1,4 @@
-using Agronomia.Application.Users;
-
-namespace Agronomia.Application.Users;
+namespace Agronomia.Application.Features.Users;
 
 /// <summary>
 /// Read model repository for user projections using optimized queries (e.g., Dapper).

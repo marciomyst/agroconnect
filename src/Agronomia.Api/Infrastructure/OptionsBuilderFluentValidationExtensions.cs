@@ -17,22 +17,15 @@ public static class OptionsBuilderFluentValidationExtensions
         return builder;
     }
 
-    private class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
+    private class FluentValidationOptions<TOptions>(string? name, IValidator<TOptions> validator) : IValidateOptions<TOptions> where TOptions : class
     {
-        private readonly string? _name;
-        private readonly IValidator<TOptions> _validator;
-
-        public FluentValidationOptions(string? name, IValidator<TOptions> validator)
-        {
-            _name = name;
-            _validator = validator;
-        }
+        private readonly string? _name = name;
 
         public ValidateOptionsResult Validate(string? name, TOptions options)
         {
             if (_name != null && _name != name) return ValidateOptionsResult.Skip;
 
-            var result = _validator.Validate(options);
+            var result = validator.Validate(options);
 
             if (result.IsValid) return ValidateOptionsResult.Success;
 

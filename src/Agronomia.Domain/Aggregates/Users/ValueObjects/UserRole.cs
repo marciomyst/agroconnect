@@ -13,5 +13,10 @@ public enum UserRole
     /// <summary>
     /// Supervisor with elevated permissions.
     /// </summary>
-    Supervisor = 2
+    Supervisor = 2,
+
+    /// <summary>
+    /// Full-access administrator role.
+    /// </summary>
+    Administrator = 3,
 }

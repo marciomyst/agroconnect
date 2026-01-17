@@ -1,7 +1,6 @@
-using Agronomia.Domain.Aggregates.Users;
 using Agronomia.Domain.SeedWork;
 
-namespace Agronomia.Domain.Interfaces;
+namespace Agronomia.Domain.Aggregates.Users;
 
 /// <summary>
 /// Repository contract for managing <see cref="User"/> aggregates.
@@ -32,12 +31,4 @@ public interface IUserRepository
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The user if found; otherwise <c>null</c>.</returns>
     Task<User?> GetByIdAsync(string id, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Retrieves a user by email.
-    /// </summary>
-    /// <param name="email">User email.</param>
-    /// <param name="cancellationToken">Cancellation token.</param>
-    /// <returns>The user if found; otherwise <c>null</c>.</returns>
-    Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
 }

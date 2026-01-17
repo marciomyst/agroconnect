@@ -1,4 +1,4 @@
-using Agronomia.Application.Users;
+using Agronomia.Application.Features.Users;
 using Agronomia.Domain.Aggregates.Users.ValueObjects;
 using Dapper;
 using System.Data;

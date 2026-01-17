@@ -1,3 +1,4 @@
+using Agronomia.Api.Features.Auth;
 using Agronomia.Api.Infrastructure;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -57,7 +58,7 @@ public static class ApiExtensions
 
     public static WebApplication MapApiEndpoints(this WebApplication app)
     {
-        //app.MapAuthEndpoints();
+        app.MapAuthEndpoints();
         //app.MapAnalysisEndpoints();
         //app.MapAgentEndpoints();
         //app.MapCompanyEndpoints();

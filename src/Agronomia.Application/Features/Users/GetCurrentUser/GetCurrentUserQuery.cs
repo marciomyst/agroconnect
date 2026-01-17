@@ -1,6 +1,4 @@
-using Agronomia.Application.Users;
-
-namespace Agronomia.Application.Users.GetCurrentUser;
+namespace Agronomia.Application.Features.Users.GetCurrentUser;
 
 /// <summary>
 /// Query that returns the authenticated user's details.

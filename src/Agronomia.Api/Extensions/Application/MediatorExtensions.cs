@@ -1,3 +1,4 @@
+using Agronomia.Application;
 using Wolverine;
 using Wolverine.FluentValidation;
 
@@ -9,6 +10,7 @@ public static class MediatorExtensions
     {
         builder.Host.UseWolverine(opts =>
         {
+            opts.Discovery.IncludeAssembly(typeof(AssemblyReference).Assembly);
             opts.UseFluentValidation();
 
         });

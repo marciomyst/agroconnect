@@ -1,5 +1,6 @@
-using Agronomia.Application.Users;
-using Agronomia.Domain.Interfaces;
+using Agronomia.Application.Features.Authentication;
+using Agronomia.Application.Features.Users;
+using Agronomia.Domain.Aggregates.Users;
 using Agronomia.Infrastructure.Persistence.ReadRepositories;
 using Agronomia.Infrastructure.Persistence.Repositories;
 
@@ -9,6 +10,8 @@ public static class RepositoryExtensions
 {
     public static WebApplicationBuilder AddRepositoryServices(this WebApplicationBuilder builder)
     {
+        builder.Services.AddScoped<IAuthenticationReadRepository, AuthenticationReadRepository>();
+
         builder.Services.AddScoped<IUserRepository, UserRepository>();
 
         builder.Services.AddScoped<IUserReadRepository, UserReadRepository>();

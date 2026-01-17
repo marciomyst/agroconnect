@@ -1,4 +1,6 @@
-namespace Agronomia.Application.Users.GetCurrentUser;
+using Agronomia.Application.Features.Users;
+
+namespace Agronomia.Application.Features.Users.GetCurrentUser;
 
 /// <summary>
 /// Handles retrieval of the currently authenticated user.
