@@ -8,6 +8,16 @@ import { PasswordVerificationComponent } from './password-verification/password-
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
 import { MainComponent } from './main.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { authGuard } from './auth.guard';
+import { MarketplaceComponent } from './marketplace/marketplace.component';
+import { FarmersPageComponent } from './farmers-page/farmers-page.component';
+import { ResellersPageComponent } from './resellers-page/resellers-page.component';
+import { LogisticsPageComponent } from './logistics-page/logistics-page.component';
+import { PricingPageComponent } from './pricing-page/pricing-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { CareersPageComponent } from './careers-page/careers-page.component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
 
 const routes: Routes = [
   {
@@ -17,11 +27,48 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'authentication'
+        redirectTo: 'platform/marketplace'
+      },
+      {
+        path: 'platform/marketplace',
+        component: MarketplaceComponent
+      },
+      {
+        path: 'platform/farmers',
+        component: FarmersPageComponent
+      },
+      {
+        path: 'platform/resellers',
+        component: ResellersPageComponent
+      },
+      {
+        path: 'platform/logistics',
+        component: LogisticsPageComponent
+      },
+      {
+        path: 'platform/pricing',
+        component: PricingPageComponent
+      },
+      {
+        path: 'platform/about',
+        component: AboutPageComponent
+      },
+      {
+        path: 'platform/careers',
+        component: CareersPageComponent
+      },
+      {
+        path: 'platform/blog',
+        component: BlogPageComponent
       },
       {
         path: 'authentication',
         component: AuthenticationComponent
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [authGuard]
       },
       {
         path: 'forgot-password',
@@ -37,20 +84,116 @@ const routes: Routes = [
         component: PasswordResetComponent
       },
       {
-        path: 'privacidade',
+        path: 'platform/privacy',
         component: PrivacyComponent
       },
       {
-        path: 'faq',
+        path: 'platform/faq',
         component: FaqComponent
       },
       {
-        path: 'termos',
+        path: 'platform/terms',
         component: TermsComponent
+      },
+      // Temporary redirects to keep legacy Portuguese URLs working
+      {
+        path: 'marketplace',
+        redirectTo: 'platform/marketplace',
+        pathMatch: 'full'
+      },
+      {
+        path: 'platform',
+        redirectTo: 'platform/marketplace',
+        pathMatch: 'full'
+      },
+      {
+        path: 'marketplace/agricultores',
+        redirectTo: 'platform/farmers',
+        pathMatch: 'full'
+      },
+      {
+        path: 'marketplace/revendedores',
+        redirectTo: 'platform/resellers',
+        pathMatch: 'full'
+      },
+      {
+        path: 'marketplace/logistica',
+        redirectTo: 'platform/logistics',
+        pathMatch: 'full'
+      },
+      {
+        path: 'marketplace/farmers',
+        redirectTo: 'platform/farmers',
+        pathMatch: 'full'
+      },
+      {
+        path: 'marketplace/resellers',
+        redirectTo: 'platform/resellers',
+        pathMatch: 'full'
+      },
+      {
+        path: 'marketplace/logistics',
+        redirectTo: 'platform/logistics',
+        pathMatch: 'full'
+      },
+      {
+        path: 'privacidade',
+        redirectTo: 'platform/privacy',
+        pathMatch: 'full'
+      },
+      {
+        path: 'termos',
+        redirectTo: 'platform/terms',
+        pathMatch: 'full'
+      },
+      {
+        path: 'privacy',
+        redirectTo: 'platform/privacy',
+        pathMatch: 'full'
+      },
+      {
+        path: 'terms',
+        redirectTo: 'platform/terms',
+        pathMatch: 'full'
+      },
+      {
+        path: 'pricing',
+        redirectTo: 'platform/pricing',
+        pathMatch: 'full'
+      },
+      {
+        path: 'about',
+        redirectTo: 'platform/about',
+        pathMatch: 'full'
+      },
+      {
+        path: 'careers',
+        redirectTo: 'platform/careers',
+        pathMatch: 'full'
+      },
+      {
+        path: 'blog',
+        redirectTo: 'platform/blog',
+        pathMatch: 'full'
+      },
+      {
+        path: 'faq',
+        redirectTo: 'platform/faq',
+        pathMatch: 'full'
+      },
+      {
+        path: 'sobre',
+        redirectTo: 'platform/about',
+        pathMatch: 'full'
+      },
+      {
+        path: 'carreiras',
+        redirectTo: 'platform/careers',
+        pathMatch: 'full'
       },
       {
         path: '**',
-        redirectTo: 'authentication'
+        redirectTo: 'platform/marketplace'
       }
     ]
   }

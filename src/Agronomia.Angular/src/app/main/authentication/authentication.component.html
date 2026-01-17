@@ -15,30 +15,65 @@
           Acesse sua conta para conectar-se com os melhores revendedores e potencializar sua colheita.
         </p>
       </div>
-      <form class="flex flex-col gap-5">
+      <form class="flex flex-col gap-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium leading-none text-text-main dark:text-gray-200">E-mail ou Celular</label>
+          <label class="text-sm font-medium leading-none text-text-main dark:text-gray-200" for="login-email">E-mail</label>
           <div class="relative">
-            <input class="input input-lg input-icon-right" placeholder="ex: joao.silva@agro.com" type="text"/>
+            <input
+              class="input input-lg input-icon-right"
+              id="login-email"
+              placeholder="ex: joao.silva@agro.com"
+              type="text"
+              formControlName="email"
+              autocomplete="username"
+            />
             <span class="material-symbols-outlined absolute right-4 top-4 text-text-muted">mail</span>
           </div>
+          <p
+            *ngIf="emailControl?.invalid && (emailControl?.dirty || emailControl?.touched)"
+            class="text-sm text-red-600"
+          >
+            Informe um e-mail valido para entrar.
+          </p>
         </div>
         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium leading-none text-text-main dark:text-gray-200">Senha</label>
+          <label class="text-sm font-medium leading-none text-text-main dark:text-gray-200" for="login-password">Senha</label>
           <div class="relative">
-            <input class="input input-lg input-icon-right" placeholder="Digite sua senha" type="password"/>
-            <button class="absolute right-4 top-0 h-full flex items-center text-text-muted hover:text-primary transition-colors" type="button">
-              <span class="material-symbols-outlined">visibility_off</span>
+            <input
+              class="input input-lg input-icon-right"
+              id="login-password"
+              placeholder="Digite sua senha"
+              [type]="passwordFieldType"
+              formControlName="password"
+              autocomplete="current-password"
+            />
+            <button
+              class="absolute right-4 top-0 h-full flex items-center text-text-muted hover:text-primary transition-colors"
+              type="button"
+              (click)="togglePasswordVisibility()"
+              aria-label="Alternar visibilidade da senha"
+            >
+              <span class="material-symbols-outlined">{{ passwordVisible ? 'visibility' : 'visibility_off' }}</span>
             </button>
           </div>
+          <p
+            *ngIf="passwordControl?.invalid && (passwordControl?.dirty || passwordControl?.touched)"
+            class="text-sm text-red-600"
+          >
+            Informe sua senha para entrar.
+          </p>
         </div>
         <div class="flex justify-end">
           <a class="text-sm font-medium text-primary hover:text-primary-dark hover:underline transition-colors" routerLink="/forgot-password">
             Esqueci minha senha
           </a>
         </div>
-        <button class="btn btn-primary btn-lg w-full" type="button">
-          Entrar na plataforma
+        <div *ngIf="errorMessage" class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {{ errorMessage }}
+        </div>
+        <button class="btn btn-primary btn-lg w-full" type="submit" [disabled]="isSubmitting || loginForm.invalid">
+          <span class="material-symbols-outlined text-xl animate-spin" *ngIf="isSubmitting">progress_activity</span>
+          <span>{{ isSubmitting ? 'Entrando...' : 'Entrar na plataforma' }}</span>
         </button>
         <div class="relative my-2">
           <div class="absolute inset-0 flex items-center">
@@ -60,11 +95,11 @@
         </a>
       </div>
       <div class="mt-auto pt-10 text-xs text-text-muted flex gap-4 justify-center">
-        <a class="hover:text-primary" routerLink="/termos">Termos</a>
+        <a class="hover:text-primary" routerLink="/platform/terms">Termos</a>
         <span>|</span>
-        <a class="hover:text-primary" routerLink="/privacidade">Privacidade</a>
+        <a class="hover:text-primary" routerLink="/platform/privacy">Privacidade</a>
         <span>|</span>
-        <a class="hover:text-primary" routerLink="/faq">Ajuda</a>
+        <a class="hover:text-primary" routerLink="/platform/faq">Ajuda</a>
       </div>
     </div>
     <div class="relative hidden lg:flex lg:w-1/2 flex-col justify-between bg-primary/10 overflow-hidden">
