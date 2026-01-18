@@ -26,9 +26,6 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(user => user.Id)
             .HasColumnType("uuid")
-            .HasConversion(
-                id => Guid.Parse(id),
-                id => id.ToString())
             .IsRequired();
 
         builder.Property(user => user.Email)

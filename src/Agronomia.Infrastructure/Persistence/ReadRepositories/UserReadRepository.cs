@@ -13,19 +13,19 @@ public sealed class UserReadRepository(IDbConnection connection) : IUserReadRepo
 {
     private const string GetByIdSql = """
         SELECT
-            u."Id"::text        AS "Id",
+            u."Id"              AS "Id",
             u."Email"           AS "Email",
             u."Name"            AS "Name",
             u."Role"            AS "Role",
             u."CreatedAt"       AS "CreatedAt"
         FROM users u
-        WHERE u."Id" = @UserId::uuid
+        WHERE u."Id" = @UserId
         GROUP BY u."Id"
         LIMIT 1;
         """;
 
     /// <inheritdoc />
-    public async Task<UserDto?> GetByIdAsync(string userId, CancellationToken cancellationToken = default)
+    public async Task<UserDto?> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         var command = new CommandDefinition(
             GetByIdSql,
@@ -50,7 +50,7 @@ public sealed class UserReadRepository(IDbConnection connection) : IUserReadRepo
 
     private sealed class UserRow
     {
-        public string Id { get; set; } = string.Empty;
+        public Guid Id { get; set; }
         public string Email { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;

@@ -1,4 +1,4 @@
-using Agronomia.Domain.SeedWork;
+using Agronomia.Domain.Common;
 using Agronomia.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;

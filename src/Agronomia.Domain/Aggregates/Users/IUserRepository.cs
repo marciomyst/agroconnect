@@ -1,4 +1,4 @@
-using Agronomia.Domain.SeedWork;
+using Agronomia.Domain.Common;
 
 namespace Agronomia.Domain.Aggregates.Users;
 
@@ -30,5 +30,5 @@ public interface IUserRepository
     /// <param name="id">User identifier.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The user if found; otherwise <c>null</c>.</returns>
-    Task<User?> GetByIdAsync(string id, CancellationToken cancellationToken = default);
+    Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 }

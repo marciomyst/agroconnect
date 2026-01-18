@@ -19,5 +19,5 @@ public interface IAuthenticationReadRepository
     /// <param name="userId">User identifier.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>User projection when found; otherwise null.</returns>
-    Task<AuthenticationUserDto?> GetUserByIdAsync(string userId, CancellationToken cancellationToken = default);
+    Task<AuthenticationUserDto?> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken = default);
 }

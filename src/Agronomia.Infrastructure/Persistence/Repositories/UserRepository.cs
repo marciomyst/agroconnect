@@ -1,5 +1,5 @@
 using Agronomia.Domain.Aggregates.Users;
-using Agronomia.Domain.SeedWork;
+using Agronomia.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Agronomia.Infrastructure.Persistence.Repositories;
@@ -29,7 +29,7 @@ public sealed class UserRepository(AgronomiaDbContext context) : IUserRepository
     }
 
     /// <inheritdoc />
-    public Task<User?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
+    public Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return context.Users
             .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
