@@ -19,7 +19,7 @@ internal sealed class AgronomiaDbContextFactory : IDesignTimeDbContextFactory<Ag
             .Build();
 
         string connectionString = configuration.GetConnectionString("WriteDatabase")
-            ?? "Host=localhost;Port=5432;Database=agronomia;Username=postgres;Password=postgres";
+            ?? throw new InvalidOperationException("ConnectionStrings:WriteDatabase is not configured.");
 
         var optionsBuilder = new DbContextOptionsBuilder<AgronomiaDbContext>();
         optionsBuilder.UseNpgsql(connectionString);
