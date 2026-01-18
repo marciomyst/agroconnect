@@ -6,21 +6,15 @@ using System.Reflection;
 namespace Agronomia.Infrastructure.Persistence;
 
 /// <summary>
-/// Entity Framework Core DbContext for the Agronomia domain.
-/// <para>
-/// Implements <see cref="IUnitOfWork"/> so changes to aggregates are persisted in a single transaction,
-/// and ensures domain events are dispatched before committing.
-/// </para>
-/// <para>
-/// Exposes DbSets only for aggregate roots and
-/// applies configurations from this assembly, and publishes domain events through MediatR prior to saving.
-/// </para>
+/// Entity Framework Core DbContext for the write model.
 /// </summary>
-/// <param name="options">DbContext options configured via dependency injection.</param>
-/// <param name="mediator">Mediator used to publish domain events raised by aggregates.</param>
-public class AgronomiaDbContext(DbContextOptions<AgronomiaDbContext> options)
-    : DbContext(options), IUnitOfWork
+public class AgronomiaDbContext : DbContext, IUnitOfWork
 {
+    public AgronomiaDbContext(DbContextOptions<AgronomiaDbContext> options)
+        : base(options)
+    {
+    }
+
     /// <summary>
     /// DbSet for <see cref="User"/> aggregate roots.
     /// </summary>
@@ -38,7 +32,7 @@ public class AgronomiaDbContext(DbContextOptions<AgronomiaDbContext> options)
     }
 
     /// <summary>
-    /// Persists changes and dispatches pending domain events prior to committing.
+    /// Persists changes to the database.
     /// </summary>
     /// <param name="cancellationToken">Token to observe while saving.</param>
     /// <returns><c>true</c> when the save completes successfully.</returns>
