@@ -1,4 +1,5 @@
 using Agronomia.Application;
+using Agronomia.Application.Infrastructure.Wolverine;
 using Wolverine;
 using Wolverine.FluentValidation;
 
@@ -8,9 +9,11 @@ public static class MediatorExtensions
 {
     public static WebApplicationBuilder AddMediatorServices(this WebApplicationBuilder builder)
     {
+        builder.Services.AddWolverineCqrs();
+
         builder.Host.UseWolverine(opts =>
         {
-            opts.Discovery.IncludeAssembly(typeof(AssemblyReference).Assembly);
+            opts.ApplyCqrsConventions();
             opts.UseFluentValidation();
 
         });
