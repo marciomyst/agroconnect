@@ -1,4 +1,5 @@
 using Agronomia.Api.Features.Auth;
+using Agronomia.Api.Features.Users;
 using Agronomia.Api.Infrastructure;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -63,7 +64,7 @@ public static class ApiExtensions
         //app.MapAgentEndpoints();
         //app.MapCompanyEndpoints();
         //app.MapFarmEndpoints();
-        //app.MapUserEndpoints();
+        app.MapUserEndpoints();
         //app.MapPingEndpoints();
 
         return app;

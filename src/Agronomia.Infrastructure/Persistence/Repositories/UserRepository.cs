@@ -1,5 +1,6 @@
-using Agronomia.Domain.Aggregates.Users;
-using Agronomia.Domain.Common;
+using Agronomia.Application.Abstractions.Identity;
+using Agronomia.Domain.Identity;
+using Agronomia.Domain.Identity.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace Agronomia.Infrastructure.Persistence.Repositories;
@@ -13,32 +14,15 @@ namespace Agronomia.Infrastructure.Persistence.Repositories;
 /// <param name="context">Agronomia DbContext instance.</param>
 public sealed class UserRepository(AgronomiaDbContext context) : IUserRepository
 {
-    /// <inheritdoc />
-    public IUnitOfWork UnitOfWork => context;
-
-    /// <inheritdoc />
-    public void Add(User user)
-    {
-        context.Users.Add(user);
-    }
-
-    /// <inheritdoc />
-    public void Update(User user)
-    {
-        context.Users.Update(user);
-    }
-
-    /// <inheritdoc />
-    public Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public Task<bool> ExistsByEmailAsync(Email email, CancellationToken ct)
     {
         return context.Users
-            .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
+            .AsNoTracking()
+            .AnyAsync(user => user.Email.Value == email.Value, ct);
     }
 
-    /// <inheritdoc />
-    public Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
+    public async Task AddAsync(User user, CancellationToken ct)
     {
-        return context.Users
-            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+        await context.Users.AddAsync(user, ct);
     }
 }

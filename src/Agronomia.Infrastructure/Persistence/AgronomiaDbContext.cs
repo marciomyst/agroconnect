@@ -1,4 +1,4 @@
-using Agronomia.Domain.Aggregates.Users;
+using Agronomia.Domain.Identity;
 using Agronomia.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

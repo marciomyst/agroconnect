@@ -1,5 +1,7 @@
 using System.Data;
+using Agronomia.Application.Abstractions.Messaging;
 using Agronomia.Infrastructure.Dapper;
+using Agronomia.Infrastructure.Messaging;
 using Agronomia.Infrastructure.Persistence;
 using Agronomia.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +26,7 @@ public static class InfrastructureModule
 
         services.AddScoped<ApplicationUnitOfWork, EfUnitOfWork>();
         services.AddScoped<DomainUnitOfWork>(sp => sp.GetRequiredService<AgronomiaDbContext>());
+        services.AddScoped<IEventDispatcher, WolverineEventDispatcher>();
 
         services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
         services.AddScoped<IDbConnection>(sp => sp.GetRequiredService<IDbConnectionFactory>().CreateConnection());
