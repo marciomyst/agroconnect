@@ -1,0 +1,347 @@
+<div class="bg-background-light dark:bg-background-dark text-[#131811] dark:text-gray-100 font-display min-h-screen">
+  <app-site-header [isAuthenticated]="isAuthenticated"></app-site-header>
+
+  <main class="flex-1 w-full flex justify-center py-6 px-4 sm:px-6 lg:px-12 xl:px-24">
+    <div class="flex flex-col max-w-[1200px] w-full gap-6">
+      <div class="flex flex-wrap gap-2 px-0 py-2 text-sm">
+        <ng-container *ngFor="let crumb of breadcrumbs; let last = last">
+          <a
+            *ngIf="!last"
+            [routerLink]="crumb.link"
+            class="text-text-muted dark:text-gray-400 font-medium hover:underline"
+          >
+            {{ crumb.label }}
+          </a>
+          <span *ngIf="last" class="text-[#131811] dark:text-white font-medium">{{ crumb.label }}</span>
+          <span *ngIf="!last" class="text-text-muted dark:text-gray-400 font-medium">/</span>
+        </ng-container>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-7 flex flex-col gap-4">
+          <div class="relative w-full aspect-square md:aspect-[4/3] bg-white dark:bg-[#1e2d18] rounded-xl overflow-hidden border border-border-color dark:border-border-strong flex items-center justify-center group">
+            <img
+              [alt]="activeImage.alt"
+              [src]="activeImage.src"
+              class="object-contain h-full w-full p-8 transition-transform duration-500 group-hover:scale-105 mix-blend-multiply dark:mix-blend-normal"
+            />
+            <div class="absolute top-4 left-4 bg-primary text-[#131811] text-xs font-extrabold px-3 py-1 rounded-full shadow-sm">
+              {{ product.badge }}
+            </div>
+          </div>
+          <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+            <button
+              *ngFor="let image of gallery"
+              class="size-20 md:size-24 flex-shrink-0 rounded-lg overflow-hidden bg-white dark:bg-[#1e2d18] p-2 border"
+              [ngClass]="image.src === activeImage.src ? 'border-2 border-primary' : 'border-border-color dark:border-border-strong hover:border-primary transition-colors'"
+              type="button"
+              (click)="setActiveImage(image)"
+            >
+              <img [alt]="image.alt" [src]="image.src" class="w-full h-full object-contain" />
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <div class="flex justify-between items-start">
+              <span class="text-sm font-semibold tracking-wider text-primary uppercase">{{ product.brand }}</span>
+              <div class="flex items-center gap-1 text-sm text-text-muted dark:text-gray-400">
+                <span class="material-symbols-outlined text-[18px] text-yellow-500 fill-1">star</span>
+                <span class="text-[#131811] dark:text-white font-bold">{{ product.rating }}</span>
+                <span>({{ product.reviewCount }} reviews)</span>
+              </div>
+            </div>
+            <h1 class="text-[#131811] dark:text-white tracking-tight text-3xl md:text-4xl font-bold leading-tight">
+              {{ product.name }}
+            </h1>
+            <p class="text-text-muted dark:text-gray-400 text-base leading-relaxed">
+              {{ product.description }}
+            </p>
+          </div>
+
+          <div class="bg-white dark:bg-[#1e2d18] p-6 rounded-xl border border-border-color dark:border-border-strong shadow-sm flex flex-col gap-6">
+            <div>
+              <p class="text-sm text-text-muted dark:text-gray-400 line-through">{{ product.originalPrice }}</p>
+              <div class="flex items-baseline gap-2">
+                <span class="text-4xl font-bold text-[#131811] dark:text-white">{{ product.price }}</span>
+                <span class="text-sm font-medium text-text-muted dark:text-gray-400">{{ product.unitLabel }}</span>
+              </div>
+              <div class="mt-2 flex items-center gap-2 text-sm text-[#131811] dark:text-gray-200 bg-[#f1f5f0] dark:bg-[#2a3f22] w-fit px-2 py-1 rounded">
+                <span class="material-symbols-outlined text-[18px]">payments</span>
+                <span>{{ product.paymentInfo }}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 py-3 border-y border-border-color dark:border-border-strong">
+              <div class="size-10 rounded-full bg-gray-200 overflow-hidden">
+                <img [alt]="seller.name" [src]="seller.avatar" class="h-full w-full object-cover" />
+              </div>
+              <div class="flex-1">
+                <p class="text-xs text-text-muted dark:text-gray-400">Vendido e entregue por:</p>
+                <div class="flex items-center gap-1">
+                  <p class="text-sm font-bold text-[#131811] dark:text-white hover:underline cursor-pointer">{{ seller.name }}</p>
+                  <span *ngIf="seller.verified" class="material-symbols-outlined text-primary text-[16px]" title="Vendedor Verificado">verified</span>
+                </div>
+              </div>
+              <div class="text-right">
+                <p class="text-xs font-bold text-[#131811] dark:text-white">{{ seller.score }}</p>
+                <p class="text-[10px] text-text-muted dark:text-gray-400">Positivo</p>
+              </div>
+            </div>
+
+            <div class="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 rounded-lg p-4 flex flex-col gap-3">
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-amber-600 dark:text-amber-500 mt-0.5">assignment_turned_in</span>
+                <div class="flex-1">
+                  <h3 class="font-bold text-sm text-[#131811] dark:text-white mb-1">Receituário Agronômico Obrigatório</h3>
+                  <p class="text-xs text-text-muted dark:text-gray-400 leading-snug">
+                    {{ product.prescriptionNote }}
+                  </p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2">
+                <div class="relative">
+                  <select
+                    class="w-full appearance-none rounded-lg border border-amber-300 dark:border-amber-700/50 bg-white dark:bg-[#1e2d18] px-4 py-2.5 text-sm text-[#131811] dark:text-white focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                  >
+                    <option value="" selected disabled>Selecione um receituário...</option>
+                    <option *ngFor="let prescription of prescriptions" [value]="prescription.id">{{ prescription.label }}</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                    <span class="material-symbols-outlined text-xl">expand_more</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-background-dark to-[#2a3f22] p-4 rounded-lg text-white relative overflow-hidden group/pool border border-border-strong/60">
+              <div class="absolute top-0 right-0 p-4 opacity-10 group-hover/pool:opacity-20 transition-opacity">
+                <span class="material-symbols-outlined text-6xl">groups</span>
+              </div>
+              <div class="flex justify-between items-center mb-2 relative z-10">
+                <h3 class="font-bold text-sm flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary">campaign</span>
+                  {{ poll.title }}
+                </h3>
+                <span class="bg-primary text-[#131811] text-xs font-bold px-2 py-0.5 rounded">{{ poll.discount }}</span>
+              </div>
+              <p class="text-xs text-gray-300 mb-3 relative z-10">{{ poll.description }}</p>
+              <div class="w-full bg-white/20 h-2 rounded-full mb-1 relative z-10">
+                <div class="bg-primary h-2 rounded-full" [style.width.%]="poll.progress"></div>
+              </div>
+              <div class="flex justify-between text-[10px] text-gray-400 mb-3 relative z-10">
+                <span>{{ poll.current }}</span>
+                <span>{{ poll.target }}</span>
+              </div>
+              <button class="w-full py-2 bg-white/10 hover:bg-white/20 border border-white/30 rounded text-xs font-bold transition-colors relative z-10" type="button">
+                {{ poll.cta }}
+              </button>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <div class="flex justify-between items-end">
+                <label class="text-sm font-medium text-[#131811] dark:text-white">Quantidade</label>
+                <span class="text-xs text-amber-600 dark:text-amber-500 font-medium flex items-center gap-1">
+                  <span class="material-symbols-outlined text-xs">info</span>
+                  Limitado pelo Receituário
+                </span>
+              </div>
+              <div class="flex gap-4 h-12">
+                <div class="flex items-center border border-border-color dark:border-border-strong rounded-lg bg-background-light dark:bg-background-dark w-32 relative">
+                  <button class="flex-1 h-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-[#2a3f22] rounded-l-lg transition-colors text-[#131811] dark:text-white" type="button">
+                    <span class="material-symbols-outlined text-sm">remove</span>
+                  </button>
+                  <input class="w-10 text-center bg-transparent border-none focus:ring-0 p-0 text-[#131811] dark:text-white font-bold h-full" max="10" type="number" [value]="1" />
+                  <button class="flex-1 h-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-[#2a3f22] rounded-r-lg transition-colors text-[#131811] dark:text-white" type="button">
+                    <span class="material-symbols-outlined text-sm">add</span>
+                  </button>
+                </div>
+                <button class="flex-1 bg-primary hover:bg-primary/90 text-[#131811] font-bold rounded-lg flex items-center justify-center gap-2 transition-transform shadow-md" type="button">
+                  <span class="material-symbols-outlined">shopping_cart</span>
+                  Comprar Agora
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <div class="border-b border-border-color dark:border-border-strong flex gap-8 overflow-x-auto">
+          <button class="pb-3 border-b-2 border-primary text-primary font-bold text-sm whitespace-nowrap" type="button">Descrição Geral</button>
+          <button class="pb-3 border-b-2 border-transparent text-text-muted dark:text-gray-400 hover:text-[#131811] dark:hover:text-white font-medium text-sm transition-colors whitespace-nowrap" type="button">Composição</button>
+          <button class="pb-3 border-b-2 border-transparent text-text-muted dark:text-gray-400 hover:text-[#131811] dark:hover:text-white font-medium text-sm transition-colors whitespace-nowrap" type="button">Modo de Aplicação</button>
+          <button class="pb-3 border-b-2 border-transparent text-text-muted dark:text-gray-400 hover:text-[#131811] dark:hover:text-white font-medium text-sm transition-colors whitespace-nowrap" type="button">Segurança</button>
+        </div>
+        <div class="py-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div class="md:col-span-2 space-y-6 text-[#131811] dark:text-gray-200 leading-relaxed">
+            <h3 class="text-xl font-bold mb-2">Sobre o Produto</h3>
+            <p>
+              O <strong>Herbicida Glyphosate 480 SL</strong> é uma solução de alta eficiência para o controle de ervas daninhas em diversas culturas. Sua formulação líquida solúvel garante rápida absorção pelas plantas, atuando de forma sistêmica desde as folhas até as raízes.
+            </p>
+            <p>
+              Indicado para o controle pós-emergência de plantas infestantes anuais e perenes, tanto de folhas estreitas quanto de folhas largas. É uma ferramenta essencial para o manejo de limpeza de áreas antes do plantio (dessecação) e para a manutenção de culturas perenes como café, citros e cana-de-açúcar.
+            </p>
+            <h4 class="font-bold text-lg mt-6">Principais Benefícios</h4>
+            <ul class="list-disc pl-5 space-y-2 text-text-muted dark:text-gray-300">
+              <li>Controle eficaz de um amplo espectro de plantas daninhas.</li>
+              <li>Não deixa resíduos no solo, permitindo o plantio logo após a aplicação.</li>
+              <li>Alta solubilidade e facilidade de mistura.</li>
+              <li>Compatível com a maioria dos adjuvantes do mercado.</li>
+            </ul>
+          </div>
+          <div class="md:col-span-1">
+            <div class="bg-background-light dark:bg-[#1e2d18] rounded-xl p-6 border border-border-color dark:border-border-strong">
+              <h4 class="font-bold text-[#131811] dark:text-white mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">info</span>
+                Especificações Técnicas
+              </h4>
+              <div class="space-y-4 text-sm">
+                <div *ngFor="let spec of specifications" class="flex justify-between border-b border-border-color dark:border-border-strong pb-2">
+                  <span class="text-text-muted dark:text-gray-400">{{ spec.label }}</span>
+                  <span
+                    class="font-medium text-[#131811] dark:text-white text-right"
+                    [ngClass]="spec.tone === 'warning' ? 'text-red-500 flex items-center gap-1 justify-end' : ''"
+                  >
+                    <span *ngIf="spec.tone === 'warning'" class="material-symbols-outlined text-sm">warning</span>
+                    {{ spec.value }}
+                  </span>
+                </div>
+                <div class="bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded text-xs text-yellow-800 dark:text-yellow-200 mt-4 border border-yellow-200 dark:border-yellow-800">
+                  <strong>Atenção:</strong> A venda deste produto requer Receituário Agronômico obrigatório para liberação.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-border-color dark:border-border-strong pt-10">
+        <h2 class="text-2xl font-bold text-[#131811] dark:text-white mb-6">Avaliações de Agricultores</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-1">
+            <div class="flex flex-col gap-2 p-6 bg-background-light dark:bg-[#1e2d18] rounded-xl">
+              <p class="text-[#131811] dark:text-white text-5xl font-black leading-tight tracking-[-0.033em]">4.8</p>
+              <div class="flex gap-1 text-yellow-500">
+                <span class="material-symbols-outlined fill-1">star</span>
+                <span class="material-symbols-outlined fill-1">star</span>
+                <span class="material-symbols-outlined fill-1">star</span>
+                <span class="material-symbols-outlined fill-1">star</span>
+                <span class="material-symbols-outlined fill-1">star_half</span>
+              </div>
+              <p class="text-text-muted dark:text-gray-400 text-base font-normal leading-normal">Baseado em 124 avaliações</p>
+              <div class="mt-4 grid grid-cols-[20px_1fr_40px] items-center gap-y-2 text-sm">
+                <span class="text-[#131811] dark:text-white">5</span>
+                <div class="h-2 w-full bg-border-color dark:bg-border-strong rounded-full overflow-hidden mx-2">
+                  <div class="h-full bg-[#131811] dark:bg-primary w-[80%]"></div>
+                </div>
+                <span class="text-text-muted dark:text-gray-400 text-right">80%</span>
+                <span class="text-[#131811] dark:text-white">4</span>
+                <div class="h-2 w-full bg-border-color dark:bg-border-strong rounded-full overflow-hidden mx-2">
+                  <div class="h-full bg-[#131811] dark:bg-primary w-[12%]"></div>
+                </div>
+                <span class="text-text-muted dark:text-gray-400 text-right">12%</span>
+                <span class="text-[#131811] dark:text-white">3</span>
+                <div class="h-2 w-full bg-border-color dark:bg-border-strong rounded-full overflow-hidden mx-2">
+                  <div class="h-full bg-[#131811] dark:bg-primary w-[5%]"></div>
+                </div>
+                <span class="text-text-muted dark:text-gray-400 text-right">5%</span>
+                <span class="text-[#131811] dark:text-white">2</span>
+                <div class="h-2 w-full bg-border-color dark:bg-border-strong rounded-full overflow-hidden mx-2">
+                  <div class="h-full bg-[#131811] dark:bg-primary w-[1%]"></div>
+                </div>
+                <span class="text-text-muted dark:text-gray-400 text-right">1%</span>
+                <span class="text-[#131811] dark:text-white">1</span>
+                <div class="h-2 w-full bg-border-color dark:bg-border-strong rounded-full overflow-hidden mx-2">
+                  <div class="h-full bg-[#131811] dark:bg-primary w-[2%]"></div>
+                </div>
+                <span class="text-text-muted dark:text-gray-400 text-right">2%</span>
+              </div>
+              <button class="mt-6 w-full py-2 border border-[#131811] dark:border-white text-[#131811] dark:text-white rounded-lg font-bold hover:bg-[#131811] hover:text-white dark:hover:bg-white dark:hover:text-[#131811] transition-colors" type="button">
+                Escrever Avaliação
+              </button>
+            </div>
+          </div>
+          <div class="lg:col-span-2 flex flex-col gap-6">
+            <div *ngFor="let review of reviews; let last = last" class="pb-6 border-b border-border-color dark:border-border-strong" [ngClass]="{ 'border-none pb-0': last }">
+              <div class="flex justify-between items-start mb-2">
+                <div class="flex items-center gap-2">
+                  <div class="size-8 rounded-full flex items-center justify-center font-bold" [ngClass]="review.color">
+                    {{ review.initials }}
+                  </div>
+                  <div>
+                    <p class="font-bold text-[#131811] dark:text-white text-sm">{{ review.name }}</p>
+                    <p class="text-xs text-text-muted dark:text-gray-500">{{ review.subtitle }}</p>
+                  </div>
+                </div>
+                <span class="text-xs text-text-muted dark:text-gray-500">{{ review.timeAgo }}</span>
+              </div>
+              <div class="flex text-yellow-500 text-sm mb-2">
+                <ng-container *ngFor="let star of review.stars">
+                  <span *ngIf="star === 'full'" class="material-symbols-outlined fill-1 text-[18px]">star</span>
+                  <span *ngIf="star === 'half'" class="material-symbols-outlined fill-1 text-[18px]">star_half</span>
+                  <span *ngIf="star === 'empty'" class="material-symbols-outlined text-[18px]">star</span>
+                </ng-container>
+              </div>
+              <p class="text-[#131811] dark:text-gray-300 text-sm leading-relaxed">
+                “{{ review.text }}”
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-10 pb-20">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-[#131811] dark:text-white">Quem viu este produto, também comprou</h2>
+          <div class="flex gap-2">
+            <button class="size-8 rounded-full border border-border-color dark:border-border-strong flex items-center justify-center hover:bg-background-light dark:hover:bg-[#2a3f22] transition-colors text-[#131811] dark:text-white" type="button">
+              <span class="material-symbols-outlined text-sm">arrow_back</span>
+            </button>
+            <button class="size-8 rounded-full border border-border-color dark:border-border-strong flex items-center justify-center hover:bg-background-light dark:hover:bg-[#2a3f22] transition-colors text-[#131811] dark:text-white" type="button">
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <article
+            *ngFor="let item of relatedProducts"
+            class="bg-white dark:bg-[#1e2d18] rounded-xl border border-border-color dark:border-border-strong overflow-hidden group hover:shadow-md transition-shadow"
+          >
+            <div class="h-48 p-4 bg-white dark:bg-[#1e2d18] flex items-center justify-center relative">
+              <img class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" [alt]="item.name" [src]="item.imageUrl" />
+              <div *ngIf="item.discount" class="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                {{ item.discount }}
+              </div>
+              <div class="absolute top-3 right-3">
+                <button class="p-1.5 rounded-full bg-background-light dark:bg-[#2a3f22] text-text-muted hover:text-red-500 transition-colors" type="button">
+                  <span class="material-symbols-outlined text-[20px]">favorite</span>
+                </button>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-xs font-bold text-text-muted dark:text-gray-400 mb-1">{{ item.brand }}</p>
+              <h3 class="font-bold text-[#131811] dark:text-white text-base leading-tight mb-2 truncate">{{ item.name }}</h3>
+              <div class="flex items-center gap-1 mb-3">
+                <span class="material-symbols-outlined text-[14px] text-yellow-500 fill-1">star</span>
+                <span class="text-xs font-medium text-[#131811] dark:text-gray-300">{{ item.rating }}</span>
+              </div>
+              <div class="flex justify-between items-end">
+                <div>
+                  <p *ngIf="item.originalPrice" class="text-xs text-gray-400 line-through">{{ item.originalPrice }}</p>
+                  <p class="text-lg font-bold text-[#131811] dark:text-white">{{ item.price }}</p>
+                </div>
+                <button class="p-2 bg-primary rounded-lg text-white hover:bg-primary/90 transition-colors" type="button">
+                  <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <app-site-footer></app-site-footer>
+</div>

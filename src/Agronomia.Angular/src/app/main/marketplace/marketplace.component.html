@@ -1,32 +1,5 @@
 <div class="bg-gray-50 dark:bg-background-dark text-[#131811] dark:text-white font-display overflow-x-hidden">
-  <div class="bg-white dark:bg-[#162210] border-b border-gray-100 dark:border-[#2a3825] sticky top-0 z-30">
-    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-      <header class="flex items-center justify-between h-20">
-        <div class="flex items-center gap-8">
-          <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
-              <span class="material-symbols-outlined text-2xl font-bold">agriculture</span>
-            </div>
-            <h2 class="text-xl font-black tracking-tight text-[#131811] dark:text-white hidden sm:block">AgroMarket</h2>
-          </div>
-          <div class="hidden md:flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-800/50 rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
-            <span class="material-symbols-outlined text-gray-500 text-sm">location_on</span>
-            <span class="text-sm font-medium text-gray-700 dark:text-gray-300 truncate max-w-[200px]">Entregar em: Fazenda Santa Clara</span>
-            <span class="material-symbols-outlined text-primary text-sm">expand_more</span>
-          </div>
-        </div>
-        <div class="hidden md:flex items-center gap-4">
-          <button class="text-sm font-bold text-gray-500 hover:text-primary transition-colors px-4" routerLink="/authentication">Entrar</button>
-          <button class="flex items-center justify-center rounded-xl h-10 px-5 bg-primary text-[#131811] hover:bg-primary-dark transition-colors text-sm font-bold shadow-md shadow-primary/20" routerLink="/authentication">
-            {{ isAuthenticated ? 'Minha conta' : 'Criar conta' }}
-          </button>
-        </div>
-        <div class="md:hidden flex items-center">
-          <span class="material-symbols-outlined text-3xl cursor-pointer">menu</span>
-        </div>
-      </header>
-    </div>
-  </div>
+  <app-site-header [isAuthenticated]="isAuthenticated"></app-site-header>
 
   <div class="bg-white dark:bg-[#162210] pb-8 pt-6 sm:pt-10 border-b border-gray-100 dark:border-gray-800">
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,9 +26,10 @@
           class="block w-full pl-12 pr-4 py-4 rounded-2xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent shadow-soft text-lg transition-all group-hover:bg-white group-hover:shadow-lg dark:group-hover:bg-gray-800"
           placeholder="Buscar produtos, revendedores ou marcas..."
           type="text"
+          (keyup.enter)="onSearch()"
         />
         <div class="absolute inset-y-2 right-2">
-          <button class="h-full px-6 bg-[#131811] dark:bg-white text-white dark:text-[#131811] font-bold rounded-xl hover:opacity-90 transition-opacity">
+          <button class="h-full px-6 bg-[#131811] dark:bg-white text-white dark:text-[#131811] font-bold rounded-xl hover:opacity-90 transition-opacity" type="button" (click)="onSearch()">
             Buscar
           </button>
         </div>
@@ -114,7 +88,7 @@
     <div>
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-black text-[#131811] dark:text-white">Lojas Parceiras em Destaque</h2>
-        <a class="text-primary font-bold hover:underline" routerLink="/platform/marketplace/lojas">Ver todas</a>
+        <a class="text-primary font-bold hover:underline" routerLink="/marketplace/lojas">Ver todas</a>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div
@@ -246,58 +220,5 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div
-        *ngFor="let audience of audiences"
-        class="group relative rounded-[2.5rem] overflow-hidden bg-white dark:bg-[#162210] shadow-soft hover:shadow-2xl transition-all duration-300 border border-transparent"
-        [ngClass]="audience.accent === 'primary' ? 'hover:border-primary/30' : 'hover:border-blue-500/30'"
-      >
-        <div
-          class="absolute top-0 right-0 w-64 h-64 rounded-bl-[10rem] -z-0 transition-transform group-hover:scale-110"
-          [ngClass]="audience.accent === 'primary' ? 'bg-green-100 dark:bg-green-900/20' : 'bg-blue-50 dark:bg-blue-900/10'"
-        ></div>
-        <div class="p-8 md:p-10 relative z-10 flex flex-col h-full">
-          <div
-            class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6"
-            [ngClass]="audience.accent === 'primary' ? 'bg-primary/10 text-primary' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'"
-          >
-            <span class="material-symbols-outlined text-3xl">{{ audience.icon }}</span>
-          </div>
-          <h3 class="text-3xl font-black mb-4">{{ audience.title }}</h3>
-          <p class="text-gray-600 dark:text-gray-300 mb-8 flex-grow">
-            {{ audience.description }}
-          </p>
-          <div class="flex items-center gap-4">
-            <button
-              class="flex-1 py-4 rounded-xl font-bold shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
-              [ngClass]="audience.accent === 'primary' ? 'bg-primary text-[#131811] hover:bg-primary-dark transition-colors shadow-primary/20' : 'bg-[#131811] dark:bg-white text-white dark:text-[#131811] hover:opacity-90 transition-colors'"
-              [disabled]="audience.requiresAuth && !isAuthenticated"
-              (click)="audience.requiresAuth && !isAuthenticated ? goToLogin() : null"
-            >
-              {{ audience.cta }}
-            </button>
-          </div>
-          <p *ngIf="audience.requiresAuth && !isAuthenticated" class="mt-3 text-xs text-orange-500 font-semibold">Entre para cadastrar sua loja.</p>
-        </div>
-        <div
-          class="hidden sm:block absolute bottom-8 right-8 w-32 h-32 rounded-2xl overflow-hidden shadow-lg border-4 border-white dark:border-[#162210] transition-transform"
-          [ngClass]="audience.accent === 'primary' ? 'rotate-3 group-hover:rotate-6' : '-rotate-3 group-hover:-rotate-6'"
-        >
-          <div
-            class="w-full h-full bg-cover bg-center"
-            [style.background-image]="
-              'url(' +
-              (audience.accent === 'primary'
-                ? 'https://lh3.googleusercontent.com/aida-public/AB6AXuClCNv4hK4oGtAji8_88JKMn7JYnluyrgS1EZLgCo1RhAy6zLm47hru-KbYetsUqmCfZf7C5GtpjE-4zEetYB8DPFiorDEe76VmkgOPmpLeVVVAR-RPqHw_cKzCj1p45lkcMIbyzaGz2YcI6Giz6h8xHIgUibFatevpoRy2iNFXQFlMylw_8Sa-dwtGstOWqIm-qnoeBssy-fjzRMpj6EujSGYk2cjvc_BHDizVetmjbPPSFy0C4rUV_rJV7a3q44fSWZX5pO2y3LTw'
-                : 'https://lh3.googleusercontent.com/aida-public/AB6AXuBm5BZCC94E79MTkVb2mQz0RpTEBTgC9ng0lYgESgXnhJSkg9vRfGabZVXxzXekRD6j9ULqSUKWtY-CDVcunx0ltUwMT4cRwm7WjDHMwICALmN9oOHA9_bBcK_E7tbeZlItrwREHYonD6-BjTCqeYQgCh55lzu8ZkBpalcaL07Zsjya08oNwWwoCmqSC6NItfpepHsSvLRYhyXQIEKz9cOciNnwVo92mmTfRBdfkf8OJMdSl7RRNS9-V-lMgJB3-YxgVIvHBnFrnldL') +
-              ')'
-            "
-          ></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <app-site-footer></app-site-footer>
 </div>
-

@@ -32,6 +32,7 @@ public sealed class UserRepository(AgronomiaDbContext context) : IUserRepository
     public Task<User?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
     {
         return context.Users
+            .Include(u => u.ManagedSellers)
             .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
     }
 
@@ -39,6 +40,7 @@ public sealed class UserRepository(AgronomiaDbContext context) : IUserRepository
     public Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
         return context.Users
+            .Include(u => u.ManagedSellers)
             .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
     }
 }

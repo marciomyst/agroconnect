@@ -18,7 +18,7 @@ public static class LoginMapper
     /// </remarks>
     public static LoginCommand ToCommand(this LoginRequest request)
     {
-        return new LoginCommand(request.Email, request.Password);
+        return new LoginCommand(request.Email, request.Password, request.DeviceId);
     }
 
     /// <summary>

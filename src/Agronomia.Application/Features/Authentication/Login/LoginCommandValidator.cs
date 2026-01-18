@@ -16,5 +16,8 @@ internal sealed class LoginCommandValidator : AbstractValidator<LoginCommand>
         RuleFor(command => command.Password)
             .NotEmpty().WithMessage("Password is required.")
             .MinimumLength(6).WithMessage("Password must have at least 6 characters.");
+
+        RuleFor(command => command.DeviceId)
+            .NotEmpty().WithMessage("DeviceId is required.");
     }
 }

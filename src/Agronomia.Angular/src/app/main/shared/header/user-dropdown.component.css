@@ -1,0 +1,7 @@
+.dropdown-item {
+  @apply flex items-center gap-4 px-4 py-3 text-text-main dark:text-white/90 hover:bg-primary/10 transition-colors w-full text-left rounded-lg;
+}
+
+.dropdown-icon {
+  @apply flex items-center justify-center rounded-lg bg-surface-light dark:bg-white/5 shrink-0 size-9 text-text-muted dark:text-text-muted-light;
+}

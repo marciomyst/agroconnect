@@ -11,5 +11,5 @@ public sealed class RefreshTokenRequestExample : IExamplesProvider<RefreshTokenR
     /// <summary>
     /// Example payload for refreshing a JWT.
     /// </summary>
-    public RefreshTokenRequest GetExamples() => new("b27f8a9c0c9d4a2d9c1f4fb9c8e2c1f3");
+    public RefreshTokenRequest GetExamples() => new("b27f8a9c0c9d4a2d9c1f4fb9c8e2c1f3", "device-web-123456");
 }

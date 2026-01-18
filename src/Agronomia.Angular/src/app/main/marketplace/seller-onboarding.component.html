@@ -1,0 +1,201 @@
+<div class="bg-background-light dark:bg-background-dark text-text-main dark:text-white min-h-screen font-display">
+  <app-site-header></app-site-header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+      <div class="space-y-2">
+        <p class="text-sm font-semibold text-primary uppercase flex items-center gap-2">
+          <span class="material-symbols-outlined text-base">store</span>
+          Cadastro de Revenda
+        </p>
+        <h1 class="text-3xl sm:text-4xl font-black leading-tight tracking-tight text-text-main dark:text-white">Conecte sua revenda à AgroConnect</h1>
+        <p class="text-text-muted dark:text-text-muted-light max-w-2xl">
+          Preencha os dados da sua empresa para vender para milhares de agricultores com segurança e facilidade.
+        </p>
+      </div>
+      <div class="hidden md:flex items-center gap-2 text-sm text-text-muted dark:text-text-muted-light">
+        <span class="material-symbols-outlined text-lg">lock</span>
+        Ambiente seguro
+      </div>
+    </div>
+
+    <div class="card overflow-hidden">
+      <div class="bg-background-light dark:bg-surface-dark-muted border-b border-border-color dark:border-border-strong px-4 sm:px-6 py-4">
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+          <ng-container *ngFor="let step of steps; let last = last">
+            <div class="flex items-center gap-3 relative" [ngClass]="{ 'opacity-50': currentStep < step.id, 'step-completed': currentStep > step.id }">
+              <div
+                class="h-10 w-10 rounded-full flex items-center justify-center text-sm font-bold transition-colors"
+                [ngClass]="{
+                  'bg-primary text-text-on-primary': currentStep === step.id,
+                  'bg-primary/15 text-primary': currentStep > step.id,
+                  'bg-border-color dark:bg-border-strong text-text-muted dark:text-text-muted-light': currentStep < step.id
+                }"
+              >
+                <span *ngIf="currentStep > step.id" class="material-symbols-outlined text-base">check</span>
+                <span *ngIf="currentStep <= step.id">{{ step.id }}</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-semibold">{{ step.label }}</span>
+                <span class="text-xs text-text-muted dark:text-text-muted-light capitalize">{{ step.id }}/{{ totalSteps }}</span>
+              </div>
+            </div>
+            <div *ngIf="!last" class="hidden sm:block flex-1 h-[1px] bg-border-color dark:bg-border-strong mx-3"></div>
+          </ng-container>
+        </div>
+      </div>
+
+      <form class="p-4 sm:p-6 lg:p-8 space-y-8" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Step 1 -->
+        <section *ngIf="currentStep === 1" class="space-y-6">
+          <div class="flex items-center gap-3 pb-2 border-b border-border-color dark:border-border-strong">
+            <span class="material-symbols-outlined text-primary">domain</span>
+            <h3 class="text-lg font-bold">Informações da Empresa</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" formGroupName="company">
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="cnpj">CNPJ</label>
+              <input id="cnpj" class="input input-lg" formControlName="cnpj" placeholder="00.000.000/0000-00" type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('company.cnpj')?.invalid && getControl('company.cnpj')?.touched">Informe o CNPJ.</p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="stateRegistration">Inscrição Estadual</label>
+              <input id="stateRegistration" class="input input-lg" formControlName="stateRegistration" placeholder="Ex: 123.456.789.000" type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('company.stateRegistration')?.invalid && getControl('company.stateRegistration')?.touched">Informe a inscrição estadual.</p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="legalName">Razão Social</label>
+              <input id="legalName" class="input input-lg" formControlName="legalName" placeholder="Nome oficial da empresa" type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('company.legalName')?.invalid && getControl('company.legalName')?.touched">Informe a razão social.</p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="tradeName">Nome Fantasia</label>
+              <input id="tradeName" class="input input-lg" formControlName="tradeName" placeholder="Como sua empresa é conhecida" type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('company.tradeName')?.invalid && getControl('company.tradeName')?.touched">Informe o nome fantasia.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 2 -->
+        <section *ngIf="currentStep === 2" class="space-y-6">
+          <div class="flex items-center gap-3 pb-2 border-b border-border-color dark:border-border-strong">
+            <span class="material-symbols-outlined text-primary">location_on</span>
+            <h3 class="text-lg font-bold">Endereço</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6" formGroupName="address">
+            <div class="flex flex-col gap-2 md:col-span-1">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="zipCode">CEP</label>
+              <input id="zipCode" class="input input-lg" formControlName="zipCode" placeholder="00000-000" type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('address.zipCode')?.invalid && getControl('address.zipCode')?.touched">Informe o CEP.</p>
+            </div>
+            <div class="flex flex-col gap-2 md:col-span-3">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="street">Logradouro</label>
+              <input id="street" class="input input-lg" formControlName="street" placeholder="Rua, Avenida, Rodovia..." type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('address.street')?.invalid && getControl('address.street')?.touched">Informe o logradouro.</p>
+            </div>
+            <div class="flex flex-col gap-2 md:col-span-1">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="number">Número</label>
+              <input id="number" class="input input-lg" formControlName="number" placeholder="123" type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('address.number')?.invalid && getControl('address.number')?.touched">Informe o número.</p>
+            </div>
+            <div class="flex flex-col gap-2 md:col-span-1">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="complement">Complemento</label>
+              <input id="complement" class="input input-lg" formControlName="complement" placeholder="Sala 101, Galpão B" type="text" />
+            </div>
+            <div class="flex flex-col gap-2 md:col-span-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="city">Cidade</label>
+              <input id="city" class="input input-lg" formControlName="city" placeholder="Digite sua cidade" type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('address.city')?.invalid && getControl('address.city')?.touched">Informe a cidade.</p>
+            </div>
+            <div class="flex flex-col gap-2 md:col-span-1">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="state">UF</label>
+              <input id="state" class="input input-lg" formControlName="state" placeholder="Ex: SP" type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('address.state')?.invalid && getControl('address.state')?.touched">Informe a UF.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section *ngIf="currentStep === 3" class="space-y-6">
+          <div class="flex items-center gap-3 pb-2 border-b border-border-color dark:border-border-strong">
+            <span class="material-symbols-outlined text-primary">person</span>
+            <h3 class="text-lg font-bold">Responsável e Acesso</h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" formGroupName="access">
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="responsibleName">Nome do Responsável</label>
+              <input id="responsibleName" class="input input-lg" formControlName="responsibleName" placeholder="Nome completo" type="text" />
+              <p class="text-sm text-red-600" *ngIf="getControl('access.responsibleName')?.invalid && getControl('access.responsibleName')?.touched">Informe o responsável.</p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="phone">Telefone / WhatsApp</label>
+              <input id="phone" class="input input-lg" formControlName="phone" placeholder="(00) 00000-0000" type="tel" />
+              <p class="text-sm text-red-600" *ngIf="getControl('access.phone')?.invalid && getControl('access.phone')?.touched">Informe o telefone.</p>
+            </div>
+            <div class="flex flex-col gap-2 md:col-span-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="email">Email Corporativo</label>
+              <input id="email" class="input input-lg" formControlName="email" placeholder="contato@suaempresa.com.br" type="email" />
+              <p class="text-sm text-red-600" *ngIf="getControl('access.email')?.invalid && getControl('access.email')?.touched">Informe um email válido.</p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="password">Criar Senha</label>
+              <input id="password" class="input input-lg" formControlName="password" placeholder="Mínimo 8 caracteres" type="password" />
+              <p class="text-sm text-red-600" *ngIf="getControl('access.password')?.invalid && getControl('access.password')?.touched">Senha mínima de 8 caracteres.</p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm font-medium text-text-main dark:text-gray-200" for="confirmPassword">Confirmar Senha</label>
+              <input id="confirmPassword" class="input input-lg" formControlName="confirmPassword" placeholder="Repita a senha" type="password" />
+              <p class="text-sm text-red-600" *ngIf="form.hasError('passwordMismatch') && getControl('access.confirmPassword')?.touched">As senhas precisam ser iguais.</p>
+            </div>
+            <div class="md:col-span-2 flex items-start gap-3 rounded-xl border border-border-color dark:border-border-strong bg-background-light dark:bg-surface-dark-muted px-4 py-3">
+              <input class="mt-1 h-4 w-4 rounded border-gray-400 text-primary focus:ring-primary" type="checkbox" formControlName="terms" id="terms" />
+              <label class="text-sm text-text-muted dark:text-text-muted-light" for="terms">
+                Li e concordo com os <a class="text-primary hover:underline font-semibold" routerLink="/platform/terms">Termos de Uso</a> e
+                <a class="text-primary hover:underline font-semibold" routerLink="/platform/privacy">Política de Privacidade</a>.
+              </label>
+            </div>
+            <p *ngIf="form.hasError('passwordMismatch') && (accessGroup?.touched || accessGroup?.dirty)" class="md:col-span-2 text-sm text-red-600">
+              As senhas precisam ser iguais.
+            </p>
+          </div>
+        </section>
+
+        <!-- Navigation -->
+        <div class="flex flex-col-reverse sm:flex-row gap-3 justify-between items-center pt-2 border-t border-border-color dark:border-border-strong">
+          <button class="btn btn-ghost w-full sm:w-auto" type="button" (click)="goToPreviousStep()" [disabled]="currentStep === 1">
+            Voltar
+          </button>
+          <div class="flex gap-3 w-full sm:w-auto">
+            <button
+              *ngIf="!isLastStep"
+              class="btn btn-primary btn-lg w-full sm:w-auto justify-center gap-2"
+              type="button"
+              (click)="goToNextStep()"
+            >
+              Próximo passo
+              <span class="material-symbols-outlined text-base">arrow_forward</span>
+            </button>
+            <button
+              *ngIf="isLastStep"
+              class="btn btn-primary btn-lg w-full sm:w-auto justify-center gap-2 disabled:opacity-60"
+              type="submit"
+              [disabled]="isSubmitting"
+            >
+              <span *ngIf="isSubmitting" class="material-symbols-outlined animate-spin text-base">progress_activity</span>
+              <span *ngIf="!isSubmitting">Finalizar cadastro</span>
+              <span class="material-symbols-outlined text-base">check_circle</span>
+            </button>
+          </div>
+        </div>
+        <p *ngIf="submitError" class="text-sm text-red-600 text-center">{{ submitError }}</p>
+      </form>
+    </div>
+
+    <div class="flex justify-center py-6 opacity-70 text-text-muted dark:text-text-muted-light">
+      <div class="flex gap-4 items-center text-xs font-medium">
+        <span class="material-symbols-outlined text-base">shield</span> SSL Seguro
+        <span class="material-symbols-outlined text-base">verified_user</span> Proteção de dados
+      </div>
+    </div>
+  </main>
+</div>

@@ -14,12 +14,6 @@ public sealed class LogoutCommandHandler(ICacheService cache)
         cancellationToken.ThrowIfCancellationRequested();
 
         string cacheKey = GetRefreshCacheKey(command.RefreshToken);
-        string? userId = await cache.GetAsync<string>(cacheKey);
-        if (string.IsNullOrWhiteSpace(userId))
-        {
-            return null;
-        }
-
         await cache.RemoveAsync(cacheKey);
         return new LogoutResult(true);
     }

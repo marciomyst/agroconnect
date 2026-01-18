@@ -1,3 +1,4 @@
+using Agronomia.Domain.Aggregates.Sellers;
 using Agronomia.Domain.Aggregates.Users.ValueObjects;
 using Agronomia.Domain.SeedWork;
 
@@ -73,4 +74,31 @@ public sealed class User : Entity, IAggregateRoot
     /// Gets when the user account was created.
     /// </summary>
     public DateTimeOffset CreatedAt { get; private set; }
+
+    /// <summary>
+    /// Gets the sellers this user can manage.
+    /// </summary>
+    public ICollection<Seller> ManagedSellers { get; private set; } = new List<Seller>();
+
+    /// <summary>
+    /// Associates the user with a seller to manage it.
+    /// </summary>
+    public void AssignSeller(Seller seller)
+    {
+        ArgumentNullException.ThrowIfNull(seller);
+
+        if (ManagedSellers.Any(managedSeller => managedSeller.Id == seller.Id))
+        {
+            return;
+        }
+
+        ManagedSellers.Add(seller);
+
+        if (seller.Managers.Any(manager => manager.Id == Id))
+        {
+            return;
+        }
+
+        seller.Managers.Add(this);
+    }
 }

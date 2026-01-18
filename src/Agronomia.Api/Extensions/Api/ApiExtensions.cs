@@ -1,5 +1,7 @@
 using Agronomia.Api.Features.Auth;
+using Agronomia.Api.Features.Users;
 using Agronomia.Api.Infrastructure;
+using Agronomia.Api.Features.Sellers;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
@@ -59,11 +61,12 @@ public static class ApiExtensions
     public static WebApplication MapApiEndpoints(this WebApplication app)
     {
         app.MapAuthEndpoints();
+        app.MapUserEndpoints();
+        app.MapSellerEndpoints();
         //app.MapAnalysisEndpoints();
         //app.MapAgentEndpoints();
         //app.MapCompanyEndpoints();
         //app.MapFarmEndpoints();
-        //app.MapUserEndpoints();
         //app.MapPingEndpoints();
 
         return app;

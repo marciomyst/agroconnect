@@ -10,7 +10,6 @@ import { TermsComponent } from './terms/terms.component';
 import { MainComponent } from './main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { authGuard } from './auth.guard';
-import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { FarmersPageComponent } from './farmers-page/farmers-page.component';
 import { ResellersPageComponent } from './resellers-page/resellers-page.component';
 import { LogisticsPageComponent } from './logistics-page/logistics-page.component';
@@ -18,6 +17,9 @@ import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { CareersPageComponent } from './careers-page/careers-page.component';
 import { BlogPageComponent } from './blog-page/blog-page.component';
+import { ProductListingComponent } from './marketplace/product-listing.component';
+import { ProductDetailComponent } from './marketplace/product-detail.component';
+import { MarketplaceComponent } from './marketplace/marketplace.component';
 
 const routes: Routes = [
   {
@@ -27,11 +29,19 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'platform/marketplace'
+        redirectTo: 'marketplace'
       },
       {
-        path: 'platform/marketplace',
+        path: 'marketplace',
         component: MarketplaceComponent
+      },
+      {
+        path: 'marketplace/products',
+        component: ProductListingComponent
+      },
+      {
+        path: 'marketplace/products/:id',
+        component: ProductDetailComponent
       },
       {
         path: 'platform/farmers',

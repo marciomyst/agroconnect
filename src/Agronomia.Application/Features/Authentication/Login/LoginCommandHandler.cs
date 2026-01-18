@@ -18,6 +18,7 @@ namespace Agronomia.Application.Features.Authentication.Login;
 public sealed class LoginCommandHandler(IAuthenticationReadRepository authenticationReadRepository, IOptions<JwtTokenSettings> jwtOptions, ICacheService cache)
 {
     private static string GetRefreshCacheKey(string refreshToken) => $"refresh:{refreshToken}";
+    private static RefreshSessionCache CreateSession(string userId, string deviceId) => new(userId, deviceId);
 
     public async Task<LoginResult?> Handle(LoginCommand command, CancellationToken cancellationToken)
     {
@@ -37,8 +38,11 @@ public sealed class LoginCommandHandler(IAuthenticationReadRepository authentica
         string refreshToken = Guid.NewGuid().ToString("N");
 
         string cacheKey = GetRefreshCacheKey(refreshToken);
-        await cache.SetAsync(cacheKey, user.Id, TimeSpan.FromDays(30));
+        var session = CreateSession(user.Id, command.DeviceId);
+        await cache.SetAsync(cacheKey, session, TimeSpan.FromDays(30));
 
         return new LoginResult(token, refreshToken);
     }
 }
+
+internal sealed record RefreshSessionCache(string UserId, string DeviceId);

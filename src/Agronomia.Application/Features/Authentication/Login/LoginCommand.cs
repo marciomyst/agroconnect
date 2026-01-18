@@ -5,4 +5,5 @@ namespace Agronomia.Application.Features.Authentication.Login;
 /// </summary>
 /// <param name="Email">User email used as the login identifier.</param>
 /// <param name="Password">Plain text password provided by the user.</param>
-public sealed record LoginCommand(string Email, string Password);
+/// <param name="DeviceId">Client-provided identifier for the device/session.</param>
+public sealed record LoginCommand(string Email, string Password, string DeviceId);

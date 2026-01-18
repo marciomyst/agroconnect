@@ -1,0 +1,121 @@
+<div class="bg-background-light dark:bg-background-dark text-text-main dark:text-white min-h-screen flex flex-col font-display">
+  <header class="w-full bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-strong px-6 lg:px-16 py-4 flex items-center justify-between sticky top-0 z-20">
+    <div class="flex items-center gap-3">
+      <div class="text-primary">
+        <span class="material-symbols-outlined text-3xl">agriculture</span>
+      </div>
+      <h1 class="text-xl font-bold tracking-tight">AgroMarket</h1>
+    </div>
+    <span class="text-sm font-medium text-text-secondary-light hidden sm:block">Sua conexão com o campo</span>
+  </header>
+
+  <main class="flex-grow flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-black text-text-main dark:text-white mb-4 tracking-tight">
+        Cadastre-se gratuitamente
+      </h2>
+      <p class="text-lg text-text-muted dark:text-text-muted-light max-w-2xl mx-auto">
+        Escolha o perfil que melhor se adapta às suas necessidades e comece a negociar hoje mesmo.
+      </p>
+    </div>
+
+    <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-8 px-4">
+      <!-- Comprador -->
+      <div
+        class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-color dark:border-border-strong shadow-card hover:shadow-card-hover hover:border-primary card-transition overflow-hidden cursor-pointer h-full"
+      >
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary to-green-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="p-8 flex flex-col h-full">
+          <div class="flex items-center justify-between mb-6">
+            <div class="w-16 h-16 rounded-xl bg-border-subtle dark:bg-surface-dark-muted flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+              <span class="material-symbols-outlined text-4xl">agriculture</span>
+            </div>
+            <span class="material-symbols-outlined text-border-color dark:text-border-strong group-hover:text-primary transition-colors">arrow_forward</span>
+          </div>
+          <h3 class="text-2xl font-bold text-text-main dark:text-white mb-3">Comprador (Produtor Rural)</h3>
+          <p class="text-text-muted dark:text-text-muted-light mb-8 flex-grow">
+            Encontre os melhores preços de defensivos e negocie direto com revendas. Cote produtos, compare preços e economize na sua safra.
+          </p>
+          <ul class="space-y-3 mb-8 text-sm text-text-muted dark:text-text-muted-light">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-base">check_circle</span>
+              <span>Cotações gratuitas</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-base">check_circle</span>
+              <span>Acesso a vendedores de todo país</span>
+            </li>
+          </ul>
+          <a
+            class="w-full mt-auto py-3 px-6 rounded-lg bg-primary text-text-on-primary font-bold text-sm tracking-wide shadow-sm hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"
+            routerLink="/authentication"
+          >
+            <span>Selecionar Comprador</span>
+            <span class="material-symbols-outlined text-lg">chevron_right</span>
+          </a>
+        </div>
+        <div
+          class="h-32 w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity relative"
+          style="background-image: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZiEtspr5KQKNgNgOfVStU9txlUGvv1smSAlB8fevCHwVgf5uw1tCOdJXm1D13BaQZp_6A_AgfHe0JBb348Poc2ANRyLA9b7YRWy4Qxz2c2sEKeS_vJxfo4Fn7esv2PbNHOGfVVKIp7Q4GXaUThA_sm3O99ZSGc628TN_Wxq15BIS95Zeky5O4g-bYKQcFRIwt4sMEjsIJro2gbYZ8Er0JcYdqTx-QiGHVhsLEkuw_aPjukOY7UByO5hKjXtzGa2Y1PEtOHi3Ya1pJ');"
+          aria-hidden="true"
+        >
+          <div class="hidden dark:block absolute inset-0 bg-gradient-to-t from-surface-dark to-transparent"></div>
+        </div>
+      </div>
+
+      <!-- Vendedor -->
+      <div
+        class="group relative flex flex-col bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-color dark:border-border-strong shadow-card hover:shadow-card-hover hover:border-primary card-transition overflow-hidden cursor-pointer h-full"
+      >
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#2c5c1d] to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="p-8 flex flex-col h-full">
+          <div class="flex items-center justify-between mb-6">
+            <div class="w-16 h-16 rounded-xl bg-border-subtle dark:bg-surface-dark-muted flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+              <span class="material-symbols-outlined text-4xl">storefront</span>
+            </div>
+            <span class="material-symbols-outlined text-border-color dark:text-border-strong group-hover:text-primary transition-colors">arrow_forward</span>
+          </div>
+          <h3 class="text-2xl font-bold text-text-main dark:text-white mb-3">Vendedor (Revenda)</h3>
+          <p class="text-text-muted dark:text-text-muted-light mb-8 flex-grow">
+            Expanda suas vendas conectando-se com produtores de todo o país. Cadastre seu estoque e receba pedidos de cotação em tempo real.
+          </p>
+          <ul class="space-y-3 mb-8 text-sm text-text-muted dark:text-text-muted-light">
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-base">check_circle</span>
+              <span>Gestão de estoque simplificada</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-base">check_circle</span>
+              <span>Negociação direta no chat</span>
+            </li>
+          </ul>
+          <a
+            class="w-full mt-auto py-3 px-6 rounded-lg bg-gray-100 dark:bg-gray-800 text-text-main dark:text-white group-hover:bg-primary group-hover:text-text-on-primary font-bold text-sm tracking-wide shadow-sm transition-all flex items-center justify-center gap-2 border border-transparent"
+            routerLink="/sellers/register"
+          >
+            <span>Selecionar Vendedor</span>
+            <span class="material-symbols-outlined text-lg">chevron_right</span>
+          </a>
+        </div>
+        <div
+          class="h-32 w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity relative"
+          style="background-image: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuDadQprFQjxFLN_VTpNgbyEJ42JITvlFlChixPTl-IpqKO0gwo41LfHO5z3DdS2O2NMC7_MPiwi90XNpH8DKzHRoXQSYH63bxEgz5xKMNaE8RJ6lXrKo77yDN14GAG3_XK1fiFtk8fp835qx74_-bM4dcqv8Va_Jmmv2BuiGXluYqCLx0nH-LxY_ms-RIaAkPdfAUouY6LQfPc3fgCGgDx8H3fv64TfjtzdcUh7481WDn_6d9e1Sn4x-oResfPblGO40IhRYsvN7lQv');"
+          aria-hidden="true"
+        >
+          <div class="hidden dark:block absolute inset-0 bg-gradient-to-t from-surface-dark to-transparent"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center">
+      <p class="text-text-muted dark:text-text-muted-light text-sm">
+        Já possui conta?
+        <a class="font-bold text-primary hover:text-primary-hover hover:underline ml-1" routerLink="/authentication">Faça login</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="py-6 text-center border-t border-border-light dark:border-border-strong bg-surface-light dark:bg-surface-dark">
+    <p class="text-xs text-text-muted dark:text-text-muted-light">© 2024 AgroMarket. Todos os direitos reservados.</p>
+  </footer>
+</div>

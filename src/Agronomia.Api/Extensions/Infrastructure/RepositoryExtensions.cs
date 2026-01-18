@@ -1,5 +1,6 @@
 using Agronomia.Application.Features.Authentication;
 using Agronomia.Application.Features.Users;
+using Agronomia.Domain.Aggregates.Sellers;
 using Agronomia.Domain.Aggregates.Users;
 using Agronomia.Infrastructure.Persistence.ReadRepositories;
 using Agronomia.Infrastructure.Persistence.Repositories;
@@ -15,6 +16,8 @@ public static class RepositoryExtensions
         builder.Services.AddScoped<IUserRepository, UserRepository>();
 
         builder.Services.AddScoped<IUserReadRepository, UserReadRepository>();
+
+        builder.Services.AddScoped<ISellerRepository, SellerRepository>();
 
         return builder;
     }

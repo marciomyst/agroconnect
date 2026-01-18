@@ -1,3 +1,4 @@
+using Agronomia.Domain.Aggregates.Sellers;
 using Agronomia.Domain.Aggregates.Users;
 using Agronomia.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,11 @@ public class AgronomiaDbContext(DbContextOptions<AgronomiaDbContext> options)
     /// DbSet for <see cref="User"/> aggregate roots.
     /// </summary>
     public DbSet<User> Users => Set<User>();
+
+    /// <summary>
+    /// DbSet for <see cref="Seller"/> aggregate roots.
+    /// </summary>
+    public DbSet<Seller> Sellers => Set<Seller>();
 
     /// <summary>
     /// Applies all IEntityTypeConfiguration classes in this assembly.

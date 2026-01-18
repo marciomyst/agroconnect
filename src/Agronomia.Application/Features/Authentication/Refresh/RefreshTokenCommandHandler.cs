@@ -1,3 +1,4 @@
+using Agronomia.Application.Features.Authentication.Login;
 using Agronomia.Crosscutting.Security;
 using Agronomia.Domain.Interfaces;
 using Microsoft.Extensions.Options;
@@ -18,13 +19,25 @@ public sealed class RefreshTokenCommandHandler(ICacheService cache, IAuthenticat
     public async Task<RefreshTokenResult?> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
         string cacheKey = GetRefreshCacheKey(request.RefreshToken);
-        string? userId = await cache.GetAsync<string>(cacheKey);
-        if (string.IsNullOrWhiteSpace(userId))
+        var session = await cache.GetAsync<RefreshSessionCache>(cacheKey);
+
+        // Fallback for legacy string-only cache entries (before device binding)
+        if (session is null)
         {
+            string? legacyUserId = await cache.GetAsync<string>(cacheKey);
+            if (!string.IsNullOrWhiteSpace(legacyUserId))
+            {
+                session = new RefreshSessionCache(legacyUserId, request.DeviceId);
+            }
+        }
+
+        if (session is null || !string.Equals(session.DeviceId, request.DeviceId, StringComparison.Ordinal))
+        {
+            await cache.RemoveAsync(cacheKey);
             return null;
         }
 
-        var user = await authenticationReadRepository.GetUserByIdAsync(userId, cancellationToken);
+        var user = await authenticationReadRepository.GetUserByIdAsync(session.UserId, cancellationToken);
         if (user is null)
         {
             await cache.RemoveAsync(cacheKey);
@@ -35,7 +48,8 @@ public sealed class RefreshTokenCommandHandler(ICacheService cache, IAuthenticat
         await cache.RemoveAsync(cacheKey);
 
         string newRefresh = Guid.NewGuid().ToString("N");
-        await cache.SetAsync(GetRefreshCacheKey(newRefresh), user.Id, TimeSpan.FromDays(30));
+        var newSession = new RefreshSessionCache(user.Id, request.DeviceId);
+        await cache.SetAsync(GetRefreshCacheKey(newRefresh), newSession, TimeSpan.FromDays(30));
 
         string accessToken = JwtTokenGenerator.Generate(user, jwtOptions.Value);
 

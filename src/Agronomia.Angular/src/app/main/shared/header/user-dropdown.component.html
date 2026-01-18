@@ -1,0 +1,93 @@
+<div class="relative">
+  <button
+    class="flex items-center justify-between gap-3 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-all cursor-pointer border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#162210] w-72"
+    type="button"
+    (click)="toggle($event)"
+    aria-haspopup="true"
+    [attr.aria-expanded]="isOpen"
+  >
+    <div
+      class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/30 flex items-center justify-center text-sm font-bold uppercase shadow-sm shadow-primary/20"
+      [ngStyle]="avatarStyle"
+      [ngClass]="{
+        'bg-gradient-to-br from-primary to-green-500 text-[#131811]': !avatarUrl,
+        'bg-gray-200 dark:bg-gray-700 text-[#131811]': !!avatarUrl
+      }"
+    >
+      <ng-container *ngIf="!avatarUrl">{{ userName.charAt(0) || 'U' }}</ng-container>
+    </div>
+    <div class="hidden lg:flex flex-1 min-w-0 flex-col items-start text-left">
+      <span class="text-md font-bold text-text-main dark:text-white">{{ userName }}</span>
+    </div>
+    <span class="material-symbols-outlined text-text-main dark:text-white text-base leading-none" aria-hidden="true">keyboard_arrow_down</span>
+  </button>
+
+  <div
+    *ngIf="isOpen"
+    class="absolute right-0 mt-2 w-72 origin-top-right rounded-2xl bg-white dark:bg-[#1f2d18] shadow-2xl ring-1 ring-black/5 dark:ring-white/10 focus:outline-none divide-y divide-gray-100 dark:divide-white/10 z-50"
+  >
+    <div class="p-4 flex items-center gap-3 lg:hidden">
+      <div
+        class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 flex items-center justify-center text-base font-bold text-white uppercase ring-2 ring-primary/20"
+        [ngStyle]="avatarStyle"
+      >
+        <ng-container *ngIf="!avatarUrl">{{ userName.charAt(0) || 'U' }}</ng-container>
+      </div>
+      <div>
+        <p class="text-base font-bold text-text-main dark:text-white">{{ userName }}</p>
+        <p class="text-xs text-text-muted dark:text-text-muted-light">{{ userRole }}</p>
+      </div>
+    </div>
+
+    <div class="py-2">
+      <button class="dropdown-item" type="button" (click)="onProfile()">
+        <div class="dropdown-icon">
+          <span class="material-symbols-outlined text-xl">person</span>
+        </div>
+        <span class="text-sm font-medium flex-1 text-left text-text-main dark:text-white">Meu Perfil</span>
+        <span class="material-symbols-outlined text-text-muted dark:text-text-muted-light text-lg">chevron_right</span>
+      </button>
+      <button class="dropdown-item" type="button" (click)="onOrders()">
+        <div class="dropdown-icon">
+          <span class="material-symbols-outlined text-xl">shopping_bag</span>
+        </div>
+        <div class="flex items-center justify-between flex-1">
+          <span class="text-sm font-medium text-left text-text-main dark:text-white">Meus Pedidos</span>
+          <span *ngIf="pendingOrders > 0" class="flex size-2 rounded-full bg-primary ring-4 ring-primary/20"></span>
+        </div>
+        <span class="material-symbols-outlined text-text-muted dark:text-text-muted-light text-lg">chevron_right</span>
+      </button>
+      <button class="dropdown-item" type="button" (click)="onPrescriptions()">
+        <div class="dropdown-icon">
+          <span class="material-symbols-outlined text-xl">description</span>
+        </div>
+        <span class="text-sm font-medium flex-1 text-left text-text-main dark:text-white">Carteira de Receitas</span>
+        <span class="material-symbols-outlined text-text-muted dark:text-text-muted-light text-lg">chevron_right</span>
+      </button>
+    </div>
+
+    <div class="py-2">
+      <button class="dropdown-item" type="button" (click)="onSettings()">
+        <div class="dropdown-icon">
+          <span class="material-symbols-outlined text-xl">settings</span>
+        </div>
+        <span class="text-sm font-medium flex-1 text-left text-text-main dark:text-white">Configuracoes</span>
+      </button>
+      <button class="dropdown-item" type="button" (click)="onHelp()">
+        <div class="dropdown-icon">
+          <span class="material-symbols-outlined text-xl">help</span>
+        </div>
+        <span class="text-sm font-medium flex-1 text-left text-text-main dark:text-white">Central de Ajuda</span>
+      </button>
+    </div>
+
+    <div class="py-2">
+      <button class="dropdown-item text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20" type="button" (click)="onLogout()">
+        <div class="dropdown-icon bg-red-50 dark:bg-red-950/30 text-red-500">
+          <span class="material-symbols-outlined text-xl">logout</span>
+        </div>
+        <span class="text-sm font-bold flex-1 text-left">Sair da conta</span>
+      </button>
+    </div>
+  </div>
+</div>

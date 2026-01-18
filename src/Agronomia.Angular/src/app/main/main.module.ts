@@ -6,14 +6,14 @@ import { PasswordRecoveryComponent } from './password-recovery/password-recovery
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { PasswordVerificationComponent } from './password-verification/password-verification.component';
 import { CarouselCardComponent } from './shared/carousel-card/carousel-card.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MarketplaceComponent } from './marketplace/marketplace.component';
-import { FooterComponent } from './shared/footer/footer.component';
+import { ProductListingComponent } from './marketplace/product-listing.component';
 import { FarmersPageComponent } from './farmers-page/farmers-page.component';
 import { ResellersPageComponent } from './resellers-page/resellers-page.component';
 import { LogisticsPageComponent } from './logistics-page/logistics-page.component';
@@ -21,6 +21,8 @@ import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { CareersPageComponent } from './careers-page/careers-page.component';
 import { BlogPageComponent } from './blog-page/blog-page.component';
+import { ProductDetailComponent } from './marketplace/product-detail.component';
+import { SharedUiModule } from './shared/shared-ui.module';
 
 @NgModule({
   declarations: [
@@ -34,15 +36,16 @@ import { BlogPageComponent } from './blog-page/blog-page.component';
     FaqComponent,
     DashboardComponent,
     MarketplaceComponent,
-    FooterComponent,
     FarmersPageComponent,
     ResellersPageComponent,
     LogisticsPageComponent,
     PricingPageComponent,
     AboutPageComponent,
     CareersPageComponent,
-    BlogPageComponent
+    BlogPageComponent,
+    ProductListingComponent,
+    ProductDetailComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule, MainRoutingModule, CarouselCardComponent]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MainRoutingModule, CarouselCardComponent, SharedUiModule]
 })
 export class MainModule {}

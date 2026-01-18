@@ -11,5 +11,5 @@ public sealed class LoginRequestExample : IExamplesProvider<LoginRequest>
     /// <summary>
     /// Example payload for user login.
     /// </summary>
-    public LoginRequest GetExamples() => new("user@example.com", "P@ssw0rd!");
+    public LoginRequest GetExamples() => new("user@example.com", "P@ssw0rd!", "device-web-123456");
 }
