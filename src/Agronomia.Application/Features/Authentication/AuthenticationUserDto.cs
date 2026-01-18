@@ -13,7 +13,7 @@ namespace Agronomia.Application.Features.Authentication;
 /// <param name="CompanyIds">Companies the user belongs to.</param>
 /// <param name="CreatedAt">Creation timestamp.</param>
 public sealed record AuthenticationUserDto(
-    string Id,
+    Guid Id,
     string Email,
     string Password,
     string Name,

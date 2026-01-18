@@ -18,13 +18,13 @@ public sealed class RefreshTokenCommandHandler(ICacheService cache, IAuthenticat
     public async Task<RefreshTokenResult?> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
         string cacheKey = GetRefreshCacheKey(request.RefreshToken);
-        string? userId = await cache.GetAsync<string>(cacheKey);
-        if (string.IsNullOrWhiteSpace(userId))
+        Guid? userId = await cache.GetAsync<Guid>(cacheKey);
+        if (userId is null || userId.Value == Guid.Empty)
         {
             return null;
         }
 
-        var user = await authenticationReadRepository.GetUserByIdAsync(userId, cancellationToken);
+        var user = await authenticationReadRepository.GetUserByIdAsync(userId.Value, cancellationToken);
         if (user is null)
         {
             await cache.RemoveAsync(cacheKey);

@@ -1,5 +1,5 @@
 using Agronomia.Domain.Aggregates.Users.ValueObjects;
-using Agronomia.Domain.SeedWork;
+using Agronomia.Domain.Common;
 
 namespace Agronomia.Domain.Aggregates.Users;
 
@@ -17,7 +17,7 @@ namespace Agronomia.Domain.Aggregates.Users;
 /// layer to provide a hashed value.
 /// </para>
 /// </remarks>
-public sealed class User : Entity, IAggregateRoot
+public sealed class User : AggregateRoot
 {
     private User()
     {
@@ -31,17 +31,17 @@ public sealed class User : Entity, IAggregateRoot
     /// <param name="password">Secure password hash.</param>
     /// <param name="name">Full name.</param>
     /// <param name="role">User role inside a company context.</param>
-    /// <param name="id">Optional identifier. If omitted, a new string Guid is generated.</param>
+    /// <param name="id">Optional identifier. If omitted, a new Guid is generated.</param>
     /// <param name="createdAt">Optional creation timestamp. Defaults to UTC now.</param>
     public User(
         string email,
         string password,
         string name,
         UserRole role,
-        string? id = null,
+        Guid? id = null,
         DateTimeOffset? createdAt = null)
+        : base(id ?? Guid.NewGuid())
     {
-        Id = id ?? Guid.NewGuid().ToString();
         Email = email;
         Password = password;
         Name = name;

@@ -1,5 +1,5 @@
 using Agronomia.Domain.Aggregates.Users;
-using Agronomia.Domain.SeedWork;
+using Agronomia.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 

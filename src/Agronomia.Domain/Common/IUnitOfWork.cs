@@ -1,4 +1,4 @@
-namespace Agronomia.Domain.SeedWork;
+namespace Agronomia.Domain.Common;
 
 /// <summary>
 /// Defines the contract for the Unit of Work pattern, coordinating the writing out of changes and the resolution of concurrency problems.

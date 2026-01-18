@@ -13,7 +13,7 @@ public sealed class AuthenticationReadRepository(IDbConnection connection) : IAu
 {
     private sealed class AuthenticationDbRow
     {
-        public string Id { get; init; } = string.Empty;
+        public Guid Id { get; init; }
         public string Email { get; init; } = string.Empty;
         public string Password { get; init; } = string.Empty;
         public string Name { get; init; } = string.Empty;
@@ -23,19 +23,19 @@ public sealed class AuthenticationReadRepository(IDbConnection connection) : IAu
 
     private const string GetByIdSql = """
         SELECT
-            u."Id"::text        AS "Id",
+            u."Id"              AS "Id",
             u."Email"           AS "Email",
             u."Password"        AS "Password",
             u."Name"            AS "Name",
             u."Role"::text      AS "Role",
             u."CreatedAt"       AS "CreatedAt"
         FROM users u
-        WHERE u."Id" = @UserId::uuid;
+        WHERE u."Id" = @UserId;
         """;
 
     private const string GetByEmailSql = """
         SELECT
-            u."Id"::text        AS "Id",
+            u."Id"              AS "Id",
             u."Email"           AS "Email",
             u."Password"        AS "Password",
             u."Name"            AS "Name",
@@ -57,7 +57,7 @@ public sealed class AuthenticationReadRepository(IDbConnection connection) : IAu
     }
 
     /// <inheritdoc />
-    public async Task<AuthenticationUserDto?> GetUserByIdAsync(string userId, CancellationToken cancellationToken = default)
+    public async Task<AuthenticationUserDto?> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         var command = new CommandDefinition(
             GetByIdSql,

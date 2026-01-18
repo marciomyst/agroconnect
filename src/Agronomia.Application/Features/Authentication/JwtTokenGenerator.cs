@@ -27,7 +27,7 @@ public static class JwtTokenGenerator
 
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Sub, user.Id),
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new(JwtRegisteredClaimNames.Email, user.Email),
             new(JwtRegisteredClaimNames.UniqueName, user.Name),
             new(ClaimTypes.Role, user.Role.ToString())
