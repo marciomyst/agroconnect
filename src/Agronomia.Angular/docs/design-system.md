@@ -1,4 +1,4 @@
-# Design System - AgroConnect UI
+# Design System - Agronomia UI
 
 Este documento descreve os tokens, utilitarios e padroes base do frontend.
 

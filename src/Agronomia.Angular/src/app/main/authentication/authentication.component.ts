@@ -13,7 +13,7 @@ export class AuthenticationComponent {
       type: 'testimonial',
       rating: 5,
       quote:
-        'O AgroConnect transformou a maneira como negociamos insumos. Encontramos os melhores precos e agilidade na entrega com apenas alguns cliques.',
+        'O Agronomia transformou a maneira como negociamos insumos. Encontramos os melhores precos e agilidade na entrega com apenas alguns cliques.',
       author: 'Carlos Mendes',
       authorRole: 'Produtor Rural - Mato Grosso',
       authorImage:

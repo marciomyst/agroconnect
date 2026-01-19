@@ -1,5 +1,4 @@
-using System;
-using Agronomia.Domain.Aggregates.Users;
+using Agronomia.Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,10 +7,6 @@ namespace Agronomia.Infrastructure.Persistence.Configurations;
 /// <summary>
 /// Entity Framework Core configuration for <see cref="User"/>.
 /// </summary>
-/// <remarks>
-/// Maps the aggregate to the <c>users</c> table, constrains column lengths, stores enums as strings,
-/// and configures the optional relationship to <see cref="Company"/>.
-/// </remarks>
 internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 {
     /// <summary>
@@ -26,26 +21,36 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(user => user.Id)
             .HasColumnType("uuid")
-            .IsRequired();
-
-        builder.Property(user => user.Email)
-            .HasMaxLength(256)
-            .IsRequired();
-
-        builder.Property(user => user.Password)
-            .HasMaxLength(256)
+            .ValueGeneratedNever()
             .IsRequired();
 
         builder.Property(user => user.Name)
             .HasMaxLength(200)
             .IsRequired();
 
-        builder.Property(user => user.Role)
-            .HasConversion<string>()
-            .HasMaxLength(32)
+        builder.OwnsOne(user => user.Email, email =>
+        {
+            email.Property(e => e.Value)
+                .HasColumnName("Email")
+                .HasMaxLength(256)
+                .IsRequired();
+        });
+
+        builder.Navigation(user => user.Email)
             .IsRequired();
 
-        builder.Property(user => user.CreatedAt)
+        builder.HasIndex(user => user.Email.Value)
+            .IsUnique();
+
+        builder.Property(user => user.PasswordHash)
+            .HasColumnName("PasswordHash")
+            .HasMaxLength(256)
+            .IsRequired();
+
+        builder.Property(user => user.IsActive)
+            .IsRequired();
+
+        builder.Property(user => user.CreatedAtUtc)
             .IsRequired();
     }
 }

@@ -1,4 +1,6 @@
-using Agronomia.Domain.Aggregates.Users;
+using Agronomia.Domain.Identity;
+using Agronomia.Domain.Memberships;
+using Agronomia.Domain.Organizations;
 using Agronomia.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -19,6 +21,26 @@ public class AgronomiaDbContext : DbContext, IUnitOfWork
     /// DbSet for <see cref="User"/> aggregate roots.
     /// </summary>
     public DbSet<User> Users => Set<User>();
+
+    /// <summary>
+    /// DbSet for <see cref="Seller"/> aggregate roots.
+    /// </summary>
+    public DbSet<Seller> Sellers => Set<Seller>();
+
+    /// <summary>
+    /// DbSet for <see cref="SellerMembership"/> aggregate roots.
+    /// </summary>
+    public DbSet<SellerMembership> SellerMemberships => Set<SellerMembership>();
+
+    /// <summary>
+    /// DbSet for <see cref="Farm"/> aggregate roots.
+    /// </summary>
+    public DbSet<Farm> Farms => Set<Farm>();
+
+    /// <summary>
+    /// DbSet for <see cref="FarmMembership"/> aggregate roots.
+    /// </summary>
+    public DbSet<FarmMembership> FarmMemberships => Set<FarmMembership>();
 
     /// <summary>
     /// Applies all IEntityTypeConfiguration classes in this assembly.

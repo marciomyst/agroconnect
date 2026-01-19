@@ -4,7 +4,7 @@ Este documento orienta **como o código deve ser escrito** neste repositório, p
 
 Ele complementa:
 
-* `Linguagem Ubíqua — AgroConnect`
+* `Linguagem Ubíqua — Agronomia`
 * `AGENTS.md`
 
 ---
@@ -35,15 +35,15 @@ Ele complementa:
 
 ```text
 src/
-├── AgroConnect.Api               # HTTP / Endpoints / Autenticação
+├── Agronomia.Api               # HTTP / Endpoints / Autenticação
 │   └── Features                  # Vertical Slices (camada de borda)
 │
-├── AgroConnect.Application       # Casos de uso / Orquestração
+├── Agronomia.Application       # Casos de uso / Orquestração
 │   ├── Abstractions              # Interfaces comuns
 │   ├── Behaviors                 # Pipeline (logging, validação, etc.)
 │   └── Features                  # Vertical Slices (Application)
 │
-├── AgroConnect.Domain            # Modelo de domínio
+├── Agronomia.Domain            # Modelo de domínio
 │   ├── Common                    # Entity, AggregateRoot, ValueObject, Events
 │   ├── Identity                  # User, Auth
 │   ├── Organizations             # Seller, Farm
@@ -53,12 +53,12 @@ src/
 │   ├── CollectiveDeals           # CollectiveDeal, DealLedger
 │   └── Finance                   # FarmWallet
 │
-├── AgroConnect.Infrastructure    # Persistência, Wolverine, integrações
+├── Agronomia.Infrastructure    # Persistência, Wolverine, integrações
 │   ├── Persistence               # DbContext, mappings, migrations
 │   ├── Repositories              # Implementações de repositório
 │   └── Messaging                 # Wolverine configuration
 │
-└── AgroConnect.Tests             # Testes de domínio e aplicação
+└── Agronomia.Tests             # Testes de domínio e aplicação
 ```
 
 ---
@@ -79,14 +79,14 @@ Uma **Feature** (ou **Use Case**) é a **unidade mínima de funcionalidade** imp
 Exemplo: `RegisterSellerWithOwner`
 
 ```text
-AgroConnect.Api
+Agronomia.Api
  └── Features
      └── Sellers
          └── RegisterSellerWithOwner
              ├── RegisterSellerWithOwnerEndpoint.cs
              └── RegisterSellerWithOwnerRequest.cs
 
-AgroConnect.Application
+Agronomia.Application
  └── Features
      └── Sellers
          └── RegisterSellerWithOwner

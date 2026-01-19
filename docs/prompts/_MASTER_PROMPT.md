@@ -1,4 +1,4 @@
-You are working on the AgroConnect backend (.NET 10).
+You are working on the Agronomia backend (.NET 10).
 
 This repository follows:
 - DDD
