@@ -1,10 +1,10 @@
 # DOMAIN_EVENTS.md
 
-Este documento cataloga **todos os eventos de domínio oficiais** do sistema AgroConnect.
+Este documento cataloga **todos os eventos de domínio oficiais** do sistema Agronomia.
 
 Ele é **normativo** e complementa:
 
-* `Linguagem Ubíqua — AgroConnect`
+* `Linguagem Ubíqua — Agronomia`
 * `ARCHITECTURE.md`
 * `AGENTS.md`
 

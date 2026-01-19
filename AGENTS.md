@@ -24,7 +24,7 @@ Seu papel é:
 
 Antes de gerar qualquer código, o agente **DEVE considerar**, nesta ordem:
 
-1. **Linguagem Ubíqua** (`Linguagem Ubíqua — AgroConnect`)
+1. **Linguagem Ubíqua** (`Linguagem Ubíqua — Agronomia`)
 2. **User Feature / User Stories** fornecidas
 3. **Event Storm** associado à feature
 4. **Estrutura de pastas do repositório**
@@ -61,13 +61,13 @@ Se houver conflito:
 
 ```text
 src/
-├── AgroConnect.Api
+├── Agronomia.Api
 │   └── Features
 │
-├── AgroConnect.Application
+├── Agronomia.Application
 │   └── Features
 │
-├── AgroConnect.Domain
+├── Agronomia.Domain
 │   ├── Common
 │   ├── Identity
 │   ├── Organizations
@@ -77,10 +77,10 @@ src/
 │   ├── CollectiveDeals
 │   └── Finance
 │
-├── AgroConnect.Infrastructure
+├── Agronomia.Infrastructure
 │   └── Persistence
 │
-└── AgroConnect.Tests
+└── Agronomia.Tests
 ```
 
 Agentes **não devem**:

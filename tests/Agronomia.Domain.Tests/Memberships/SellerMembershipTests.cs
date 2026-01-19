@@ -24,6 +24,23 @@ public sealed class SellerMembershipTests
     }
 
     [Fact]
+    public void Grant_ValidRole_RaisesSellerMembershipGranted()
+    {
+        var sellerId = Guid.NewGuid();
+        var userId = Guid.NewGuid();
+
+        var membership = SellerMembership.Grant(sellerId, userId, SellerRole.Manager);
+
+        var domainEvent = Assert.Single(membership.DomainEvents);
+        var granted = Assert.IsType<SellerMembershipGranted>(domainEvent);
+
+        Assert.Equal(sellerId, granted.SellerId);
+        Assert.Equal(userId, granted.UserId);
+        Assert.Equal(SellerRole.Manager, granted.Role);
+        Assert.Equal(DateTimeKind.Utc, granted.OccurredAtUtc.Kind);
+    }
+
+    [Fact]
     public void GrantOwner_EmptySellerId_Throws()
     {
         Assert.Throws<ArgumentException>(() => SellerMembership.GrantOwner(Guid.Empty, Guid.NewGuid()));

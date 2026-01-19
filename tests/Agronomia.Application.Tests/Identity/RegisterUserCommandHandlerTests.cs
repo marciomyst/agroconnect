@@ -58,6 +58,11 @@ public sealed class RegisterUserCommandHandlerTests
             return Task.FromResult<User?>(null);
         }
 
+        public Task<bool> ExistsAsync(Guid userId, CancellationToken ct)
+        {
+            return Task.FromResult(false);
+        }
+
         public Task AddAsync(User user, CancellationToken ct)
         {
             AddedUser = user;

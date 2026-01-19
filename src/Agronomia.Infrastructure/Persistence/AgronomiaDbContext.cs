@@ -33,6 +33,16 @@ public class AgronomiaDbContext : DbContext, IUnitOfWork
     public DbSet<SellerMembership> SellerMemberships => Set<SellerMembership>();
 
     /// <summary>
+    /// DbSet for <see cref="Farm"/> aggregate roots.
+    /// </summary>
+    public DbSet<Farm> Farms => Set<Farm>();
+
+    /// <summary>
+    /// DbSet for <see cref="FarmMembership"/> aggregate roots.
+    /// </summary>
+    public DbSet<FarmMembership> FarmMemberships => Set<FarmMembership>();
+
+    /// <summary>
     /// Applies all IEntityTypeConfiguration classes in this assembly.
     /// <para>Ensures the model picks up fluent configurations for aggregates.</para>
     /// </summary>

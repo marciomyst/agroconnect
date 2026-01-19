@@ -77,6 +77,11 @@ public sealed class ChangeUserPasswordCommandHandlerTests
             return Task.FromResult(userId == _user.Id ? _user : null);
         }
 
+        public Task<bool> ExistsAsync(Guid userId, CancellationToken ct)
+        {
+            return Task.FromResult(userId == _user.Id);
+        }
+
         public Task AddAsync(User user, CancellationToken ct)
         {
             return Task.CompletedTask;

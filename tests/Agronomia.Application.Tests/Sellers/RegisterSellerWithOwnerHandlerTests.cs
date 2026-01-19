@@ -62,6 +62,11 @@ public sealed class RegisterSellerWithOwnerHandlerTests
             return Task.FromResult(ExistsResult);
         }
 
+        public Task<bool> ExistsAsync(Guid sellerId, CancellationToken ct)
+        {
+            return Task.FromResult(false);
+        }
+
         public Task AddAsync(Seller seller, CancellationToken ct)
         {
             AddedSeller = seller;
@@ -72,6 +77,19 @@ public sealed class RegisterSellerWithOwnerHandlerTests
     private sealed class FakeSellerMembershipRepository : ISellerMembershipRepository
     {
         public SellerMembership? AddedMembership { get; private set; }
+
+        public Task<IReadOnlyList<SellerMembership>> GetBySellerAndUserAsync(
+            Guid sellerId,
+            Guid userId,
+            CancellationToken ct)
+        {
+            return Task.FromResult<IReadOnlyList<SellerMembership>>(Array.Empty<SellerMembership>());
+        }
+
+        public Task<bool> ExistsAsync(Guid sellerId, Guid userId, SellerRole role, CancellationToken ct)
+        {
+            return Task.FromResult(false);
+        }
 
         public Task AddAsync(SellerMembership membership, CancellationToken ct)
         {

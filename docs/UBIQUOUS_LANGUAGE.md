@@ -1,6 +1,6 @@
-# Linguagem Ubíqua — AgroConnect
+# Linguagem Ubíqua — Agronomia
 
-Este documento define a **linguagem ubíqua oficial** do sistema AgroConnect.
+Este documento define a **linguagem ubíqua oficial** do sistema Agronomia.
 
 Ele deve ser utilizado como **referência única** para:
 

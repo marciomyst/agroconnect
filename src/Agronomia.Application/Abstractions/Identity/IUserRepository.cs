@@ -11,5 +11,7 @@ public interface IUserRepository
 
     Task<User?> GetByIdAsync(Guid userId, CancellationToken ct);
 
+    Task<bool> ExistsAsync(Guid userId, CancellationToken ct);
+
     Task AddAsync(User user, CancellationToken ct);
 }

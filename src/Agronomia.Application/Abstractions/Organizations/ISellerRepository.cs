@@ -6,5 +6,7 @@ public interface ISellerRepository
 {
     Task<bool> ExistsByTaxIdAsync(string taxId, CancellationToken ct);
 
+    Task<bool> ExistsAsync(Guid sellerId, CancellationToken ct);
+
     Task AddAsync(Seller seller, CancellationToken ct);
 }

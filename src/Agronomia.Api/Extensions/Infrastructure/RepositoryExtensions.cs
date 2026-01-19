@@ -21,6 +21,8 @@ public static class RepositoryExtensions
 
         builder.Services.AddScoped<ISellerRepository, EfSellerRepository>();
         builder.Services.AddScoped<ISellerMembershipRepository, EfSellerMembershipRepository>();
+        builder.Services.AddScoped<IFarmRepository, EfFarmRepository>();
+        builder.Services.AddScoped<IFarmMembershipRepository, EfFarmMembershipRepository>();
 
         builder.Services.AddSingleton<IPasswordHasher, PasswordHasherAdapter>();
         builder.Services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();

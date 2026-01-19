@@ -34,6 +34,13 @@ public sealed class UserRepository(AgronomiaDbContext context) : IUserRepository
             .SingleOrDefaultAsync(user => user.Id == userId, ct);
     }
 
+    public Task<bool> ExistsAsync(Guid userId, CancellationToken ct)
+    {
+        return context.Users
+            .AsNoTracking()
+            .AnyAsync(user => user.Id == userId, ct);
+    }
+
     public async Task AddAsync(User user, CancellationToken ct)
     {
         await context.Users.AddAsync(user, ct);

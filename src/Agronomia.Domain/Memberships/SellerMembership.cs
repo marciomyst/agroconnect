@@ -23,7 +23,7 @@ public sealed class SellerMembership : AggregateRoot
 
     public SellerRole Role { get; private set; }
 
-    public static SellerMembership GrantOwner(Guid sellerId, Guid userId, DateTime? nowUtc = null)
+    public static SellerMembership Grant(Guid sellerId, Guid userId, SellerRole role, DateTime? nowUtc = null)
     {
         if (sellerId == Guid.Empty)
         {
@@ -35,8 +35,13 @@ public sealed class SellerMembership : AggregateRoot
             throw new ArgumentException("UserId is required.", nameof(userId));
         }
 
+        if (!Enum.IsDefined(typeof(SellerRole), role))
+        {
+            throw new ArgumentOutOfRangeException(nameof(role), "Role is invalid.");
+        }
+
         var occurredAtUtc = NormalizeUtc(nowUtc ?? DateTime.UtcNow);
-        var membership = new SellerMembership(Guid.NewGuid(), sellerId, userId, SellerRole.Owner);
+        var membership = new SellerMembership(Guid.NewGuid(), sellerId, userId, role);
 
         membership.AddDomainEvent(new SellerMembershipGranted(
             Guid.NewGuid(),
@@ -46,6 +51,11 @@ public sealed class SellerMembership : AggregateRoot
             membership.Role));
 
         return membership;
+    }
+
+    public static SellerMembership GrantOwner(Guid sellerId, Guid userId, DateTime? nowUtc = null)
+    {
+        return Grant(sellerId, userId, SellerRole.Owner, nowUtc);
     }
 
     private static DateTime NormalizeUtc(DateTime value)
