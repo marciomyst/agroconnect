@@ -48,6 +48,16 @@ public sealed class RegisterUserCommandHandlerTests
             return Task.FromResult(ExistsResult);
         }
 
+        public Task<User?> GetByEmailAsync(Email email, CancellationToken ct)
+        {
+            return Task.FromResult<User?>(null);
+        }
+
+        public Task<User?> GetByIdAsync(Guid userId, CancellationToken ct)
+        {
+            return Task.FromResult<User?>(null);
+        }
+
         public Task AddAsync(User user, CancellationToken ct)
         {
             AddedUser = user;
@@ -58,5 +68,10 @@ public sealed class RegisterUserCommandHandlerTests
     private sealed class FakePasswordHasher : IPasswordHasher
     {
         public string Hash(string password) => $"hashed::{password}";
+
+        public bool Verify(string password, string passwordHash)
+        {
+            return passwordHash == $"hashed::{password}";
+        }
     }
 }

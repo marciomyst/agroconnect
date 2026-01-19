@@ -45,6 +45,16 @@ public sealed class User : AggregateRoot
         return user;
     }
 
+    public void ChangePassword(string newPasswordHash, DateTime? nowUtc = null)
+    {
+        Guard.AgainstNullOrEmpty(newPasswordHash, nameof(newPasswordHash));
+
+        PasswordHash = newPasswordHash;
+
+        var occurredAt = NormalizeUtc(nowUtc ?? DateTime.UtcNow);
+        AddDomainEvent(new UserPasswordChanged(Guid.NewGuid(), occurredAt, Id));
+    }
+
     private static DateTime NormalizeUtc(DateTime value)
     {
         return value.Kind == DateTimeKind.Utc

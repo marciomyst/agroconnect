@@ -7,5 +7,9 @@ public interface IUserRepository
 {
     Task<bool> ExistsByEmailAsync(Email email, CancellationToken ct);
 
+    Task<User?> GetByEmailAsync(Email email, CancellationToken ct);
+
+    Task<User?> GetByIdAsync(Guid userId, CancellationToken ct);
+
     Task AddAsync(User user, CancellationToken ct);
 }
