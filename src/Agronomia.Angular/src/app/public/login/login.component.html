@@ -1,0 +1,72 @@
+<section class="login-shell">
+  <div class="login-card">
+    <div class="login-hero">
+      <div class="hero-badge">Agronomia</div>
+      <h1>Bem-vindo de volta</h1>
+      <p>
+        Acesse seu painel com contexto de organizacao e acompanhe suas operacoes
+        em tempo real.
+      </p>
+      <div class="hero-metrics">
+        <div>
+          <span class="metric-title">Sessao segura</span>
+          <span class="metric-value">Token + contexto ativo</span>
+        </div>
+        <div>
+          <span class="metric-title">Fluxo rapido</span>
+          <span class="metric-value">Login e selecao de organizacao</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-form">
+      <div class="form-header">
+        <h2>Entrar</h2>
+        <p>Use seu email ou nome de usuario para continuar.</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <label class="field">
+          <span>Email ou usuario</span>
+          <input
+            type="text"
+            formControlName="emailOrUserName"
+            autocomplete="username"
+            [class.invalid]="form.controls.emailOrUserName.touched && form.controls.emailOrUserName.invalid"
+          />
+          <span class="field-error" *ngIf="form.controls.emailOrUserName.touched && form.controls.emailOrUserName.hasError('required')">
+            Informe seu email ou usuario.
+          </span>
+          <span class="field-error" *ngIf="form.controls.emailOrUserName.touched && form.controls.emailOrUserName.errors?.['server'] && !form.controls.emailOrUserName.hasError('required')">
+            {{ form.controls.emailOrUserName.errors?.['server'] }}
+          </span>
+        </label>
+
+        <label class="field">
+          <span>Senha</span>
+          <input
+            type="password"
+            formControlName="password"
+            autocomplete="current-password"
+            [class.invalid]="form.controls.password.touched && form.controls.password.invalid"
+          />
+          <span class="field-error" *ngIf="form.controls.password.touched && form.controls.password.hasError('required')">
+            Informe sua senha.
+          </span>
+          <span class="field-error" *ngIf="form.controls.password.touched && form.controls.password.errors?.['server'] && !form.controls.password.hasError('required')">
+            {{ form.controls.password.errors?.['server'] }}
+          </span>
+        </label>
+
+        <div class="global-error" *ngIf="errorMessage()" aria-live="polite">
+          {{ errorMessage() }}
+        </div>
+
+        <button type="submit" class="submit" [disabled]="form.invalid || isLoading()">
+          <span>{{ isLoading() ? 'Entrando...' : 'Entrar' }}</span>
+          <span class="spinner" *ngIf="isLoading()" aria-hidden="true"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

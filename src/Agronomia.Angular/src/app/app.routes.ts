@@ -25,6 +25,13 @@ export const APP_ROUTES: Routes = [
         .then(m => m.SELLER_ROUTES),
   },
   {
+    path: 'security',
+    canMatch: [authCanMatch],
+    loadChildren: () =>
+      import('./security/security.routes')
+        .then(m => m.SECURITY_ROUTES),
+  },
+  {
     path: 'admin',
     canMatch: [authCanMatch, roleCanMatch('Admin')],
     loadChildren: () =>
