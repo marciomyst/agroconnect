@@ -1,0 +1,7 @@
+namespace Agronomia.Application.Features.Users.GetCurrentUser;
+
+/// <summary>
+/// Query that returns the authenticated user's details.
+/// </summary>
+/// <param name="UserId">Identifier from the authenticated principal.</param>
+public sealed record GetCurrentUserQuery(Guid UserId);

@@ -1,0 +1,16 @@
+<Solution>
+  <Project Path="src/Agronomia.Angular/Agronomia.Angular.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="src/Agronomia.Api/Agronomia.Api.csproj" />
+  <Project Path="src/Agronomia.Application/Agronomia.Application.csproj" />
+  <Project Path="src/Agronomia.Crosscutting/Agronomia.Crosscutting.csproj" />
+  <Project Path="src/Agronomia.Domain/Agronomia.Domain.csproj" />
+  <Project Path="src/Agronomia.Infrastructure/Agronomia.Infrastructure.csproj" />
+  <Project Path="tests/Agronomia.Api.Tests/Agronomia.Api.Tests.csproj" />
+  <Project Path="tests/Agronomia.Application.Tests/Agronomia.Application.Tests.csproj" />
+  <Project Path="tests/Agronomia.Crosscutting.Tests/Agronomia.Crosscutting.Tests.csproj" />
+  <Project Path="tests/Agronomia.Domain.Tests/Agronomia.Domain.Tests.csproj" />
+  <Project Path="tests/Agronomia.Infrastructure.Tests/Agronomia.Infrastructure.Tests.csproj" />
+</Solution>
