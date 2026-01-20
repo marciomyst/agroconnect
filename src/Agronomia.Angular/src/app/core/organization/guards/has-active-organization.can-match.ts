@@ -6,6 +6,11 @@ export const hasActiveOrganizationCanMatch: CanMatchFn = () => {
   const activeOrganizationStore = inject(ActiveOrganizationStore);
   const router = inject(Router);
 
+  // Organization guard: require an active organization or redirect to selection.
+  if (activeOrganizationStore.hasActiveOrganization()) {
+    return true;
+  }
+
   activeOrganizationStore.loadFromStorage();
 
   return activeOrganizationStore.hasActiveOrganization()

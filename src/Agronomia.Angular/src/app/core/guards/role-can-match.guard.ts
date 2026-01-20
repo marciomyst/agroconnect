@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
-import { CanMatchFn, Router } from '@angular/router';
-import { AuthTokenService } from '../auth/auth-token.service';
+import { CanMatchFn } from '@angular/router';
 import { CurrentUserStore } from '../auth/current-user.store';
 import { OrganizationType } from '../auth/auth.types';
 import { ActiveOrganizationStore } from '../organization/active-organization.store';
+import { ActiveOrganization } from '../organization/organization.model';
 
 const resolveOrganizationType = (role: string): OrganizationType | null => {
   if (role === 'Seller') {
@@ -21,31 +21,44 @@ const resolveOrganizationType = (role: string): OrganizationType | null => {
   return null;
 };
 
+const hasRoleInActiveOrganization = (
+  requiredRole: string,
+  currentUserStore: CurrentUserStore,
+  activeOrganization: ActiveOrganization
+): boolean => {
+  const user = currentUserStore.user();
+  if (!user) {
+    return false;
+  }
+
+  const organization = user.organizations.find(org =>
+    org.organizationId === activeOrganization.organizationId
+    && org.type === activeOrganization.organizationType
+  );
+
+  return organization ? organization.roles.includes(requiredRole) : false;
+};
+
 export const roleCanMatch = (requiredRole: string): CanMatchFn => {
   return () => {
     const currentUserStore = inject(CurrentUserStore);
     const activeOrganizationStore = inject(ActiveOrganizationStore);
-    const tokenService = inject(AuthTokenService);
-    const router = inject(Router);
-
-    if (!tokenService.hasToken()) {
-      currentUserStore.clear();
-      return router.parseUrl('/login');
-    }
-
-    activeOrganizationStore.loadFromStorage();
     const activeOrganization = activeOrganizationStore.activeOrganization();
+    const requiredOrganizationType = resolveOrganizationType(requiredRole);
 
-    if (!activeOrganization) {
-      return router.parseUrl('/select-organization');
+    // Role guard: organization-type roles require an active organization context.
+    if (requiredOrganizationType) {
+      return activeOrganization
+        ? activeOrganization.organizationType === requiredOrganizationType
+        : false;
     }
 
-    const organizationType = resolveOrganizationType(requiredRole);
-
-    if (organizationType) {
-      return activeOrganization.organizationType === organizationType;
+    // Role guard: validate scoped roles against the active organization.
+    if (activeOrganization) {
+      return hasRoleInActiveOrganization(requiredRole, currentUserStore, activeOrganization);
     }
 
-    return activeOrganization.roles.includes(requiredRole);
+    // No active organization: fall back to global roles (e.g., admin).
+    return currentUserStore.hasRole(requiredRole);
   };
 };

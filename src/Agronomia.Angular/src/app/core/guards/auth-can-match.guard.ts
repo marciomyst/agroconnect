@@ -9,6 +9,7 @@ export const authCanMatch: CanMatchFn = () => {
   const tokenService = inject(AuthTokenService);
   const router = inject(Router);
 
+  // Auth guard: ensure a valid session or redirect to login.
   if (!tokenService.hasToken()) {
     store.clear();
     return router.parseUrl('/login');
