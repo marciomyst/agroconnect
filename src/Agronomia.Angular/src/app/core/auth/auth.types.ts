@@ -26,3 +26,8 @@ export interface LoginResponse {
   token?: string;
   expiresAtUtc?: string;
 }
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+}
