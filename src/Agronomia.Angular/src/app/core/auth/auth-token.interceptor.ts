@@ -5,13 +5,15 @@ import { ActiveOrganizationStore } from '../organization/active-organization.sto
 
 const apiPrefix = '/api/';
 
-// Reserved for future organization context propagation.
+// Propagate active organization context for authenticated API calls.
 const getOrganizationHeaders = (organizationId: string | null): Record<string, string> => {
   if (!organizationId) {
     return {};
   }
 
-  return {};
+  return {
+    'X-Organization-Id': organizationId,
+  };
 };
 
 const isApiRequest = (url: string): boolean => {

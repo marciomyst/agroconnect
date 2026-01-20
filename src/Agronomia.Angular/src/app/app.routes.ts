@@ -26,7 +26,7 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'admin',
-    canMatch: [authCanMatch, hasActiveOrganizationCanMatch, roleCanMatch('Admin')],
+    canMatch: [authCanMatch, roleCanMatch('Admin')],
     loadChildren: () =>
       import('./admin/admin.routes')
         .then(m => m.ADMIN_ROUTES),
