@@ -1,6 +1,15 @@
-import { provideZoneChangeDetection } from "@angular/core";
-import { platformBrowser } from '@angular/platform-browser';
-import { AppModule } from './app/app.module';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideZoneChangeDetection } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { AppComponent } from './app/app.component';
+import { APP_ROUTES } from './app/app.routes';
+import { authTokenInterceptor } from './app/core/auth/auth-token.interceptor';
 
-platformBrowser().bootstrapModule(AppModule, { applicationProviders: [provideZoneChangeDetection({ eventCoalescing: true })], })
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(APP_ROUTES),
+    provideHttpClient(withInterceptors([authTokenInterceptor])),
+  ],
+}).catch(err => console.error(err));
