@@ -25,11 +25,16 @@ export class PublicLoginComponent {
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
+  readonly isPasswordVisible = signal(false);
 
   readonly form = this.formBuilder.nonNullable.group({
-    emailOrUserName: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
+
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible.update(value => !value);
+  }
 
   onSubmit(): void {
     if (this.isLoading()) {
@@ -45,7 +50,7 @@ export class PublicLoginComponent {
     this.errorMessage.set(null);
     this.clearFieldErrors();
 
-    const { emailOrUserName: email, password } = this.form.getRawValue();
+    const { email, password } = this.form.getRawValue();
 
     const payload = { email, password };
 
@@ -91,7 +96,7 @@ export class PublicLoginComponent {
     }
 
     if (status === 0 || (status !== null && status >= 500)) {
-      return 'Nao foi possivel entrar. Tente novamente em instantes.';
+      return 'Não foi possivel entrar. Tente novamente em instantes.';
     }
 
     if (status !== null) {
@@ -101,7 +106,7 @@ export class PublicLoginComponent {
       }
     }
 
-    return 'Nao foi possivel entrar. Tente novamente em instantes.';
+    return 'Não foi possivel entrar. Tente novamente em instantes.';
   }
 
   private getErrorStatus(error: unknown): number | null {
@@ -164,7 +169,7 @@ export class PublicLoginComponent {
     }
 
     const mapping: Record<string, keyof typeof this.form.controls> = {
-      Email: 'emailOrUserName',
+      Email: 'email',
       Password: 'password',
     };
 

@@ -49,6 +49,8 @@ public class AgronomiaDbContext : DbContext, IUnitOfWork
     /// <param name="modelBuilder">Builder used to configure the EF Core model.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+         modelBuilder.Ignore<DomainEvent>();
+
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }

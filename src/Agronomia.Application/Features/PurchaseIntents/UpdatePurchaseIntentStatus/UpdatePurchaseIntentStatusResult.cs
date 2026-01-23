@@ -1,0 +1,3 @@
+namespace Agronomia.Application.Features.PurchaseIntents.UpdatePurchaseIntentStatus;
+
+public sealed record UpdatePurchaseIntentStatusResult(Guid PurchaseIntentId);

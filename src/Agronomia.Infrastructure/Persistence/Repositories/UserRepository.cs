@@ -25,7 +25,7 @@ public sealed class UserRepository(AgronomiaDbContext context) : IUserRepository
     {
         return context.Users
             .AsNoTracking()
-            .SingleOrDefaultAsync(user => user.Email.Value == email.Value, ct);
+            .SingleOrDefaultAsync(user => user.Email == email, ct);
     }
 
     public Task<User?> GetByIdAsync(Guid userId, CancellationToken ct)

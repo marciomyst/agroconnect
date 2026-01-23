@@ -1,0 +1,731 @@
+<section id="top" class="w-full">
+  <div class="relative w-full">
+    <div class="relative h-[340px] md:h-[440px] lg:h-[520px] overflow-hidden">
+      <div
+        class="absolute inset-0 bg-cover bg-center"
+        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAqlzbSVhyiSTSfKGdqoqYph7uiUY-9th7ZbwM92HMESK7NpGuay3r3kgZEogcZi8mlXwcHCbOHllVxbKtVYj45RbBjukFB8CDZhu5KlzGIbRiQTjmFj3EX32l7dUOdgl_w0jvAHLAI5qywd_Cbx26EV90Zc5TX0fzpC842Y53HWm2fdzikVLEWcekf9dbmHdEogzQFfv_zWRioMYRX9bKljGlRga3L8kuC1Fjh3pKfDDxgOQFcWFuu8F73_rWEt7CL3wFFcjAtLgXv");'
+      ></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-text-main/95 via-text-main/65 to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background-light to-transparent"></div>
+      <div
+        class="relative z-10 h-full max-w-[1280px] mx-auto px-6 py-12 md:py-16 flex flex-col justify-center text-white"
+      >
+        <span
+          class="inline-flex items-center gap-2 bg-primary/15 text-primary text-xs font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full border border-primary/30 w-fit"
+        >
+          Poll de Vendas Aberto
+        </span>
+        <h1 class="mt-4 font-display text-display-xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          Safra de sucesso:<br />juntos pagamos menos.
+        </h1>
+        <p class="mt-4 text-body-lg text-white/90 max-w-xl">
+          Garanta defensivos e fertilizantes com descontos progressivos de ate 30% comprando em grupo.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="btn btn-lg btn-primary" routerLink="/login">
+            Ver oportunidades
+            <span class="material-symbols-outlined text-xl">arrow_forward</span>
+          </a>
+          <a class="btn btn-lg border border-white/40 text-white bg-transparent hover:bg-white/10" href="#offers">
+            Ver ofertas
+          </a>
+        </div>
+        <div class="mt-8 flex flex-wrap items-center gap-6 text-sm text-white/80">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-xl">groups</span>
+            Mais de 12 mil produtores conectados
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-xl">local_shipping</span>
+            Entrega rapida para todo o Brasil
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-xl">verified</span>
+            Compras seguras e com garantia
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+        <span class="w-8 h-1.5 rounded-full bg-white"></span>
+        <span class="w-8 h-1.5 rounded-full bg-white/40"></span>
+        <span class="w-8 h-1.5 rounded-full bg-white/40"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative z-10 -mt-10 md:-mt-16">
+    <div class="max-w-[1280px] mx-auto px-6 space-y-8 pb-12">
+      <section id="categories" class="card card-muted p-6">
+        <div class="flex items-center justify-between gap-4 pb-6">
+          <h2 class="text-heading-lg font-bold text-text-main">Navegue pelas Categorias</h2>
+          <a class="text-body-sm text-text-secondary-light hover:text-primary hover:underline" href="#">
+            Ver todas
+          </a>
+        </div>
+        <app-public-carousel ariaLabel="Categorias em carrossel" dotLabelPrefix="Categoria" [itemIds]="categoryIds">
+          <button id="cat-1" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJsYVAmxhKKjqLeHf6wJgrzx8Qjdz51T6vEa4ih8ubCRAeQ4LvdS2gHXXX_-z_20XAowOiJ92wBm_9tknFtbQz5YjthCg9iIbH4L8BxTdP5X6V0whO5g-IUQGB8TZtK5pRhjD5qqtMC0JSY13dzAbHp2kWzuzEbl5gNA0wkJYTARxGEwDyVIsg0cZ1Q5T3mwO959ZfSjuzzt_7Yan7zzJpWi_Cu6yFU6czcIFNcXomfrRLq37q-kH0BT4_Q9LWKl3lhW_s0QGj8Rxc");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">Defensivos</span>
+          </button>
+          <button id="cat-2" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqGytJ_hXNgSSzBhcRQWf3Ko-_M4ZZ-KY_XqZQ1oIG5SAHf46KK58Fp-ED7-xKbhwCyo-ajhZuyAlBbLkaae1tJicZqt1_lcg4bnUMkkRnmiDOdiXQWWqlJVp_xXJZACkn9hCZfmwPMudr7nV_-HheC-n5ZzcZtQTK479azOUSOifzjWMuxfdeoWkRG1mh9Txbcg964mAPvSNh0uCkw-Orn787g1cS9yvwoYMmSfZF07UolY2cf-PE9JUaAh-Y3hIsauUTo_1cNe9v");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">Fertilizantes</span>
+          </button>
+          <button id="cat-3" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAXzJ-MoRv0q6D3t6S1j-S6Ir2nGCDn6I5Ka3AOArV1K38VgsN74vOzGVR9ZP2tEIzxOnQ16lgHVovvKGcfjMSX_pwb2VyvDaC0EUESyFGAUz_z5GMEfNL-yI5jhkysWe5Bdre_UINp2IGJmP9xqFukj2SBXfY09xfvI9D6U7nASp3FmqlVLoqozvvL4e0P_-YguDMvmLqTna3upyIIqVLxO1F16XDVmtKMTv4C4QoWov-s4kU5Ra9DrUJNpulOxo0VLHTvc3wErsE5");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">Sementes</span>
+          </button>
+          <button id="cat-4" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDeiTb4621o3AOGF9URUmSbraOd7jfrzFgUQGbVNKl0NrRGy41biXG-NGQbK-5m2Xc6ENFm3sOrNGIUGnULP8uyRxIUDjriom4yPDuYtGy9l-kr-1pmHVXSFnYUCz7STWgGhqlFHPFEF59oUyvA6JjZjmhxbRQ_UzWDUkQ8c-edIqE5RgJLnvVyQO_e5lA_AXU-ZfYNcCT3QHFYmKsz9zfbyx04YO0W3uSXBIB2C210ENziChuMwe0CvZtX5QLXsVo-_3R8PXlcSV9D");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">Pecas</span>
+          </button>
+          <button id="cat-5" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0dT1Agh_sd9u4cTxCx6awva5gczZVM9S6ZVF7fPHkouAXgc1bDwQ91NMbvj1i4YO3GMpWHBljXneT9T97bBl7PhuQf7zrwI5oLCq1Xp7ebR6rj2WMdm9A0FdEldaRiaGX2iMNz7cFiKPrgikpDuaBUCmKfakS9hBChrZpj1uEPg_0Dqb1pnjrlxQlXjRphgofE0G7FsQhg_XmypjGMwZC8j7j3-MUfOXUxLKbq7pUkJh5hev5Bjgjis-GbtptPxYIPgxIJKLPVxKe");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">Biologicos</span>
+          </button>
+          <button id="cat-6" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD6M-dAJDWMCRYxC1JIoKcssPhMv5BZva6MPK5dLfdyDhuPR6xLWKzNjV5oUCoSQaZCp495nZLh_JQKdBC38_OOihoHWA9LbIga5MAp4yPPl23ua_T5E3hzws1nAn9PunoHJtivnE7NwdHWZONoNRwM7AGu8cGTrkLHxBgxHYjGBKjNXDunXsYaApo2nZXTStiuaVsnb_LEqFGST_Ak57CYiQOWB2P5AJaWUHDnad7mGHIp0Tsx0YKrCpXIwJLeW12-qiTIib87BuFM");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">Irrigacao</span>
+          </button>
+          <button id="cat-7" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAZ8L9e2B9FxgchhPWGf3OS4Sdis96k9Nt5hV_dzg-yW9_v-B4_snJ9sNOcNVVGaXJpWI3xZc9s_y_01SgkQXRY4RjH2zKde2W-EEKoAfXWF6yMvM59SUNTbpxIeNdG-bxp1xmjyZaCXzMNxaaPrYTLj60HzHvwOAJ3iMchhEBYf6r_PtjF6hpK7pM7GLmWKugHD1TU8HkAwA5bH45YKvWNZc_I2ifSg4QEJf8OlYTKBj7iEq4Pcq6c59YagZARmuwBQoJb5Q5vK9lL");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">Ferramentas</span>
+          </button>
+          <button id="cat-8" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9tIcrJNuBmHIeScA67Vw4K-yYhXZWBZsBFevOTnk6ndkSYDSXFZZIpog5msabmNgERe7zbGY9AQlqWFUnnaq7dPRTq-PyCE1OULfJbnN9knV7IP91AepjtwFruL7kH9WRiiizOrlQsWrYoeAh14izuZwWYjzSJhxyXM6VArjNuK6K8XeO330sJZnZq7KVzLoqXN2nEFD5BUZjQG0ikICHF56ZnYht9CTqaIQbFUQeHIQv5EYMPiPgTlhAsmEsommdYmR_WueUKiJN");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">EPIs</span>
+          </button>
+          <button id="cat-9" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9tIcrJNuBmHIeScA67Vw4K-yYhXZWBZsBFevOTnk6ndkSYDSXFZZIpog5msabmNgERe7zbGY9AQlqWFUnnaq7dPRTq-PyCE1OULfJbnN9knV7IP91AepjtwFruL7kH9WRiiizOrlQsWrYoeAh14izuZwWYjzSJhxyXM6VArjNuK6K8XeO330sJZnZq7KVzLoqXN2nEFD5BUZjQG0ikICHF56ZnYht9CTqaIQbFUQeHIQv5EYMPiPgTlhAsmEsommdYmR_WueUKiJN");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">EPIs</span>
+          </button>
+          <button id="cat-10" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9tIcrJNuBmHIeScA67Vw4K-yYhXZWBZsBFevOTnk6ndkSYDSXFZZIpog5msabmNgERe7zbGY9AQlqWFUnnaq7dPRTq-PyCE1OULfJbnN9knV7IP91AepjtwFruL7kH9WRiiizOrlQsWrYoeAh14izuZwWYjzSJhxyXM6VArjNuK6K8XeO330sJZnZq7KVzLoqXN2nEFD5BUZjQG0ikICHF56ZnYht9CTqaIQbFUQeHIQv5EYMPiPgTlhAsmEsommdYmR_WueUKiJN");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">EPIs</span>
+          </button>
+          <button id="cat-11" class="group flex flex-col items-center gap-3 min-w-[110px] snap-start shrink-0 scroll-ml-6" type="button">
+            <div
+              class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border border-border-color bg-surface-light group-hover:border-primary group-hover:shadow-card transition-all"
+            >
+              <div
+                class="w-full h-full bg-cover bg-center"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCijQ1vNFfLpM1TLXIDL443KtQYFm6N8TgGaGIYvu0rJZen1waAolRk9Z9tyMw5vrQ80NWvWK3FjNCH65JtIikwkyDRUgb1yU8uWzv5tVgG1Or5ybH_x2kxGPhwFdgkDRhq6KqJhW19XUseNFethCXMYpMVuobnoLvUWKD5BaFMRqP0StKEkFgugJHvWCFUMUi0fAsa6CWKRLoF-xL0rBWsP50DI1bMJkrt6MpMSGNbzJhc2WIkI4smo3hlYEIPmMEdC74jlkdfGSCL");'
+              ></div>
+            </div>
+            <span class="text-body-sm font-semibold text-text-muted group-hover:text-primary">Energia</span>
+          </button>
+        </app-public-carousel>
+      </section>
+
+      <section id="offers" class="card p-6">
+        <div class="flex items-center justify-between border-b border-border-subtle pb-3 mb-4">
+          <h2 class="text-heading-md font-bold text-text-main">Ofertas do Dia</h2>
+          <a class="text-body-sm text-text-secondary-light hover:text-primary hover:underline" href="#">
+            Ver todas as ofertas
+          </a>
+        </div>
+        <div class="flex overflow-x-auto no-scrollbar gap-4 pb-4">
+          <article
+            class="min-w-[220px] max-w-[220px] bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="h-40 w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-R2JsNX1Gvdjj1UhCvjgicUpyTFkfVmJ4kd63z7cZk4IUaweACJzHtOwZLt8ITAnzh1johmijRDzGs-K1ungbz8XN8uqiFU-c_UHpMrTPSI-TP8c5PRtnuusD12wlTMs6BDZT0GoThcjwXWrIN_2Vs2nOCdt987amjF7IOr7dpf5P9SejfzbmjLnihC9tiERGNMWVD2r3ysBGQn_HB0Gqj6QoTo6tBPKMc-PUTIzSTewdyTu_SyEN2hfKgELl1lts2EOgC7Me3iTo");'
+            ></div>
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-primary/15 text-primary text-xs font-bold px-2 py-0.5 rounded-full">-15%</span>
+              <span
+                class="bg-accent-olive/20 text-accent-olive text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-xs">groups</span>
+                Poll ativo
+              </span>
+            </div>
+            <div class="flex items-baseline gap-1 text-text-main">
+              <span class="text-xs">R$</span>
+              <span class="text-2xl font-bold">408,00</span>
+              <span class="text-xs text-text-muted line-through ml-1">R$ 480,00</span>
+            </div>
+            <h3 class="text-body-sm text-text-main mt-2 font-semibold">
+              Herbicida Glifosato Premium 20L - Controle eficaz
+            </h3>
+            <p class="text-xs text-text-muted mt-auto pt-2">Entrega GRATIS amanha</p>
+          </article>
+
+          <article
+            class="min-w-[220px] max-w-[220px] bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="h-40 w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwfeQopJz38ZCSnfkZUWjAWAS6QltZj_5lfp20DUu-SoenXQeKaJ4gquJe1cdkh9VPKJ_CZq_SCMD9Dgpf54NAlOd7w8yiCGnGARg0UBE4nWYi7lBOnLWlM5ERan8ITdcYAXXiFUI3WZ4cfjdGYvIlsVzZ3YaLUhE6DMGDnm-_tD2pQWqMi3Pgp676tHLcMP--fBwbxRaAAo1xRmY6Dfxo7jP5NIqGqIJoCLKB_7_HnCSuKEz8G7R5nDkFWZXxXfDJOmdSVd-NvCQ3");'
+            ></div>
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-primary/15 text-primary text-xs font-bold px-2 py-0.5 rounded-full">-10%</span>
+              <span
+                class="bg-accent-olive/20 text-accent-olive text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-xs">groups</span>
+                Poll ativo
+              </span>
+            </div>
+            <div class="flex items-baseline gap-1 text-text-main">
+              <span class="text-xs">R$</span>
+              <span class="text-2xl font-bold">162,00</span>
+              <span class="text-xs text-text-muted line-through ml-1">R$ 180,00</span>
+            </div>
+            <h3 class="text-body-sm text-text-main mt-2 font-semibold">
+              Adubo NPK 04-14-08 50kg - Alta produtividade
+            </h3>
+            <p class="text-xs text-text-muted mt-auto pt-2">Entrega GRATIS sab, 18 de mai</p>
+          </article>
+
+          <article
+            class="min-w-[220px] max-w-[220px] bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="h-40 w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBZKQVPf7BRy4sxrJU3SBAkca6rWMQts52l7G-vcLpfb_jqkfZhxs21rYA0hKoOg5VzC82ooHylg5MN-If-17BI9ijbxR0yUI9t8pLvXh65s38AaI-9wYi0peo_03YFgourQ7KLfWEYpO6coV_lrkTktxCJowQUvFSGtwqlYFijrMaph6lVdy8x1cA8bDpSbmVhtmilOs0SRK9pHNYBu_zRJjJbgVdXCnD7pjbXXMEy40-CHaUbhM2Q4urJgXjycsVtVFRxqGf6ArHx");'
+            ></div>
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-primary/15 text-primary text-xs font-bold px-2 py-0.5 rounded-full">-20%</span>
+              <span
+                class="bg-accent-olive/20 text-accent-olive text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-xs">groups</span>
+                Poll ativo
+              </span>
+            </div>
+            <div class="flex items-baseline gap-1 text-text-main">
+              <span class="text-xs">R$</span>
+              <span class="text-2xl font-bold">256,00</span>
+              <span class="text-xs text-text-muted line-through ml-1">R$ 320,00</span>
+            </div>
+            <h3 class="text-body-sm text-text-main mt-2 font-semibold">
+              Inseticida sistemico para soja e milho 5L
+            </h3>
+            <p class="text-xs text-text-muted mt-auto pt-2">Termina em 04:32:15</p>
+          </article>
+          <article
+            class="min-w-[220px] max-w-[220px] bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="h-40 w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDwUCVDfoTy98ri3hrUU4DesUuMgXsk4WIKDfI1AW1otmJzi07Rm8uS9zPvyIUHtS-DRmHR4D1pvW4TJLIQdEi0vdEmGfxU-r1KOWIJLkG48hreBbEvcadYs_urfTYUHNGN87r-SecNcbpbLxCwHPeTACAp2__sGzrgq9utZHpd19NsvU21_9JMAZB9UNOaY3iNodJgdDc0iLIgcsuOZogkMtgJzV5K0ESknkjM3QNYfkNCC2rAcoOqjtfXmW6QAZXyV0inSIqM7zED");'
+            ></div>
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-primary/15 text-primary text-xs font-bold px-2 py-0.5 rounded-full">-35%</span>
+              <span
+                class="bg-accent-olive/20 text-accent-olive text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-xs">groups</span>
+                Poll ativo
+              </span>
+            </div>
+            <div class="flex items-baseline gap-1 text-text-main">
+              <span class="text-xs">R$</span>
+              <span class="text-2xl font-bold">780,00</span>
+              <span class="text-xs text-text-muted line-through ml-1">R$ 1.200,00</span>
+            </div>
+            <h3 class="text-body-sm text-text-main mt-2 font-semibold">
+              Kit filtros revisao 500h trator JD 7J
+            </h3>
+            <p class="text-xs text-text-muted mt-auto pt-2">Restam apenas 3</p>
+          </article>
+
+          <article
+            class="min-w-[220px] max-w-[220px] bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="h-40 w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmk77WnJSTuRb2RmgHqvOVo6fMc4FmCXEKTS557ksQUAlSZGojDAZas1EGQK3aocdxcscVzJpPzQi6npRhAIYJBaBi5DNKD2z10-bBoH0wVzIzC0cOcPub7-6Dg7yrjD26PD51Xah91Zks3OnjUSZugk_ePOzxH2JAUiGIyeV_9dy4TVsrcsiXBZHWAOPtUkZm6MsxZ0EAVuRkHG6CMN3tUN8WYBKrexLBbWbHWutWAwtn5seKXjwbqrQDZPwwNVWMy6ScdfiLdrE_");'
+            ></div>
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-primary/15 text-primary text-xs font-bold px-2 py-0.5 rounded-full">-5%</span>
+            </div>
+            <div class="flex items-baseline gap-1 text-text-main">
+              <span class="text-xs">R$</span>
+              <span class="text-2xl font-bold">28,40</span>
+              <span class="text-xs text-text-muted line-through ml-1">R$ 29,90</span>
+            </div>
+            <h3 class="text-body-sm text-text-main mt-2 font-semibold">
+              Luvas de protecao nitrilica - Caixa com 50
+            </h3>
+            <p class="text-xs text-text-muted mt-auto pt-2">Entrega GRATIS na compra de 5+</p>
+          </article>
+
+          <article
+            class="min-w-[220px] max-w-[220px] bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="h-40 w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAXzJ-MoRv0q6D3t6S1j-S6Ir2nGCDn6I5Ka3AOArV1K38VgsN74vOzGVR9ZP2tEIzxOnQ16lgHVovvKGcfjMSX_pwb2VyvDaC0EUESyFGAUz_z5GMEfNL-yI5jhkysWe5Bdre_UINp2IGJmP9xqFukj2SBXfY09xfvI9D6U7nASp3FmqlVLoqozvvL4e0P_-YguDMvmLqTna3upyIIqVLxO1F16XDVmtKMTv4C4QoWov-s4kU5Ra9DrUJNpulOxo0VLHTvc3wErsE5");'
+            ></div>
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-primary/15 text-primary text-xs font-bold px-2 py-0.5 rounded-full">-12%</span>
+            </div>
+            <div class="flex items-baseline gap-1 text-text-main">
+              <span class="text-xs">R$</span>
+              <span class="text-2xl font-bold">480,00</span>
+              <span class="text-xs text-text-muted line-through ml-1">R$ 545,00</span>
+            </div>
+            <h3 class="text-body-sm text-text-main mt-2 font-semibold">
+              Sementes de milho hibrido - Saca 20kg
+            </h3>
+            <p class="text-xs text-text-muted mt-auto pt-2">Oferta termina em breve</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <article
+          class="relative overflow-hidden rounded-2xl border border-border-dark bg-gradient-to-br from-surface-dark via-surface-dark-soft to-background-dark text-white p-6 flex items-center justify-between"
+        >
+          <div
+            class="absolute inset-0 bg-cover bg-center opacity-20 mix-blend-overlay"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0dT1Agh_sd9u4cTxCx6awva5gczZVM9S6ZVF7fPHkouAXgc1bDwQ91NMbvj1i4YO3GMpWHBljXneT9T97bBl7PhuQf7zrwI5oLCq1Xp7ebR6rj2WMdm9A0FdEldaRiaGX2iMNz7cFiKPrgikpDuaBUCmKfakS9hBChrZpj1uEPg_0Dqb1pnjrlxQlXjRphgofE0G7FsQhg_XmypjGMwZC8j7j3-MUfOXUxLKbq7pUkJh5hev5Bjgjis-GbtptPxYIPgxIJKLPVxKe");'
+          ></div>
+          <div class="relative z-10 flex flex-col max-w-[70%]">
+            <span class="text-primary text-xs font-bold uppercase tracking-widest mb-2">Tecnologia</span>
+            <h3 class="text-heading-lg font-bold mb-2">Novo diagnostico inteligente</h3>
+            <p class="text-body-sm text-white/80 mb-4">
+              Identifique pragas e doencas na sua lavoura em segundos com nossa IA.
+            </p>
+            <button class="btn btn-sm border border-white/30 text-white bg-transparent hover:bg-white/10" type="button">
+              Experimentar agora
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          </div>
+          <div
+            class="relative z-10 w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined text-4xl text-white">document_scanner</span>
+          </div>
+        </article>
+
+        <article
+          class="relative overflow-hidden rounded-2xl border border-border-dark bg-gradient-to-br from-surface-dark via-surface-dark-soft to-background-dark text-white p-6 flex items-center justify-between"
+        >
+          <div class="relative z-10 flex flex-col max-w-[70%]">
+            <span class="text-primary text-xs font-bold uppercase tracking-widest mb-2">Mobile</span>
+            <h3 class="text-heading-lg font-bold mb-2">AgroMarket no seu bolso</h3>
+            <p class="text-body-sm text-white/80 mb-4">
+              Gerencie compras, polls e vendas de onde estiver. Baixe nosso app.
+            </p>
+            <div class="flex gap-2">
+              <button
+                class="btn btn-sm border border-white/30 text-white bg-transparent hover:bg-white/10"
+                type="button"
+              >
+                App Store
+              </button>
+              <button
+                class="btn btn-sm border border-white/30 text-white bg-transparent hover:bg-white/10"
+                type="button"
+              >
+                Google Play
+              </button>
+            </div>
+          </div>
+          <div
+            class="relative z-10 w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined text-4xl text-white">smartphone</span>
+          </div>
+        </article>
+      </section>
+
+      <section id="polls" class="card p-6">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="material-symbols-outlined text-primary text-3xl">groups</span>
+          <div>
+            <h2 class="text-heading-lg font-bold text-text-main">Polls de Vendas recomendados</h2>
+            <p class="text-body-sm text-text-muted">Economize comprando em grupo</p>
+          </div>
+        </div>
+        <div class="flex overflow-x-auto no-scrollbar gap-6 pb-4">
+          <article
+            class="min-w-[300px] md:min-w-[380px] bg-surface-light rounded-xl p-5 border border-border-color shadow-sm flex gap-4 hover:shadow-card transition-shadow relative"
+          >
+            <div class="absolute top-0 right-0 bg-primary text-text-on-primary text-[10px] font-bold px-2 py-1 rounded-bl-lg">
+              POLL RECOMENDADO
+            </div>
+            <div class="w-24 h-24 bg-surface-light-muted rounded-xl bg-contain bg-center bg-no-repeat p-2">
+              <div
+                class="w-full h-full bg-contain bg-center bg-no-repeat"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDo1_JFiJzvaVbxJ56Z1FkTx8_9IyrXTpH1vS8XPe6RVlvR4seg-dqJS_Wat3K6P_0ApiFNeStB-v1N7aFc4DYeaBOvf78GZfNUfz4uz_cunVbgQucTEeqVYZ6rFltT0BsFNavkTiMNF3GN0KGFB-Y072k0RFepOyaTNsaWaOq7eOZSCNu3Y4mz-oNEHCukRcqqnkZ8eQKDaUjAhH5ecRMISKvzG6VdrARkfzVRs2T6AEnJhSIn8gqGYEhp6alC-9JWxZaWIJoXS2Yj");'
+              ></div>
+            </div>
+            <div class="flex-1 flex flex-col">
+              <h3 class="font-bold text-text-main text-lg">Oleo Mineral Assist 20L</h3>
+              <div class="text-xs text-text-muted mb-4">
+                Vendido por <span class="text-primary font-semibold">Agrope Ltda</span>
+              </div>
+              <div class="bg-background-light rounded-lg p-3 mb-3">
+                <div class="flex justify-between items-end mb-1">
+                  <span class="text-[10px] font-bold text-text-muted uppercase">Progresso do desconto</span>
+                  <span class="text-xs font-bold text-primary">75%</span>
+                </div>
+                <div class="w-full bg-border-color rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+                </div>
+                <div class="flex justify-between mt-1">
+                  <span class="text-[10px] text-text-muted">Meta: 2000L</span>
+                  <span class="text-[10px] text-text-muted">Faltam 500L</span>
+                </div>
+              </div>
+              <div class="flex justify-between items-center mt-auto">
+                <div class="flex flex-col">
+                  <span class="text-[10px] text-text-muted">Preco atual</span>
+                  <span class="font-bold text-text-muted line-through text-xs">R$ 18,90/L</span>
+                  <span class="font-bold text-lg text-primary">R$ 15,50/L</span>
+                </div>
+                <button class="btn btn-sm btn-primary" type="button">Participar</button>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="min-w-[300px] md:min-w-[380px] bg-surface-light rounded-xl p-5 border border-border-color shadow-sm flex gap-4 hover:shadow-card transition-shadow"
+          >
+            <div class="w-24 h-24 bg-surface-light-muted rounded-xl bg-contain bg-center bg-no-repeat p-2">
+              <div
+                class="w-full h-full bg-contain bg-center bg-no-repeat"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC4fwn7YtoiSWAq2I8eDmuYNM3hHgnFENUWOFlj1AggCw8zGYaNwdDqvCNav-ILe6loKdejL5vPNaqVXLh_XiRpDTU-Qcl-vvjSrB2O1DGZuVgUDyRQ_UTI0B4ZuWW0glYFCevFsCiEBHlY9SV67G2KjLrevcA2uc_ZVXYHwwWgOCqRqGnbspJILreXrWm4WfAuRkRmmHnMLtfTprAphP5HGWi2bIPjyWyYMomy8wZ3So7ZdfWduks-5E0k_GKI7B_m66jYwwmadI07");'
+              ></div>
+            </div>
+            <div class="flex-1 flex flex-col">
+              <h3 class="font-bold text-text-main text-lg">Fungicida Fox Xpro 5L</h3>
+              <div class="text-xs text-text-muted mb-4">
+                Vendido por <span class="text-primary font-semibold">RuralTech</span>
+              </div>
+              <div class="bg-background-light rounded-lg p-3 mb-3">
+                <div class="flex justify-between items-end mb-1">
+                  <span class="text-[10px] font-bold text-text-muted uppercase">Progresso do desconto</span>
+                  <span class="text-xs font-bold text-accent-olive">30%</span>
+                </div>
+                <div class="w-full bg-border-color rounded-full h-2">
+                  <div class="bg-accent-olive h-2 rounded-full" style="width: 30%"></div>
+                </div>
+                <div class="flex justify-between mt-1">
+                  <span class="text-[10px] text-text-muted">Meta: 500L</span>
+                  <span class="text-[10px] text-text-muted">Inicio</span>
+                </div>
+              </div>
+              <div class="flex justify-between items-center mt-auto">
+                <div class="flex flex-col">
+                  <span class="text-[10px] text-text-muted">Alvo</span>
+                  <span class="font-bold text-lg text-primary">R$ 820,00</span>
+                </div>
+                <button class="btn btn-sm btn-outline" type="button">Ver detalhes</button>
+              </div>
+            </div>
+          </article>
+          <article
+            class="min-w-[300px] md:min-w-[380px] bg-surface-light rounded-xl p-5 border border-border-color shadow-sm flex gap-4 hover:shadow-card transition-shadow relative"
+          >
+            <div class="absolute top-0 right-0 bg-primary-dark text-text-on-primary text-[10px] font-bold px-2 py-1 rounded-bl-lg">
+              ULTIMAS VAGAS
+            </div>
+            <div class="w-24 h-24 bg-surface-light-muted rounded-xl bg-contain bg-center bg-no-repeat p-2">
+              <div
+                class="w-full h-full bg-contain bg-center bg-no-repeat"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkSh9fcrFdsgq6fFa4EZkj2UClejbFow99x2zDdaaOM7V1ol9aF9GPme179DmeHRZye4cnEAk0p4MvGPtgFFVvJNuW_lB8CRIDiCK5J-P_u9pCP39vFEI4Arw8str6j1YkeNSoRtF7pj5dFQ8TtWzt0RjDhxsSrsKkv__V9jQBnIoycZRgvTDgHYDwRCw8qj2PMTnfxOj5SytlxTTuuARclQXstrS9EJSq5DUJv9A-YfwviWHU9yEi-tw7hexoyi0mDaSv0FiemcM-");'
+              ></div>
+            </div>
+            <div class="flex-1 flex flex-col">
+              <h3 class="font-bold text-text-main text-lg">Ureia Agricola 50kg</h3>
+              <div class="text-xs text-text-muted mb-4">
+                Vendido por <span class="text-primary font-semibold">Coop Norte</span>
+              </div>
+              <div class="bg-background-light rounded-lg p-3 mb-3">
+                <div class="flex justify-between items-end mb-1">
+                  <span class="text-[10px] font-bold text-text-muted uppercase">Progresso do desconto</span>
+                  <span class="text-xs font-bold text-primary">92%</span>
+                </div>
+                <div class="w-full bg-border-color rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 92%"></div>
+                </div>
+                <div class="flex justify-between mt-1">
+                  <span class="text-[10px] text-text-muted">Meta: 50 Ton</span>
+                  <span class="text-[10px] text-text-muted">Quase la</span>
+                </div>
+              </div>
+              <div class="flex justify-between items-center mt-auto">
+                <div class="flex flex-col">
+                  <span class="text-[10px] text-text-muted">Alvo</span>
+                  <span class="font-bold text-lg text-primary">R$ 125,00</span>
+                </div>
+                <button class="btn btn-sm btn-primary" type="button">Participar</button>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="min-w-[300px] md:min-w-[380px] bg-surface-light rounded-xl p-5 border border-border-color shadow-sm flex gap-4 hover:shadow-card transition-shadow"
+          >
+            <div class="w-24 h-24 bg-surface-light-muted rounded-xl bg-contain bg-center bg-no-repeat p-2">
+              <div
+                class="w-full h-full bg-contain bg-center bg-no-repeat"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBfzpTeSZIMySj8unYx04GKR6PfhL0nn8F1RheRdJ2g_bG3o-YWpdESLzKdM0wPEd6QppxIcnRWtwaRb7S43P42M77ewW8R1S47Ed6gTpRnHx9NXLs6X-P5YsTmlh7TkXksq5J-ATKRpglC7ygehj2FUOTQa4wKKm7-2rsSohj9VX_0nDZwJYlK5GK2G5kyVPFApRl_SOXYgocCiu2qErLoLiZutXWSu1Z_MA-3m1sZL-TPfNhh2QfjKCFmGCFiAvN21_3gCe-qYaKB");'
+              ></div>
+            </div>
+            <div class="flex-1 flex flex-col">
+              <h3 class="font-bold text-text-main text-lg">Adjuvante Antideriva 1L</h3>
+              <div class="text-xs text-text-muted mb-4">
+                Vendido por <span class="text-primary font-semibold">AgroMix</span>
+              </div>
+              <div class="bg-background-light rounded-lg p-3 mb-3">
+                <div class="flex justify-between items-end mb-1">
+                  <span class="text-[10px] font-bold text-text-muted uppercase">Progresso do desconto</span>
+                  <span class="text-xs font-bold text-accent-olive">45%</span>
+                </div>
+                <div class="w-full bg-border-color rounded-full h-2">
+                  <div class="bg-accent-olive h-2 rounded-full" style="width: 45%"></div>
+                </div>
+                <div class="flex justify-between mt-1">
+                  <span class="text-[10px] text-text-muted">Meta: 1000L</span>
+                  <span class="text-[10px] text-text-muted">Crescendo</span>
+                </div>
+              </div>
+              <div class="flex justify-between items-center mt-auto">
+                <div class="flex flex-col">
+                  <span class="text-[10px] text-text-muted">Alvo</span>
+                  <span class="font-bold text-lg text-primary">R$ 38,00</span>
+                </div>
+                <button class="btn btn-sm btn-outline" type="button">Ver detalhes</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <h2 class="text-heading-md font-bold text-text-main">Inspirado nas suas tendencias de compra</h2>
+            <span class="hidden md:inline-flex bg-accent-lime text-accent-olive text-xs font-bold px-2 py-1 rounded-full">
+              Soja
+            </span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <article
+            class="bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="aspect-square w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIy0hvYqThfA2dRt7VYOcPtAuumIf_-gkJCA4GzSQURdUUL_N-qoX4HRg0JJdSCJasnQtR-OXGkCQgkzuTPfaRUMWXXQAYsoSyDJ-7Z9PUPjeGvwG03P3NRBcr8Rb4VsRwEgnatdkl9q5SHUgRd4_o4MQQZyQSWz0yAPqsByyeo7Wt1gkatWEQqanV3lOUwUcGL6-N0zEIjtVsahtoTyHTblEVCt_0ZErz7tckfevsiaRn9lsYJPt9nykKVooPzsxg165lw4qj9mGb");'
+            ></div>
+            <h3 class="text-body-sm font-semibold text-text-main mb-2">Fertilizante foliar Manganes 5L</h3>
+            <div class="flex text-primary text-[10px] mb-2 items-center gap-1">
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star_half</span>
+              <span class="text-text-secondary-light ml-1 font-medium">42</span>
+            </div>
+            <div class="mt-auto">
+              <div class="flex items-baseline gap-1">
+                <span class="text-xs">R$</span>
+                <span class="text-xl font-bold text-text-main">89,90</span>
+              </div>
+              <div class="text-xs text-text-muted mt-1">
+                Entrega <span class="font-bold text-text-main">Segunda-feira</span>
+              </div>
+              <button class="btn btn-sm btn-outline w-full mt-3" type="button">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article
+            class="bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="aspect-square w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALSUOUauTcqOI2qMdaEvMUH4l7ZXaT8W3AGkqu4aBCOPJvWXOUyqV8Cd8JA3gxpj-APkXwF_R5jUcDbEijSQGbOgxIU-zerF3fWWmwrs5I96S0Zf67LnMgWcCTKClCovvw3O3T22vCAKZwaclpKemQaBfdgPtlDTYSe86E6aU2BHkQlJfq2y-5n0m3xkNpVLQrAG4MfDX2Mz7GkMJ6fz3jYpceRvBnp4mfj92hxyYkCEt6hdYm75ln-DctpWD4K8V2q94gPC1FKxJe");'
+            ></div>
+            <h3 class="text-body-sm font-semibold text-text-main mb-2">Inoculante liquido premium 200ml</h3>
+            <div class="flex text-primary text-[10px] mb-2 items-center gap-1">
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="text-text-secondary-light ml-1 font-medium">128</span>
+            </div>
+            <div class="mt-auto">
+              <div class="flex items-baseline gap-1">
+                <span class="text-xs">R$</span>
+                <span class="text-xl font-bold text-text-main">12,50</span>
+              </div>
+              <div class="text-xs text-text-muted mt-1">
+                Entrega <span class="font-bold text-text-main">Amanha</span>
+              </div>
+              <button class="btn btn-sm btn-outline w-full mt-3" type="button">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article
+            class="bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="aspect-square w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBfzpTeSZIMySj8unYx04GKR6PfhL0nn8F1RheRdJ2g_bG3o-YWpdESLzKdM0wPEd6QppxIcnRWtwaRb7S43P42M77ewW8R1S47Ed6gTpRnHx9NXLs6X-P5YsTmlh7TkXksq5J-ATKRpglC7ygehj2FUOTQa4wKKm7-2rsSohj9VX_0nDZwJYlK5GK2G5kyVPFApRl_SOXYgocCiu2qErLoLiZutXWSu1Z_MA-3m1sZL-TPfNhh2QfjKCFmGCFiAvN21_3gCe-qYaKB");'
+            ></div>
+            <h3 class="text-body-sm font-semibold text-text-main mb-2">Adjuvante antideriva 1L</h3>
+            <div class="flex text-primary text-[10px] mb-2 items-center gap-1">
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star_border</span>
+              <span class="text-text-secondary-light ml-1 font-medium">15</span>
+            </div>
+            <div class="mt-auto">
+              <div class="flex items-baseline gap-1">
+                <span class="text-xs">R$</span>
+                <span class="text-xl font-bold text-text-main">45,00</span>
+              </div>
+              <div class="text-xs text-text-muted mt-1">
+                Entrega <span class="font-bold text-text-main">Terca-feira</span>
+              </div>
+              <button class="btn btn-sm btn-outline w-full mt-3" type="button">Adicionar ao carrinho</button>
+            </div>
+          </article>
+          <article
+            class="bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow"
+          >
+            <div
+              class="aspect-square w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDPHRfu6vUAgBJ1q2p_oyjXxM9YqNPA0saLLCy3oX94OrjLrn7bxNWJz_u8xdmX6jdvrDoi8xJUm_5Vaf4eSF7WO32WKRj-C1G21ME4cNbVDsE9xmg0dz7rpF0TiamkuWAuKOpyExGwqrk4YtsA0kT_8DmTKrAjBcwE1KkISuMItBwcku7rybAVh-TLTENw1pqo_hbzuQeZqFTi9PZUJh3FznrdggMk44EBWTpmsAf84lWJbr6VSlB_VTVUqOniFEOEgBIxNK0sHwPf");'
+            ></div>
+            <h3 class="text-body-sm font-semibold text-text-main mb-2">Cloreto de potassio vermelho 50kg</h3>
+            <div class="flex text-primary text-[10px] mb-2 items-center gap-1">
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="text-text-secondary-light ml-1 font-medium">56</span>
+            </div>
+            <div class="mt-auto">
+              <div class="flex items-baseline gap-1">
+                <span class="text-xs">R$</span>
+                <span class="text-xl font-bold text-text-main">180,00</span>
+              </div>
+              <div class="text-xs text-text-muted mt-1">
+                Entrega <span class="font-bold text-text-main">Quarta-feira</span>
+              </div>
+              <button class="btn btn-sm btn-outline w-full mt-3" type="button">Adicionar ao carrinho</button>
+            </div>
+          </article>
+
+          <article
+            class="bg-surface-light border border-border-color rounded-xl p-4 flex flex-col hover:shadow-card transition-shadow hidden md:flex"
+          >
+            <div
+              class="aspect-square w-full bg-surface-light-muted rounded-lg mb-4 bg-contain bg-center bg-no-repeat p-2"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDEmHyeucfFFGEL0i8yJkINZr1FpQjKUWNNWXHTS_BIP5_fCKhzaq__4oyFR0ZkPlFRlkOERcvCxk95X6li7aSajgytUHS6fn7oIG_4ky37xxyCwDN8FQKfH9FkxzLmSyyH7s0fYzP9TBgFaSuDwub1JjKZ8aeDKqthMKDAcqsMcuWEDldEOWnDpG77JzxufAgSKGt9a8coJSzO3cVzkgPv9eirnGxjugb9relK-RXiGp36SaHqTHFCCOZUBZCO0uXnBqEoayLNMftY");'
+            ></div>
+            <h3 class="text-body-sm font-semibold text-text-main mb-2">Nematicida biologico 5L</h3>
+            <div class="flex text-primary text-[10px] mb-2 items-center gap-1">
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star_half</span>
+              <span class="text-text-secondary-light ml-1 font-medium">33</span>
+            </div>
+            <div class="mt-auto">
+              <div class="flex items-baseline gap-1">
+                <span class="text-xs">R$</span>
+                <span class="text-xl font-bold text-text-main">340,00</span>
+              </div>
+              <div class="text-xs text-text-muted mt-1">
+                Entrega <span class="font-bold text-text-main">Segunda-feira</span>
+              </div>
+              <button class="btn btn-sm btn-outline w-full mt-3" type="button">Adicionar ao carrinho</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <a
+        class="w-full bg-surface-dark text-white py-4 text-center text-sm font-bold rounded-xl hover:bg-surface-dark-soft transition-colors block"
+        href="#top"
+      >
+        Voltar ao inicio
+      </a>
+    </div>
+  </div>
+</section>

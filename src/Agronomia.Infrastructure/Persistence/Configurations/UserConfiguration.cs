@@ -1,4 +1,5 @@
 using Agronomia.Domain.Identity;
+using Agronomia.Domain.Identity.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -21,25 +22,22 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(user => user.Id)
             .HasColumnType("uuid")
-            .ValueGeneratedNever()
-            .IsRequired();
+            .ValueGeneratedNever();
 
         builder.Property(user => user.Name)
-            .HasMaxLength(200)
+            .HasMaxLength(256)
             .IsRequired();
 
-        builder.OwnsOne(user => user.Email, email =>
-        {
-            email.Property(e => e.Value)
-                .HasColumnName("Email")
-                .HasMaxLength(256)
-                .IsRequired();
-        });
-
-        builder.Navigation(user => user.Email)
+        builder.Property(user => user.Email)
+            .HasConversion(
+                email => email.Value,
+                value => Email.Create(value)
+            )
+            .HasColumnName("Email")
+            .HasMaxLength(256)
             .IsRequired();
 
-        builder.HasIndex(user => user.Email.Value)
+        builder.HasIndex(user => user.Email)
             .IsUnique();
 
         builder.Property(user => user.PasswordHash)
