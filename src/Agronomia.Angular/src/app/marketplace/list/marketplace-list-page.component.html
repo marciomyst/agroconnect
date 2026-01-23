@@ -1,0 +1,55 @@
+<section class="marketplace-list">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Marketplace</p>
+      <h1>Find products</h1>
+      <p class="subtitle">Browse offers from trusted sellers.</p>
+    </div>
+  </header>
+
+  <div class="filters">
+    <div class="field">
+      <label for="marketplace-search">Search</label>
+      <input id="marketplace-search" type="search" [formControl]="searchControl" placeholder="Search by product name" />
+    </div>
+    <div class="field">
+      <label for="marketplace-category">Category</label>
+      <select id="marketplace-category" [formControl]="categoryControl">
+        <option *ngFor="let option of categories" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="pager">
+      <span>Page {{ page() }} of {{ totalPages }}</span>
+      <div class="pager-actions">
+        <button type="button" class="btn ghost" (click)="previousPage()" [disabled]="page() <= 1">Prev</button>
+        <button type="button" class="btn ghost" (click)="nextPage()" [disabled]="page() >= totalPages">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="state" *ngIf="errorMessage()">{{ errorMessage() }}</div>
+  <div class="state" *ngIf="isLoading()">Loading marketplace...</div>
+
+  <div class="state" *ngIf="!isLoading() && products()?.items?.length === 0">
+    No products found with active offers.
+  </div>
+
+  <div class="grid" *ngIf="products()?.items?.length">
+    <article class="product-card" *ngFor="let item of products()!.items">
+      <div class="card-top">
+        <div>
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.category }}</p>
+        </div>
+        <span class="badge recipe" *ngIf="item.isControlledByRecipe">Controlled</span>
+      </div>
+      <div class="price">
+        <span>Best price</span>
+        <strong>BRL {{ item.bestPrice | number: '1.2-2' }}</strong>
+      </div>
+      <a class="btn primary" [routerLink]="['/farmer/marketplace/products', item.productId]">
+        View offers
+      </a>
+    </article>
+  </div>
+</section>

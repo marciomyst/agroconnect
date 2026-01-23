@@ -1,0 +1,54 @@
+<section class="catalog-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Seller Workspace</p>
+      <h1>Catalog</h1>
+      <p class="subtitle">Manage the products you offer in the marketplace.</p>
+    </div>
+    <a class="btn primary" routerLink="/seller/catalog/new">Add product</a>
+  </header>
+
+  <div class="toolbar">
+    <div class="search">
+      <label for="catalog-search">Search</label>
+      <input id="catalog-search" type="search" [formControl]="searchControl" placeholder="Search products by name" />
+    </div>
+    <div class="pager">
+      <span>Page {{ page() }} of {{ totalPages }}</span>
+      <div class="pager-actions">
+        <button type="button" class="btn ghost" (click)="previousPage()" [disabled]="page() <= 1">Prev</button>
+        <button type="button" class="btn ghost" (click)="nextPage()" [disabled]="page() >= totalPages">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="state" *ngIf="errorMessage()">{{ errorMessage() }}</div>
+
+  <div class="state" *ngIf="isLoading()">Loading catalog...</div>
+
+  <div class="state" *ngIf="!isLoading() && catalog()?.items?.length === 0">
+    No products in your catalog yet.
+  </div>
+
+  <div class="catalog-grid" *ngIf="catalog()?.items?.length">
+    <article class="catalog-card" *ngFor="let item of catalog()!.items">
+      <div class="card-main">
+        <div>
+          <h3>{{ item.productName }}</h3>
+          <p class="meta">{{ item.category }} · {{ item.unitOfMeasure }}</p>
+        </div>
+        <div class="price">
+          <span class="currency">{{ item.currency }}</span>
+          <span class="amount">{{ item.price | number: '1.2-2' }}</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="badge" [class.offline]="!item.isAvailable">
+          {{ item.isAvailable ? 'Available' : 'Unavailable' }}
+        </span>
+        <span class="badge recipe" *ngIf="item.isControlledByRecipe">Controlled</span>
+        <a class="link" [routerLink]="['/seller/catalog', item.sellerProductId, 'edit']">Edit</a>
+      </div>
+    </article>
+  </div>
+</section>

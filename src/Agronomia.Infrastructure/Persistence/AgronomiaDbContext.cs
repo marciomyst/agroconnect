@@ -1,5 +1,8 @@
+using Agronomia.Domain.Catalog.Products;
+using Agronomia.Domain.Catalog.SellerProducts;
 using Agronomia.Domain.Identity;
 using Agronomia.Domain.Memberships;
+using Agronomia.Domain.Orders.PurchaseIntents;
 using Agronomia.Domain.Organizations;
 using Agronomia.Domain.Common;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +44,21 @@ public class AgronomiaDbContext : DbContext, IUnitOfWork
     /// DbSet for <see cref="FarmMembership"/> aggregate roots.
     /// </summary>
     public DbSet<FarmMembership> FarmMemberships => Set<FarmMembership>();
+
+    /// <summary>
+    /// DbSet for <see cref="Product"/> aggregate roots.
+    /// </summary>
+    public DbSet<Product> Products => Set<Product>();
+
+    /// <summary>
+    /// DbSet for <see cref="SellerProduct"/> aggregate roots.
+    /// </summary>
+    public DbSet<SellerProduct> SellerProducts => Set<SellerProduct>();
+
+    /// <summary>
+    /// DbSet for <see cref="PurchaseIntent"/> aggregate roots.
+    /// </summary>
+    public DbSet<PurchaseIntent> PurchaseIntents => Set<PurchaseIntent>();
 
     /// <summary>
     /// Applies all IEntityTypeConfiguration classes in this assembly.

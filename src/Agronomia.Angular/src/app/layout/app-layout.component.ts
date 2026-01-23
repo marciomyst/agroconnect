@@ -36,6 +36,8 @@ const FARMER_NAV: NavSection = {
   title: 'Farmer',
   items: [
     { label: 'Dashboard', route: '/farmer', exact: true },
+    { label: 'Marketplace', route: '/farmer/marketplace', exact: false },
+    { label: 'Purchase Intents', route: '/farmer/purchase-intents', exact: false },
     { label: 'Members', route: '/farmer/members', exact: false },
   ],
 };

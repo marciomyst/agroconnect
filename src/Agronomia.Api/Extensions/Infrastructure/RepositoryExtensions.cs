@@ -1,6 +1,8 @@
 using Agronomia.Application.Abstractions.Auth;
+using Agronomia.Application.Abstractions.Catalog;
 using Agronomia.Application.Abstractions.Identity;
 using Agronomia.Application.Abstractions.Memberships;
+using Agronomia.Application.Abstractions.Orders;
 using Agronomia.Application.Abstractions.Organizations;
 using Agronomia.Application.Abstractions.Security;
 using Agronomia.Application.Features.Users;
@@ -18,6 +20,15 @@ public static class RepositoryExtensions
         builder.Services.AddScoped<IUserRepository, UserRepository>();
 
         builder.Services.AddScoped<IUserReadRepository, UserReadRepository>();
+
+        builder.Services.AddScoped<IProductRepository, EfProductRepository>();
+        builder.Services.AddScoped<ISellerProductRepository, EfSellerProductRepository>();
+        builder.Services.AddScoped<IPurchaseIntentRepository, EfPurchaseIntentRepository>();
+
+        builder.Services.AddScoped<IProductReadRepository, ProductReadRepository>();
+        builder.Services.AddScoped<ISellerCatalogReadRepository, SellerCatalogReadRepository>();
+        builder.Services.AddScoped<IMarketplaceReadRepository, MarketplaceReadRepository>();
+        builder.Services.AddScoped<IPurchaseIntentReadRepository, PurchaseIntentReadRepository>();
 
         builder.Services.AddScoped<ISellerRepository, EfSellerRepository>();
         builder.Services.AddScoped<ISellerMembershipRepository, EfSellerMembershipRepository>();

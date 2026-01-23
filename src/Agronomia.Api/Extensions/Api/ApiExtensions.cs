@@ -1,5 +1,8 @@
 using Agronomia.Api.Features.Auth;
 using Agronomia.Api.Features.Farms;
+using Agronomia.Api.Features.Marketplace;
+using Agronomia.Api.Features.Products;
+using Agronomia.Api.Features.PurchaseIntents;
 using Agronomia.Api.Features.Sellers;
 using Agronomia.Api.Features.Users;
 using Agronomia.Api.Infrastructure;
@@ -67,6 +70,9 @@ public static class ApiExtensions
         //app.MapCompanyEndpoints();
         app.MapFarmEndpoints();
         app.MapSellerEndpoints();
+        app.MapProductEndpoints();
+        app.MapMarketplaceEndpoints();
+        app.MapPurchaseIntentEndpoints();
         app.MapUserEndpoints();
         //app.MapPingEndpoints();
 

@@ -1,3 +1,4 @@
+using Agronomia.Api.Features.Sellers.Catalog;
 using Agronomia.Api.Features.Sellers.GrantSellerMembership;
 using Agronomia.Api.Features.Sellers.RegisterSellerWithOwner;
 
@@ -9,5 +10,6 @@ public static class SellersEndpoints
     {
         app.MapGrantSellerMembership();
         app.MapRegisterSellerWithOwner();
+        app.MapSellerCatalogEndpoints();
     }
 }
