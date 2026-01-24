@@ -9,6 +9,7 @@ interface NavItem {
   label: string;
   route: string;
   exact: boolean;
+  icon: string;
 }
 
 interface NavSection {
@@ -19,26 +20,30 @@ interface NavSection {
 const ADMIN_NAV: NavSection = {
   title: 'Admin',
   items: [
-    { label: 'Dashboard', route: '/admin', exact: true },
+    { label: 'Dashboard', route: '/admin', exact: true, icon: 'dashboard' },
   ],
 };
 
 const SELLER_NAV: NavSection = {
   title: 'Seller',
   items: [
-    { label: 'Dashboard', route: '/seller', exact: true },
-    { label: 'Catalog', route: '/seller/catalog', exact: false },
-    { label: 'Members', route: '/seller/members', exact: false },
+    { label: 'Dashboard', route: '/seller', exact: true, icon: 'dashboard' },
+    { label: 'Catalog', route: '/seller/catalog', exact: false, icon: 'inventory_2' },
+    { label: 'Memberships', route: '/seller/members', exact: false, icon: 'group' },
   ],
 };
 
 const FARMER_NAV: NavSection = {
   title: 'Farmer',
   items: [
-    { label: 'Dashboard', route: '/farmer', exact: true },
-    { label: 'Marketplace', route: '/farmer/marketplace', exact: false },
-    { label: 'Purchase Intents', route: '/farmer/purchase-intents', exact: false },
-    { label: 'Members', route: '/farmer/members', exact: false },
+    { label: 'Dashboard', route: '/farmer', exact: true, icon: 'dashboard' },
+    { label: 'Minha Lavoura', route: '/farmer/farm', exact: false, icon: 'potted_plant' },
+    { label: 'Compras Coletivas', route: '/farmer/collective-deals', exact: false, icon: 'groups' },
+    { label: 'Meus Pedidos', route: '/farmer/orders', exact: false, icon: 'inventory_2' },
+    { label: 'Diagnosticos', route: '/farmer/diagnostics', exact: false, icon: 'pest_control' },
+    { label: 'Marketplace', route: '/farmer/marketplace', exact: false, icon: 'storefront' },
+    { label: 'Purchase Intents', route: '/farmer/purchase-intents', exact: false, icon: 'assignment' },
+    { label: 'Memberships', route: '/farmer/members', exact: false, icon: 'group' },
   ],
 };
 

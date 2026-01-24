@@ -1,4 +1,5 @@
 using Agronomia.Application.Abstractions.Identity;
+using Agronomia.Application.Abstractions.Persistence;
 using Agronomia.Application.Abstractions.Security;
 using Agronomia.Application.Features.Identity.RegisterUser;
 using Agronomia.Domain.Identity;
@@ -13,7 +14,7 @@ public sealed class RegisterUserCommandHandlerTests
     public async Task HandleAsync_DuplicateEmail_ThrowsConflict()
     {
         var repository = new FakeUserRepository { ExistsResult = true };
-        var handler = new RegisterUserCommandHandler(repository, new FakePasswordHasher());
+        var handler = new RegisterUserCommandHandler(repository, new FakePasswordHasher(), new FakeUnitOfWork());
 
         var command = new RegisterUserCommand("User", "user@example.com", "password123");
 
@@ -25,7 +26,7 @@ public sealed class RegisterUserCommandHandlerTests
     {
         var repository = new FakeUserRepository();
         var hasher = new FakePasswordHasher();
-        var handler = new RegisterUserCommandHandler(repository, hasher);
+        var handler = new RegisterUserCommandHandler(repository, hasher, new FakeUnitOfWork());
 
         var command = new RegisterUserCommand("User", "user@example.com", "password123");
 
@@ -78,5 +79,14 @@ public sealed class RegisterUserCommandHandlerTests
         {
             return passwordHash == $"hashed::{password}";
         }
+    }
+
+    private sealed class FakeUnitOfWork : IUnitOfWork
+    {
+        public Task BeginTransactionAsync(CancellationToken ct) => Task.CompletedTask;
+
+        public Task CommitAsync(CancellationToken ct) => Task.CompletedTask;
+
+        public Task RollbackAsync(CancellationToken ct) => Task.CompletedTask;
     }
 }

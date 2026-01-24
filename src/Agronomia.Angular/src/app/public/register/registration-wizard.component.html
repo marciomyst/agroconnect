@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="stepper">
+      <div class="stepper" *ngIf="!isAccountStepSkipped()">
         <div class="step" [class.is-active]="step() === 'user'" [class.is-complete]="step() === 'farm'">
           <span class="step-index">1</span>
           <div>
@@ -256,23 +256,30 @@
     <aside class="registration-aside">
       <div class="aside-card">
         <h2>Seu onboarding</h2>
-        <p>Complete o cadastro para acessar o marketplace e registrar suas compras.</p>
-        <div class="aside-steps">
-          <div class="aside-step" [class.is-active]="step() === 'user'">
-            <span>1</span>
-            <div>
-              <strong>Conta</strong>
-              <p>Crie seu acesso com e-mail e senha.</p>
+        <ng-container *ngIf="step() === 'user'; else farmOnboarding">
+          <p>Crie seu acesso para iniciar o cadastro da Propriedade.</p>
+          <div class="aside-steps">
+            <div class="aside-step is-active">
+              <span>1</span>
+              <div>
+                <strong>Conta</strong>
+                <p>Crie seu acesso com e-mail e senha.</p>
+              </div>
             </div>
           </div>
-          <div class="aside-step" [class.is-active]="step() === 'farm'">
-            <span>2</span>
-            <div>
-              <strong>Propriedade</strong>
-              <p>Cadastre os dados da Propriedade.</p>
+        </ng-container>
+        <ng-template #farmOnboarding>
+          <p>Cadastre os dados da Propriedade para ativar seu contexto.</p>
+          <div class="aside-steps">
+            <div class="aside-step is-active">
+              <span>{{ isAccountStepSkipped() ? '1' : '2' }}</span>
+              <div>
+                <strong>Propriedade</strong>
+                <p>Cadastre os dados da Propriedade.</p>
+              </div>
             </div>
           </div>
-        </div>
+        </ng-template>
       </div>
     </aside>
   </div>

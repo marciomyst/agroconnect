@@ -69,7 +69,5 @@ internal sealed class SellerProductConfiguration : IEntityTypeConfiguration<Sell
             .HasForeignKey(sellerProduct => sellerProduct.ProductId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.Navigation(sellerProduct => sellerProduct.Price)
-            .IsRequired();
     }
 }

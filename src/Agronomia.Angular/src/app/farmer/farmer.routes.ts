@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from '../layout/app-layout.component';
+import { FarmerDashboardPageComponent } from './dashboard/farmer-dashboard-page.component';
 import { FarmerPurchaseIntentListPageComponent } from './purchase-intents/farmer-purchase-intent-list-page.component';
 import { PurchaseIntentCreatePageComponent } from './purchase-intents/purchase-intent-create-page.component';
 import { MarketplaceListPageComponent } from '../marketplace/list/marketplace-list-page.component';
@@ -10,6 +11,7 @@ export const FARMER_ROUTES: Routes = [
     path: '',
     component: AppLayoutComponent,
     children: [
+      { path: '', component: FarmerDashboardPageComponent },
       { path: 'marketplace', component: MarketplaceListPageComponent },
       { path: 'marketplace/products/:productId', component: MarketplaceProductDetailPageComponent },
       { path: 'marketplace/products/:productId/intent', component: PurchaseIntentCreatePageComponent },

@@ -15,7 +15,7 @@ public sealed class ChangeUserPasswordTests
 
         user.ChangePassword("new-hash");
 
-        var domainEvent = Assert.Single(user.DomainEvents.Where(e => e is UserPasswordChanged));
+        var domainEvent = Assert.Single(user.DomainEvents, e => e is UserPasswordChanged);
         var changed = Assert.IsType<UserPasswordChanged>(domainEvent);
 
         Assert.Equal(user.Id, changed.UserId);

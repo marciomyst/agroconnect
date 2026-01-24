@@ -3,17 +3,20 @@ using System;
 using Agronomia.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Agronomia.Infrastructure.Persistence.Migrations
+namespace Agronomia.Infrastructure.Migrations
 {
     [DbContext(typeof(AgronomiaDbContext))]
-    partial class AgronomiaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260124155938_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,90 @@ namespace Agronomia.Infrastructure.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Agronomia.Domain.Catalog.Products.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("Category");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsControlledByRecipe")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("Name");
+
+                    b.Property<string>("RegistrationNumber")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("RegistrationNumber");
+
+                    b.Property<string>("UnitOfMeasure")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("UnitOfMeasure");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Category");
+
+                    b.HasIndex("Name");
+
+                    b.HasIndex("Name", "RegistrationNumber")
+                        .IsUnique()
+                        .HasFilter("\"RegistrationNumber\" IS NOT NULL");
+
+                    b.ToTable("products", (string)null);
+                });
+
+            modelBuilder.Entity("Agronomia.Domain.Catalog.SellerProducts.SellerProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SellerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsAvailable");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SellerId");
+
+                    b.HasIndex("SellerId", "ProductId")
+                        .IsUnique();
+
+                    b.ToTable("seller_products", (string)null);
+                });
 
             modelBuilder.Entity("Agronomia.Domain.Identity.User", b =>
                 {
@@ -100,88 +187,6 @@ namespace Agronomia.Infrastructure.Persistence.Migrations
                     b.ToTable("seller_memberships", (string)null);
                 });
 
-            modelBuilder.Entity("Agronomia.Domain.Catalog.Products.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsControlledByRecipe")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("RegistrationNumber")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
-
-                    b.Property<string>("UnitOfMeasure")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Category");
-
-                    b.HasIndex("Name");
-
-                    b.HasIndex("Name", "RegistrationNumber")
-                        .IsUnique()
-                        .HasFilter("\"RegistrationNumber\" IS NOT NULL");
-
-                    b.ToTable("products", (string)null);
-                });
-
-            modelBuilder.Entity("Agronomia.Domain.Catalog.SellerProducts.SellerProduct", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("boolean");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("SellerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("UpdatedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsAvailable");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("SellerId");
-
-                    b.HasIndex("SellerId", "ProductId")
-                        .IsUnique();
-
-                    b.ToTable("seller_products", (string)null);
-
-                    b.Navigation("Price");
-                });
-
             modelBuilder.Entity("Agronomia.Domain.Orders.PurchaseIntents.PurchaseIntent", b =>
                 {
                     b.Property<Guid>("Id")
@@ -189,6 +194,9 @@ namespace Agronomia.Infrastructure.Persistence.Migrations
 
                     b.Property<Guid>("FarmId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
@@ -214,9 +222,6 @@ namespace Agronomia.Infrastructure.Persistence.Migrations
 
                     b.Property<DateTime>("UpdatedAtUtc")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -317,31 +322,34 @@ namespace Agronomia.Infrastructure.Persistence.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("SellerProductId");
                         });
+
+                    b.Navigation("Price")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Agronomia.Domain.Orders.PurchaseIntents.PurchaseIntent", b =>
                 {
-                    b.HasOne("Agronomia.Domain.Catalog.Products.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Agronomia.Domain.Catalog.SellerProducts.SellerProduct", null)
-                        .WithMany()
-                        .HasForeignKey("SellerProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Agronomia.Domain.Organizations.Farm", null)
                         .WithMany()
                         .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Agronomia.Domain.Catalog.Products.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Agronomia.Domain.Organizations.Seller", null)
                         .WithMany()
                         .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Agronomia.Domain.Catalog.SellerProducts.SellerProduct", null)
+                        .WithMany()
+                        .HasForeignKey("SellerProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

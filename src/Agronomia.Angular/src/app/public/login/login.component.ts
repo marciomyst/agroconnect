@@ -8,7 +8,6 @@ import { AuthTokenService } from '../../core/auth/auth-token.service';
 import { CurrentUserContext } from '../../core/auth/auth.types';
 import { CurrentUserStore } from '../../core/auth/current-user.store';
 import { ActiveOrganizationStore } from '../../core/organization/active-organization.store';
-import { RegistrationProgressService } from '../../core/registration/registration-progress.service';
 
 @Component({
   selector: 'app-public-login',
@@ -22,7 +21,6 @@ export class PublicLoginComponent {
   private readonly tokenService = inject(AuthTokenService);
   private readonly currentUserStore = inject(CurrentUserStore);
   private readonly activeOrganizationStore = inject(ActiveOrganizationStore);
-  private readonly registrationProgress = inject(RegistrationProgressService);
   private readonly router = inject(Router);
   private readonly formBuilder = inject(FormBuilder);
 
@@ -87,14 +85,8 @@ export class PublicLoginComponent {
         // Navigation depends on whether an active organization is already resolved.
         if (!this.activeOrganizationStore.hasActiveOrganization()) {
           if (context.organizations.length === 0) {
-            if (this.registrationProgress.hasPendingSellerRegistration()) {
-              void this.router.navigate(['/register/seller'], { queryParams: { step: 'seller' } });
-              return;
-            }
-            if (this.registrationProgress.hasPendingFarmRegistration()) {
-              void this.router.navigate(['/register/farmer'], { queryParams: { step: 'farm' } });
-              return;
-            }
+            void this.router.navigate(['/']);
+            return;
           }
           void this.router.navigate(['/select-organization']);
           return;

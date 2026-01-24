@@ -1,0 +1,241 @@
+<section class="space-y-8">
+  <header class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between dash-reveal" style="--dash-delay: 0ms;">
+    <div class="space-y-2">
+      <p class="text-caption uppercase tracking-[0.3em] text-text-muted dark:text-text-muted-light">
+        Farm Dashboard
+      </p>
+      <h1 class="text-display-lg font-black text-text-main dark:text-text-main-dark">
+        Bom dia, {{ userDisplayName() }}!
+      </h1>
+      <p class="text-body-md text-text-muted dark:text-text-muted-light max-w-2xl">
+        Aqui esta o resumo da sua producao hoje.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <a class="btn btn-outline btn-lg" [routerLink]="['/farmer/marketplace']">Ver Marketplace</a>
+      <button type="button" class="btn btn-primary btn-lg">Novo Diagnostico</button>
+    </div>
+  </header>
+
+  <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <article class="card p-5 flex flex-col gap-3 dash-reveal" style="--dash-delay: 40ms;">
+      <div class="flex items-center justify-between">
+        <span class="text-caption uppercase tracking-[0.2em] text-text-muted dark:text-text-muted-light">FarmWallet</span>
+        <span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark">account_balance_wallet</span>
+      </div>
+      <div class="flex items-end justify-between">
+        <span class="text-heading-lg font-bold text-text-main dark:text-text-main-dark">BRL 12.480,00</span>
+        <span class="text-body-sm text-text-secondary-light dark:text-text-secondary-dark">+BRL 820</span>
+      </div>
+      <p class="text-body-sm text-text-muted dark:text-text-muted-light">Cashback ready for new Orders.</p>
+    </article>
+
+    <article class="card p-5 flex flex-col gap-3 dash-reveal" style="--dash-delay: 90ms;">
+      <div class="flex items-center justify-between">
+        <span class="text-caption uppercase tracking-[0.2em] text-text-muted dark:text-text-muted-light">Orders</span>
+        <span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark">local_shipping</span>
+      </div>
+      <div class="flex items-end justify-between">
+        <span class="text-heading-lg font-bold text-text-main dark:text-text-main-dark">14</span>
+        <span class="text-body-sm text-text-secondary-light dark:text-text-secondary-dark">+3</span>
+      </div>
+      <p class="text-body-sm text-text-muted dark:text-text-muted-light">Orders moving this week.</p>
+    </article>
+
+    <article class="card p-5 flex flex-col gap-3 dash-reveal" style="--dash-delay: 140ms;">
+      <div class="flex items-center justify-between">
+        <span class="text-caption uppercase tracking-[0.2em] text-text-muted dark:text-text-muted-light">PurchaseIntents</span>
+        <span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark">task_alt</span>
+      </div>
+      <div class="flex items-end justify-between">
+        <span class="text-heading-lg font-bold text-text-main dark:text-text-main-dark">7</span>
+        <span class="text-body-sm text-text-secondary-light dark:text-text-secondary-dark">+2</span>
+      </div>
+      <p class="text-body-sm text-text-muted dark:text-text-muted-light">PurchaseIntents open now.</p>
+    </article>
+
+    <article class="card p-5 flex flex-col gap-3 dash-reveal" style="--dash-delay: 190ms;">
+      <div class="flex items-center justify-between">
+        <span class="text-caption uppercase tracking-[0.2em] text-text-muted dark:text-text-muted-light">CollectiveDeals</span>
+        <span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark">groups</span>
+      </div>
+      <div class="flex items-end justify-between">
+        <span class="text-heading-lg font-bold text-text-main dark:text-text-main-dark">5</span>
+        <span class="text-body-sm text-text-secondary-light dark:text-text-secondary-dark">+1</span>
+      </div>
+      <p class="text-body-sm text-text-muted dark:text-text-muted-light">CollectiveDeals to join today.</p>
+    </article>
+  </section>
+
+  <section class="grid gap-4 lg:grid-cols-12">
+    <article class="card p-6 lg:col-span-7 relative overflow-hidden dash-reveal" style="--dash-delay: 240ms;">
+      <div class="absolute -right-12 -top-12 size-44 rounded-full bg-accent-lime/70 blur-3xl"></div>
+      <div class="relative space-y-6">
+        <div class="flex items-center gap-2 text-text-secondary-light dark:text-text-secondary-dark">
+          <span class="material-symbols-outlined">account_balance_wallet</span>
+          <span class="text-body-sm font-semibold">FarmWallet pulse</span>
+        </div>
+        <div class="space-y-2">
+          <h2 class="text-heading-lg font-bold text-text-main dark:text-text-main-dark">
+            FarmWallet available for new Orders
+          </h2>
+          <p class="text-body-sm text-text-muted dark:text-text-muted-light max-w-xl">
+            Use FarmWallet credit for Orders and CollectiveDeals while tracking upcoming payouts.
+          </p>
+        </div>
+        <div class="space-y-5">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-body-sm font-semibold text-text-main dark:text-text-main-dark">
+              <span>Available balance</span>
+              <span class="text-text-secondary-light dark:text-text-secondary-dark">76%</span>
+            </div>
+            <div class="h-2 rounded-full bg-border-light dark:bg-border-dark">
+              <div class="h-2 rounded-full bg-primary" style="width: 76%"></div>
+            </div>
+            <p class="text-caption text-text-muted dark:text-text-muted-light">BRL 9.900,00</p>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-body-sm font-semibold text-text-main dark:text-text-main-dark">
+              <span>Pending credit</span>
+              <span class="text-text-secondary-light dark:text-text-secondary-dark">14%</span>
+            </div>
+            <div class="h-2 rounded-full bg-border-light dark:bg-border-dark">
+              <div class="h-2 rounded-full bg-primary" style="width: 14%"></div>
+            </div>
+            <p class="text-caption text-text-muted dark:text-text-muted-light">BRL 1.340,00</p>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-body-sm font-semibold text-text-main dark:text-text-main-dark">
+              <span>Cashback ready</span>
+              <span class="text-text-secondary-light dark:text-text-secondary-dark">10%</span>
+            </div>
+            <div class="h-2 rounded-full bg-border-light dark:bg-border-dark">
+              <div class="h-2 rounded-full bg-primary" style="width: 10%"></div>
+            </div>
+            <p class="text-caption text-text-muted dark:text-text-muted-light">BRL 1.240,00</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="grid gap-4 lg:col-span-5">
+      <article class="card card-muted p-5 dash-reveal" style="--dash-delay: 300ms;">
+        <div class="flex items-center justify-between">
+          <h3 class="text-heading-md font-bold text-text-main dark:text-text-main-dark">PurchaseIntent tracker</h3>
+          <span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark">checklist</span>
+        </div>
+        <ul class="mt-4 space-y-3 text-body-sm text-text-main dark:text-text-main-dark">
+          <li class="flex items-center justify-between">
+            <span>Draft</span>
+            <span class="font-semibold">2</span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span>Submitted</span>
+            <span class="font-semibold">4</span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span>Matched</span>
+            <span class="font-semibold">1</span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card p-5 dash-reveal" style="--dash-delay: 360ms;">
+        <div class="flex items-center justify-between">
+          <h3 class="text-heading-md font-bold text-text-main dark:text-text-main-dark">Marketplace pulse</h3>
+          <span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark">storefront</span>
+        </div>
+        <ul class="mt-4 space-y-3">
+          <li class="flex items-center justify-between">
+            <span class="text-body-sm font-semibold text-text-main dark:text-text-main-dark">Fertilizantes</span>
+            <span class="text-body-sm text-text-secondary-light dark:text-text-secondary-dark">18 products</span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="text-body-sm font-semibold text-text-main dark:text-text-main-dark">Defensivos</span>
+            <span class="text-body-sm text-text-secondary-light dark:text-text-secondary-dark">12 products</span>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="text-body-sm font-semibold text-text-main dark:text-text-main-dark">Sementes</span>
+            <span class="text-body-sm text-text-secondary-light dark:text-text-secondary-dark">9 products</span>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <app-collective-deals-closing></app-collective-deals-closing>
+
+  <section class="space-y-4">
+    <h2 class="text-heading-md font-bold text-text-main dark:text-text-main-dark flex items-center gap-2">
+      <span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark">receipt_long</span>
+      Recent Orders
+    </h2>
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-body-sm text-text-main dark:text-text-main-dark">
+          <thead class="text-caption uppercase tracking-[0.2em] text-text-muted dark:text-text-muted-light bg-background-light dark:bg-surface-dark-soft">
+            <tr>
+              <th class="px-6 py-4">Order</th>
+              <th class="px-6 py-4">Seller</th>
+              <th class="px-6 py-4">Date</th>
+              <th class="px-6 py-4">Total</th>
+              <th class="px-6 py-4">Status</th>
+              <th class="px-6 py-4 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border-light dark:divide-border-dark">
+            <tr class="hover:bg-background-light/70 dark:hover:bg-surface-dark-muted transition-colors">
+              <td class="px-6 py-4 font-semibold">#ORD-9821</td>
+              <td class="px-6 py-4">Seller AgroSul</td>
+              <td class="px-6 py-4">12/10/2023</td>
+              <td class="px-6 py-4 font-semibold">BRL 1.250,00</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center gap-2 rounded-full border border-border-muted bg-accent-lime/60 px-3 py-1 text-caption font-semibold">
+                  <span class="size-2 rounded-full bg-primary"></span>
+                  Awaiting confirmation
+                </span>
+              </td>
+              <td class="px-6 py-4 text-right">
+                <button type="button" class="btn btn-ghost btn-sm">Track</button>
+              </td>
+            </tr>
+            <tr class="hover:bg-background-light/70 dark:hover:bg-surface-dark-muted transition-colors">
+              <td class="px-6 py-4 font-semibold">#ORD-9815</td>
+              <td class="px-6 py-4">Seller NutriPlantas</td>
+              <td class="px-6 py-4">10/10/2023</td>
+              <td class="px-6 py-4 font-semibold">BRL 890,00</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center gap-2 rounded-full border border-border-muted bg-accent-lime/30 px-3 py-1 text-caption font-semibold">
+                  <span class="size-2 rounded-full bg-primary-dark"></span>
+                  In preparation
+                </span>
+              </td>
+              <td class="px-6 py-4 text-right">
+                <button type="button" class="btn btn-ghost btn-sm">Track</button>
+              </td>
+            </tr>
+            <tr class="hover:bg-background-light/70 dark:hover:bg-surface-dark-muted transition-colors">
+              <td class="px-6 py-4 font-semibold">#ORD-9780</td>
+              <td class="px-6 py-4">Seller Sementes Ouro</td>
+              <td class="px-6 py-4">08/10/2023</td>
+              <td class="px-6 py-4 font-semibold">BRL 3.400,00</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center gap-2 rounded-full border border-border-muted bg-accent-lime/20 px-3 py-1 text-caption font-semibold">
+                  <span class="size-2 rounded-full bg-text-secondary-light"></span>
+                  Ready for pickup
+                </span>
+              </td>
+              <td class="px-6 py-4 text-right">
+                <button type="button" class="btn btn-ghost btn-sm">Track</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex items-center justify-between gap-4 border-t border-border-light dark:border-border-dark bg-background-light/60 dark:bg-surface-dark-soft px-6 py-4">
+        <p class="text-body-sm text-text-muted dark:text-text-muted-light">Showing latest Farm Orders.</p>
+        <button type="button" class="btn btn-outline btn-sm">View history</button>
+      </div>
+    </div>
+  </section>
+</section>

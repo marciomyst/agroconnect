@@ -5,6 +5,7 @@ using Agronomia.Application.Abstractions.Memberships;
 using Agronomia.Application.Abstractions.Orders;
 using Agronomia.Application.Abstractions.Organizations;
 using Agronomia.Application.Abstractions.Security;
+using Agronomia.Application.Features.Identity.GetCurrentUserContext;
 using Agronomia.Application.Features.Users;
 using Agronomia.Infrastructure.Auth;
 using Agronomia.Infrastructure.Persistence.Repositories;
@@ -20,6 +21,7 @@ public static class RepositoryExtensions
         builder.Services.AddScoped<IUserRepository, UserRepository>();
 
         builder.Services.AddScoped<IUserReadRepository, UserReadRepository>();
+        builder.Services.AddScoped<ICurrentUserContextReadRepository, CurrentUserContextReadRepository>();
 
         builder.Services.AddScoped<IProductRepository, EfProductRepository>();
         builder.Services.AddScoped<ISellerProductRepository, EfSellerProductRepository>();

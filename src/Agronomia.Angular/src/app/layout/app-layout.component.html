@@ -1,71 +1,104 @@
-<div class="app-layout">
-  <header class="app-topbar">
-    <div class="brand">
-      <div class="brand-mark" aria-hidden="true"></div>
-      <div class="brand-copy">
-        <span class="brand-title">Agronomia</span>
-        <span class="brand-subtitle">Contexto ativo</span>
-      </div>
-    </div>
-
-    <div class="context">
-      <div class="context-block">
-        <span class="label">Usuario</span>
-        <span class="value">{{ user()?.name || user()?.email || 'Conta' }}</span>
-        <span class="meta" *ngIf="user()?.name && user()?.email">{{ user()?.email }}</span>
-      </div>
-
-      <div class="context-block" *ngIf="activeOrganization() as organization; else noOrganization">
-        <span class="label">Organizacao</span>
-        <span class="value">{{ organization.organizationName }}</span>
-        <span class="pill">{{ organization.organizationType }}</span>
-      </div>
-
-      <ng-template #noOrganization>
-        <div class="context-block">
-          <span class="label">Organizacao</span>
-          <span class="value">Sem contexto ativo</span>
+<div class="flex h-screen overflow-hidden bg-background-light text-text-main dark:bg-background-dark dark:text-text-main-dark font-body">
+  <aside
+    class="hidden md:flex w-72 flex-col bg-surface-light dark:bg-surface-dark border-r border-border-color dark:border-border-dark"
+  >
+    <div class="p-6 pb-2">
+      <div class="flex items-center gap-3">
+        <div class="size-8 rounded-lg bg-primary text-text-on-primary flex items-center justify-center font-bold">
+          <span class="material-symbols-outlined text-[18px]">agriculture</span>
         </div>
-      </ng-template>
+        <h2 class="text-heading-md font-bold tracking-tight">AgroConnect</h2>
+      </div>
     </div>
+    <div class="flex flex-col flex-1 px-4 py-6 gap-6 overflow-y-auto">
+      <div class="flex items-center gap-3 p-3 rounded-xl bg-background-light dark:bg-surface-dark-muted/60 border border-border-color dark:border-border-dark">
+        <div class="size-10 rounded-full border-2 border-primary/50 bg-accent-lime flex items-center justify-center text-text-main">
+          <span class="material-symbols-outlined text-[20px]">person</span>
+        </div>
+        <div class="min-w-0">
+          <p class="text-body-sm font-semibold truncate">
+            {{ activeOrganization()?.organizationName || 'Conta' }}
+          </p>
+          <p class="text-caption text-text-muted dark:text-text-muted-light truncate">
+            {{ user()?.name || user()?.email || 'Usuario' }}
+          </p>
+        </div>
+      </div>
 
-    <div class="actions">
-      <button type="button" class="btn ghost" (click)="onChangeOrganization()">
-        Trocar organizacao
-      </button>
-      <button type="button" class="btn solid" (click)="onLogout()">
-        Sair
-      </button>
-    </div>
-  </header>
-
-  <div class="app-shell">
-    <aside class="app-nav">
-      <div class="nav-heading">Navegacao</div>
-
-      <ng-container *ngFor="let section of navSections(); let sectionIndex = index">
-        <div class="nav-section" [style.--section-index]="sectionIndex">
-          <div class="nav-title">{{ section.title }}</div>
-          <a
-            *ngFor="let item of section.items; let itemIndex = index"
-            class="nav-link"
-            [style.--item-index]="itemIndex"
-            [routerLink]="item.route"
-            routerLinkActive="is-active"
-            [routerLinkActiveOptions]="{ exact: item.exact }"
-          >
-            <span class="nav-label">{{ item.label }}</span>
-          </a>
+      <ng-container *ngIf="navSections() as sections">
+        <nav class="flex flex-col gap-1">
+          <ng-container *ngFor="let section of sections">
+            <div *ngIf="sections.length > 1" class="px-3 text-caption uppercase tracking-[0.2em] text-text-muted dark:text-text-muted-light">
+              {{ section.title }}
+            </div>
+            <a
+              *ngFor="let item of section.items"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-body-sm font-medium text-text-muted dark:text-text-muted-light hover:bg-background-light dark:hover:bg-surface-dark-muted transition-colors"
+              [routerLink]="item.route"
+              routerLinkActive="bg-primary/15 text-primary-dark dark:text-primary font-semibold"
+              [routerLinkActiveOptions]="{ exact: item.exact }"
+            >
+              <span class="material-symbols-outlined text-[20px]">{{ item.icon }}</span>
+              <span class="truncate">{{ item.label }}</span>
+            </a>
+          </ng-container>
+        </nav>
+        <div class="text-body-sm text-text-muted dark:text-text-muted-light" *ngIf="sections.length === 0">
+          Nenhuma opcao disponivel.
         </div>
       </ng-container>
 
-      <div class="nav-empty" *ngIf="navSections().length === 0">
-        Nenhuma opcao disponivel.
+      <div class="mt-auto">
+        <a
+          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-body-sm font-medium text-text-muted dark:text-text-muted-light hover:bg-background-light dark:hover:bg-surface-dark-muted transition-colors"
+          routerLink="/security"
+        >
+          <span class="material-symbols-outlined text-[20px]">settings</span>
+          <span>Configuracoes</span>
+        </a>
       </div>
-    </aside>
+    </div>
+  </aside>
 
-    <main class="app-content">
+  <main class="flex-1 flex flex-col h-full relative overflow-hidden">
+    <header class="h-16 flex items-center justify-between px-6 bg-surface-light dark:bg-surface-dark border-b border-border-color dark:border-border-dark shrink-0 z-10">
+      <div class="flex items-center md:hidden gap-3">
+        <button type="button" class="p-2 text-text-muted dark:text-text-muted-light">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <span class="font-bold text-lg">AgroConnect</span>
+      </div>
+      <div class="hidden md:flex flex-1 max-w-md">
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-text-muted">
+            <span class="material-symbols-outlined text-[20px]">search</span>
+          </div>
+          <input
+            class="input h-10 pl-10 text-body-sm"
+            placeholder="Buscar produtos, pedidos..."
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" class="relative p-2 text-text-muted hover:text-primary transition-colors">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="absolute top-2 right-2 size-2 rounded-full bg-red-500 border-2 border-surface-light dark:border-surface-dark"></span>
+        </button>
+        <button type="button" class="p-2 text-text-muted hover:text-primary transition-colors">
+          <span class="material-symbols-outlined">dark_mode</span>
+        </button>
+        <button type="button" class="btn btn-ghost btn-sm" (click)="onChangeOrganization()">
+          Trocar organizacao
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="onLogout()">
+          Sair
+        </button>
+      </div>
+    </header>
+
+    <div class="flex-1 overflow-y-auto p-4 md:p-8 space-y-8">
       <router-outlet></router-outlet>
-    </main>
-  </div>
+    </div>
+  </main>
 </div>

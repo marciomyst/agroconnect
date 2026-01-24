@@ -2,8 +2,16 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthTokenService } from './auth-token.service';
 import { ActiveOrganizationStore } from '../organization/active-organization.store';
+import { environment } from '../../../environments/environment';
 
 const apiPrefix = '/api/';
+const apiOrigin = (() => {
+  try {
+    return new URL(environment.apiUrl, window.location.origin).origin;
+  } catch {
+    return window.location.origin;
+  }
+})();
 
 // Propagate active organization context for authenticated API calls.
 const getOrganizationHeaders = (organizationId: string | null): Record<string, string> => {
@@ -23,8 +31,8 @@ const isApiRequest = (url: string): boolean => {
 
   try {
     const parsed = new URL(url);
-    return parsed.origin === window.location.origin
-      && parsed.pathname.startsWith(apiPrefix);
+    return parsed.pathname.startsWith(apiPrefix)
+      && (parsed.origin === window.location.origin || parsed.origin === apiOrigin);
   } catch {
     return false;
   }

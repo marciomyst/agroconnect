@@ -45,7 +45,7 @@
   background: var(--surface);
   padding: 46px 54px 40px;
   display: grid;
-  gap: 22px;
+  gap: 32px;
 }
 
 .registration-aside {
@@ -209,14 +209,14 @@
 }
 
 .panel-heading h1 {
-  margin: 0 0 8px;
+  margin: 0 0 4px;
   font-family: var(--font-display);
   font-size: 2rem;
   line-height: 1.1;
 }
 
 .panel-heading {
-  min-height: 6rem;
+  min-height: 3.4rem;
 }
 
 .panel-heading p {
@@ -238,8 +238,11 @@
 }
 
 form {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 18px;
+  align-items: stretch;
+  height: 100%;
 }
 
 .field {
@@ -251,6 +254,7 @@ form {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--ink);
+  line-height: 1.2;
 }
 
 .input-wrap {
@@ -394,6 +398,7 @@ form {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  margin-top: auto;
 }
 
 .actions .btn.ghost {

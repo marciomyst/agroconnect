@@ -1,5 +1,7 @@
 using System.Data;
+using Agronomia.Application.Abstractions.Auth;
 using Agronomia.Application.Abstractions.Messaging;
+using Agronomia.Infrastructure.Auth;
 using Agronomia.Infrastructure.Dapper;
 using Agronomia.Infrastructure.Messaging;
 using Agronomia.Infrastructure.Persistence;
@@ -23,6 +25,9 @@ public static class InfrastructureModule
         }
 
         services.AddDbContext<AgronomiaDbContext>(options => options.UseNpgsql(connectionString));
+
+        services.AddHttpContextAccessor();
+        services.AddScoped<ICurrentUser, CurrentUser>();
 
         services.AddScoped<ApplicationUnitOfWork, EfUnitOfWork>();
         services.AddScoped<DomainUnitOfWork>(sp => sp.GetRequiredService<AgronomiaDbContext>());

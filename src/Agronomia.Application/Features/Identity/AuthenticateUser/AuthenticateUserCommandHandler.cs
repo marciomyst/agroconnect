@@ -38,7 +38,7 @@ public sealed class AuthenticateUserCommandHandler(
             authenticatedAtUtc,
             user.Id,
             authenticatedAtUtc);
-        await _eventDispatcher.DispatchAsync(new[] { domainEvent }, ct);
+        await _eventDispatcher.DispatchAsync([domainEvent], ct);
 
         return new AuthenticateUserResult(user.Id, user.Email.Value, token);
     }

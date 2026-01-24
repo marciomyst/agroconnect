@@ -54,6 +54,7 @@ export class SellerRegistrationWizardComponent {
 
   readonly step = signal<WizardStep>('user');
   readonly resumeRequired = signal(false);
+  readonly isAccountStepSkipped = signal(false);
 
   readonly isSubmittingUser = signal(false);
   readonly isSubmittingSeller = signal(false);
@@ -77,18 +78,18 @@ export class SellerRegistrationWizardComponent {
 
   constructor() {
     const requestedStep = this.route.snapshot.queryParamMap.get('step');
+    const hasToken = this.tokenService.hasToken();
     const wantsSellerStep = requestedStep === 'seller'
       || this.registrationProgress.hasPendingSellerRegistration();
 
-    if (wantsSellerStep) {
-      if (this.tokenService.hasToken()) {
-        this.step.set('seller');
-      } else {
-        this.resumeRequired.set(true);
-      }
+    if (hasToken) {
+      this.isAccountStepSkipped.set(true);
+      this.step.set('seller');
+    } else if (wantsSellerStep) {
+      this.resumeRequired.set(true);
     }
 
-    if (this.tokenService.hasToken() && !this.currentUserStore.isLoaded()) {
+    if (hasToken && !this.currentUserStore.isLoaded()) {
       this.currentUserStore.loadFromApi().pipe(
         takeUntilDestroyed(this.destroyRef)
       ).subscribe();

@@ -1,4 +1,5 @@
 using Agronomia.Api.Features.Auth.Authenticate;
+using Agronomia.Api.Features.Auth.GetCurrentUserContext;
 
 namespace Agronomia.Api.Features.Auth;
 
@@ -14,5 +15,6 @@ public static class AuthEndpoints
     public static void MapAuthEndpoints(this IEndpointRouteBuilder app)
     {
         app.MapAuthenticateUser();
+        app.MapGetCurrentUserContext();
     }
 }

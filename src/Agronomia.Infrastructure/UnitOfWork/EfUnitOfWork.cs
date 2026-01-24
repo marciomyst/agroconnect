@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Agronomia.Infrastructure.UnitOfWork;
 
-public sealed class EfUnitOfWork(AgronomiaDbContext dbContext) : IUnitOfWork, IAsyncDisposable
+public sealed class EfUnitOfWork(AgronomiaDbContext dbContext) : IUnitOfWork, IAsyncDisposable, IDisposable
 {
     private readonly AgronomiaDbContext _dbContext = dbContext;
     private IDbContextTransaction? _transaction;
@@ -46,9 +46,23 @@ public sealed class EfUnitOfWork(AgronomiaDbContext dbContext) : IUnitOfWork, IA
 
     public async ValueTask DisposeAsync()
     {
-        if (_transaction is not null)
+        if (_transaction is null)
         {
-            await _transaction.DisposeAsync();
+            return;
         }
+
+        await _transaction.DisposeAsync();
+        _transaction = null;
+    }
+
+    public void Dispose()
+    {
+        if (_transaction is null)
+        {
+            return;
+        }
+
+        _transaction.Dispose();
+        _transaction = null;
     }
 }

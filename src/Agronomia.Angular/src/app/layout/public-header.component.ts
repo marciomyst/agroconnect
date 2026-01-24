@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { AuthTokenService } from '../core/auth/auth-token.service';
+import { CurrentUserStore } from '../core/auth/current-user.store';
+import { ActiveOrganizationStore } from '../core/organization/active-organization.store';
 
 @Component({
   selector: 'app-public-header',
   standalone: true,
+  imports: [CommonModule, RouterLink],
   template: `
     <header class="flex flex-col w-full z-50">
       <div class="bg-[#1a2e14] text-white h-[64px] flex items-center px-4 gap-2 lg:gap-4 w-full relative z-20">
@@ -73,13 +79,35 @@ import { Component } from '@angular/core';
             <span class="text-xs">BR</span>
             <span class="material-symbols-outlined !text-[16px] text-gray-400">arrow_drop_down</span>
           </button>
-          <a class="header-item-hover hidden md:flex flex-col justify-center px-2 py-1.5 leading-tight" href="#">
-            <span class="text-xs text-gray-100">Ola, faca seu login</span>
-            <div class="flex items-center font-bold text-sm">
-              Contas e Listas
-              <span class="material-symbols-outlined !text-[18px] text-gray-400">arrow_drop_down</span>
-            </div>
-          </a>
+          <ng-container *ngIf="isAuthenticated(); else loginLink">
+            <details class="user-menu hidden md:block">
+              <summary class="header-item-hover flex flex-col justify-center px-2 py-1.5 leading-tight cursor-pointer">
+                <span class="text-xs text-gray-100">{{ greeting() }}</span>
+                <div class="flex items-center font-bold text-sm">
+                  Contas e Listas
+                  <span class="material-symbols-outlined !text-[18px] text-gray-400">arrow_drop_down</span>
+                </div>
+              </summary>
+              <div class="user-menu-panel">
+                <a class="user-menu-link" [routerLink]="dashboardRoute()">Dashboard</a>
+                <a class="user-menu-link" routerLink="/register/farmer">Cadastrar Propriedade</a>
+                <a class="user-menu-link" routerLink="/register/seller">Cadastrar Vendedor</a>
+                <button class="user-menu-link" type="button" (click)="onLogout()">Sair</button>
+              </div>
+            </details>
+          </ng-container>
+          <ng-template #loginLink>
+            <a
+              class="header-item-hover hidden md:flex flex-col justify-center px-2 py-1.5 leading-tight"
+              routerLink="/login"
+            >
+              <span class="text-xs text-gray-100">{{ greeting() }}</span>
+              <div class="flex items-center font-bold text-sm">
+                Contas e Listas
+                <span class="material-symbols-outlined !text-[18px] text-gray-400">arrow_drop_down</span>
+              </div>
+            </a>
+          </ng-template>
           <a class="header-item-hover hidden lg:flex flex-col justify-center px-2 py-1.5 leading-tight" href="#">
             <span class="text-xs text-gray-100">Devolucoes</span>
             <span class="font-bold text-sm">e Pedidos</span>
@@ -170,6 +198,47 @@ import { Component } from '@angular/core';
       .header-item-hover:hover {
         border: 1px solid white;
       }
+      .user-menu {
+        position: relative;
+      }
+      .user-menu summary {
+        list-style: none;
+      }
+      .user-menu summary::-webkit-details-marker {
+        display: none;
+      }
+      .user-menu-panel {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        min-width: 220px;
+        background: #1f3520;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 8px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+        z-index: 30;
+      }
+      .user-menu-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        border: none;
+        color: #fff;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        background: transparent;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+      }
+      .user-menu-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
       .no-scrollbar::-webkit-scrollbar {
         display: none;
       }
@@ -180,4 +249,45 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class PublicHeaderComponent {}
+export class PublicHeaderComponent {
+  private readonly tokenService = inject(AuthTokenService);
+  private readonly currentUserStore = inject(CurrentUserStore);
+  private readonly activeOrganizationStore = inject(ActiveOrganizationStore);
+  private readonly router = inject(Router);
+
+  readonly isAuthenticated = computed(() => this.currentUserStore.user() !== null);
+
+  readonly greeting = computed(() => {
+    const user = this.currentUserStore.user();
+    const name = user?.name?.trim();
+    if (name) {
+      return `Ola, ${name}`;
+    }
+
+    if (user?.email) {
+      return `Ola, ${user.email}`;
+    }
+
+    return 'Ola, faca seu login';
+  });
+
+  readonly dashboardRoute = computed(() => {
+    const activeOrganization = this.activeOrganizationStore.activeOrganization();
+    if (activeOrganization?.organizationType === 'Farm') {
+      return '/farmer';
+    }
+
+    if (activeOrganization?.organizationType === 'Seller') {
+      return '/seller';
+    }
+
+    return '/select-organization';
+  });
+
+  onLogout(): void {
+    this.tokenService.clearToken();
+    this.currentUserStore.clear();
+    this.activeOrganizationStore.clear();
+    void this.router.navigate(['/login']);
+  }
+}
