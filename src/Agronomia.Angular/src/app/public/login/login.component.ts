@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { finalize, switchMap, tap } from 'rxjs';
 import { AuthApiService } from '../../core/auth/auth-api.service';
 import { AuthTokenService } from '../../core/auth/auth-token.service';
+import { CurrentUserContext } from '../../core/auth/auth.types';
 import { CurrentUserStore } from '../../core/auth/current-user.store';
 import { ActiveOrganizationStore } from '../../core/organization/active-organization.store';
+import { RegistrationProgressService } from '../../core/registration/registration-progress.service';
 
 @Component({
   selector: 'app-public-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
@@ -20,12 +22,14 @@ export class PublicLoginComponent {
   private readonly tokenService = inject(AuthTokenService);
   private readonly currentUserStore = inject(CurrentUserStore);
   private readonly activeOrganizationStore = inject(ActiveOrganizationStore);
+  private readonly registrationProgress = inject(RegistrationProgressService);
   private readonly router = inject(Router);
   private readonly formBuilder = inject(FormBuilder);
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
   readonly isPasswordVisible = signal(false);
+  readonly isSignupSelectionVisible = signal(false);
 
   readonly form = this.formBuilder.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -34,6 +38,14 @@ export class PublicLoginComponent {
 
   togglePasswordVisibility(): void {
     this.isPasswordVisible.update(value => !value);
+  }
+
+  showSignupSelection(): void {
+    this.isSignupSelectionVisible.set(true);
+  }
+
+  showLogin(): void {
+    this.isSignupSelectionVisible.set(false);
   }
 
   onSubmit(): void {
@@ -71,8 +83,19 @@ export class PublicLoginComponent {
           return;
         }
         this.activeOrganizationStore.loadFromStorage();
+        this.ensureSingleOrganizationSelected(context);
         // Navigation depends on whether an active organization is already resolved.
         if (!this.activeOrganizationStore.hasActiveOrganization()) {
+          if (context.organizations.length === 0) {
+            if (this.registrationProgress.hasPendingSellerRegistration()) {
+              void this.router.navigate(['/register/seller'], { queryParams: { step: 'seller' } });
+              return;
+            }
+            if (this.registrationProgress.hasPendingFarmRegistration()) {
+              void this.router.navigate(['/register/farmer'], { queryParams: { step: 'farm' } });
+              return;
+            }
+          }
           void this.router.navigate(['/select-organization']);
           return;
         }
@@ -86,6 +109,24 @@ export class PublicLoginComponent {
         }
         this.form.controls.password.setValue('');
       },
+    });
+  }
+
+  private ensureSingleOrganizationSelected(context: CurrentUserContext): void {
+    if (this.activeOrganizationStore.hasActiveOrganization()) {
+      return;
+    }
+
+    if (context.organizations.length !== 1) {
+      return;
+    }
+
+    const organization = context.organizations[0];
+    this.activeOrganizationStore.setActiveOrganization({
+      organizationId: organization.organizationId,
+      organizationName: organization.organizationName,
+      organizationType: organization.type,
+      roles: organization.roles,
     });
   }
 

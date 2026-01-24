@@ -1,0 +1,83 @@
+<div class="purchase-intents-page">
+  <header class="purchase-intents-header">
+    <div>
+      <h1 class="title">Purchase intents</h1>
+      <p class="subtitle">Aqui voce acompanha todas as intencoes de compra criadas pela sua propriedade.</p>
+    </div>
+
+    <a
+      class="btn btn-outline"
+      [routerLink]="['/farmer/marketplace']"
+    >
+      Back to marketplace
+    </a>
+  </header>
+
+  <!-- Loading -->
+  <div
+    class="state state--loading"
+    *ngIf="isLoading()"
+  >
+    <div class="spinner"></div>
+    <span>Loading purchase intents...</span>
+  </div>
+
+  <!-- Error -->
+  <div
+    class="state state--error"
+    *ngIf="!isLoading() && errorMessage()"
+  >
+    <p>{{ errorMessage() }}</p>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="loadIntents()"
+    >
+      Try again
+    </button>
+  </div>
+
+  <!-- Empty -->
+  <div
+    class="state state--empty"
+    *ngIf="isEmpty()"
+  >
+    <p>You don’t have any purchase intents yet.</p>
+    <p class="hint">
+      Go to the
+      <a [routerLink]="['/farmer/marketplace']">marketplace</a>
+      to create your first purchase intent.
+    </p>
+  </div>
+
+  <!-- List -->
+  <div
+    class="table-wrapper"
+    *ngIf="hasIntents()"
+  >
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Vendedor</th>
+          <th class="numeric">Quantity</th>
+          <th>Status</th>
+          <th>Requested at</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let intent of intents()">
+          <td>{{ intent.productName }}</td>
+          <td>{{ intent.sellerName }}</td>
+          <td class="numeric">{{ intent.quantity }}</td>
+          <td>
+            <span [class]="getStatusBadgeClass(intent.status)">
+              {{ intent.status }}
+            </span>
+          </td>
+          <td>{{ formatDate(intent.requestedAtUtc) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

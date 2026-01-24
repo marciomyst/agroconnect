@@ -1,0 +1,279 @@
+<section class="registration-shell">
+  <div class="registration-card">
+    <div class="registration-panel">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <span class="material-symbols-outlined">agriculture</span>
+        </div>
+        <div>
+          <span class="brand-title">AgroConnect</span>
+          <span class="brand-subtitle">Cadastro guiado</span>
+        </div>
+      </div>
+
+      <div class="stepper">
+        <div class="step" [class.is-active]="step() === 'user'" [class.is-complete]="step() === 'seller'">
+          <span class="step-index">1</span>
+          <div>
+            <span class="step-title">Conta</span>
+            <span class="step-caption">Dados do usuario</span>
+          </div>
+        </div>
+        <div class="step" [class.is-active]="step() === 'seller'">
+          <span class="step-index">2</span>
+          <div>
+            <span class="step-title">Vendedor</span>
+            <span class="step-caption">Cadastro do Vendedor</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-heading">
+        <div class="panel-stack">
+          <div
+            class="panel-view"
+            [class.is-active]="step() === 'user'"
+            [attr.aria-hidden]="step() !== 'user' ? 'true' : null"
+          >
+            <h1>Crie sua conta</h1>
+            <p>Preencha seus dados para continuar o cadastro do Vendedor.</p>
+          </div>
+          <div
+            class="panel-view"
+            [class.is-active]="step() === 'seller'"
+            [attr.aria-hidden]="step() !== 'seller' ? 'true' : null"
+          >
+            <h1>Cadastre seu Vendedor</h1>
+            <p>Informe os dados do Vendedor para ativar seu perfil.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="banner" *ngIf="resumeRequired()">
+        Para continuar o cadastro do Vendedor, faca login primeiro.
+        <a class="link" [routerLink]="['/login']">Ir para login</a>
+      </div>
+
+      <div class="panel-stack">
+        <form
+          class="panel-view"
+          [class.is-active]="step() === 'user'"
+          [attr.aria-hidden]="step() !== 'user' ? 'true' : null"
+          [formGroup]="userForm"
+          (ngSubmit)="submitUser()"
+          novalidate
+        >
+          <div class="field">
+            <label for="register-name">Nome completo</label>
+            <div class="input-wrap">
+              <input
+                id="register-name"
+                type="text"
+                formControlName="name"
+                autocomplete="name"
+                placeholder="ex: Ana Pereira"
+                [class.invalid]="userForm.controls.name.touched && userForm.controls.name.invalid"
+              />
+              <span class="material-symbols-outlined" aria-hidden="true">person</span>
+            </div>
+            <span class="field-error" *ngIf="userForm.controls.name.touched && userForm.controls.name.hasError('required')">
+              Informe seu nome.
+            </span>
+            <span class="field-error" *ngIf="userForm.controls.name.touched && userForm.controls.name.hasError('minlength')">
+              Informe um nome mais completo.
+            </span>
+            <span
+              class="field-error"
+              *ngIf="userForm.controls.name.touched && userForm.controls.name.errors?.['server'] && !userForm.controls.name.hasError('required')"
+            >
+              {{ userForm.controls.name.errors?.['server'] }}
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="register-email">E-mail</label>
+            <div class="input-wrap">
+              <input
+                id="register-email"
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                placeholder="ex: ana@fazenda.com"
+                [class.invalid]="userForm.controls.email.touched && userForm.controls.email.invalid"
+              />
+              <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+            </div>
+            <span class="field-error" *ngIf="userForm.controls.email.touched && userForm.controls.email.hasError('required')">
+              Informe seu e-mail.
+            </span>
+            <span class="field-error" *ngIf="userForm.controls.email.touched && userForm.controls.email.hasError('email')">
+              Informe um e-mail valido.
+            </span>
+            <span
+              class="field-error"
+              *ngIf="userForm.controls.email.touched && userForm.controls.email.errors?.['server'] && !userForm.controls.email.hasError('required') && !userForm.controls.email.hasError('email')"
+            >
+              {{ userForm.controls.email.errors?.['server'] }}
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="register-password">Senha</label>
+            <div class="input-wrap">
+              <input
+                id="register-password"
+                type="password"
+                formControlName="password"
+                autocomplete="new-password"
+                placeholder="Crie uma senha"
+                [class.invalid]="userForm.controls.password.touched && userForm.controls.password.invalid"
+              />
+              <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+            </div>
+            <span class="field-error" *ngIf="userForm.controls.password.touched && userForm.controls.password.hasError('required')">
+              Informe uma senha.
+            </span>
+            <span class="field-error" *ngIf="userForm.controls.password.touched && userForm.controls.password.hasError('minlength')">
+              Sua senha deve ter ao menos 8 caracteres.
+            </span>
+            <span
+              class="field-error"
+              *ngIf="userForm.controls.password.touched && userForm.controls.password.errors?.['server'] && !userForm.controls.password.hasError('required') && !userForm.controls.password.hasError('minlength')"
+            >
+              {{ userForm.controls.password.errors?.['server'] }}
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="register-confirm">Confirmar senha</label>
+            <div class="input-wrap">
+              <input
+                id="register-confirm"
+                type="password"
+                formControlName="confirmPassword"
+                autocomplete="new-password"
+                placeholder="Repita sua senha"
+                [class.invalid]="userForm.controls.confirmPassword.touched && userForm.controls.confirmPassword.invalid"
+              />
+              <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+            </div>
+            <span class="field-error" *ngIf="userForm.controls.confirmPassword.touched && userForm.controls.confirmPassword.hasError('required')">
+              Confirme sua senha.
+            </span>
+            <span class="field-error" *ngIf="userForm.touched && userForm.hasError('passwordMismatch')">
+              As senhas nao conferem.
+            </span>
+          </div>
+
+          <div class="global-error" *ngIf="userErrorMessage()" aria-live="polite">
+            {{ userErrorMessage() }}
+          </div>
+
+          <button type="submit" class="submit" [disabled]="userForm.invalid || isSubmittingUser()">
+            <span>{{ isSubmittingUser() ? 'Criando conta...' : 'Continuar cadastro' }}</span>
+            <span class="spinner" *ngIf="isSubmittingUser()" aria-hidden="true"></span>
+          </button>
+
+          <div class="panel-footer">
+            <span>Ja possui uma conta?</span>
+            <a class="link strong" [routerLink]="['/login']">Fazer login</a>
+          </div>
+        </form>
+
+        <form
+          class="panel-view"
+          [class.is-active]="step() === 'seller'"
+          [attr.aria-hidden]="step() !== 'seller' ? 'true' : null"
+          [formGroup]="sellerForm"
+          (ngSubmit)="submitSeller()"
+          novalidate
+        >
+          <div class="field">
+            <label for="seller-tax-id">TaxId (CNPJ)</label>
+            <div class="input-wrap">
+              <input
+                id="seller-tax-id"
+                type="text"
+                formControlName="taxId"
+                autocomplete="off"
+                placeholder="Informe o CNPJ"
+                [class.invalid]="sellerForm.controls.taxId.touched && sellerForm.controls.taxId.invalid"
+              />
+              <span class="material-symbols-outlined" aria-hidden="true">badge</span>
+            </div>
+            <span class="field-error" *ngIf="sellerForm.controls.taxId.touched && sellerForm.controls.taxId.hasError('required')">
+              Informe o TaxId.
+            </span>
+            <span
+              class="field-error"
+              *ngIf="sellerForm.controls.taxId.touched && sellerForm.controls.taxId.errors?.['server'] && !sellerForm.controls.taxId.hasError('required')"
+            >
+              {{ sellerForm.controls.taxId.errors?.['server'] }}
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="seller-corporate-name">Razao Social</label>
+            <div class="input-wrap">
+              <input
+                id="seller-corporate-name"
+                type="text"
+                formControlName="corporateName"
+                autocomplete="organization"
+                placeholder="ex: Agroinsumos Ltda"
+                [class.invalid]="sellerForm.controls.corporateName.touched && sellerForm.controls.corporateName.invalid"
+              />
+              <span class="material-symbols-outlined" aria-hidden="true">domain</span>
+            </div>
+            <span class="field-error" *ngIf="sellerForm.controls.corporateName.touched && sellerForm.controls.corporateName.hasError('required')">
+              Informe a Razao Social.
+            </span>
+            <span
+              class="field-error"
+              *ngIf="sellerForm.controls.corporateName.touched && sellerForm.controls.corporateName.errors?.['server'] && !sellerForm.controls.corporateName.hasError('required')"
+            >
+              {{ sellerForm.controls.corporateName.errors?.['server'] }}
+            </span>
+          </div>
+
+          <div class="global-error" *ngIf="sellerErrorMessage()" aria-live="polite">
+            {{ sellerErrorMessage() }}
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn ghost" (click)="cancelSellerRegistration()">
+              Cancelar agora
+            </button>
+            <button type="submit" class="submit" [disabled]="sellerForm.invalid || isSubmittingSeller()">
+              <span>{{ isSubmittingSeller() ? 'Finalizando...' : 'Finalizar cadastro' }}</span>
+              <span class="spinner" *ngIf="isSubmittingSeller()" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <aside class="registration-aside">
+      <div class="aside-card">
+        <h2>Seu onboarding</h2>
+        <p>Complete o cadastro para publicar seus produtos e receber pedidos.</p>
+        <div class="aside-steps">
+          <div class="aside-step" [class.is-active]="step() === 'user'">
+            <span>1</span>
+            <div>
+              <strong>Conta</strong>
+              <p>Crie seu acesso com e-mail e senha.</p>
+            </div>
+          </div>
+          <div class="aside-step" [class.is-active]="step() === 'seller'">
+            <span>2</span>
+            <div>
+              <strong>Vendedor</strong>
+              <p>Cadastre os dados do Vendedor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>

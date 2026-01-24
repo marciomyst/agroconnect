@@ -1,120 +1,185 @@
 <section class="login-shell">
   <div class="login-card">
     <div class="login-panel">
-      <div class="brand">
-        <div class="brand-icon" aria-hidden="true">
-          <span class="material-symbols-outlined">agriculture</span>
-        </div>
-        <h2>AgroConnect</h2>
-      </div>
-
-      <div class="panel-heading">
-        <h1>Bem-vindo de volta</h1>
-        <p>
-          Acesse sua conta para conectar-se com os melhores revendedores e potencializar sua colheita.
-        </p>
-      </div>
-
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-        <div class="field">
-          <label for="login-email">E-mail</label>
-          <div class="input-wrap">
-            <input
-              id="login-email"
-              type="email"
-              formControlName="email"
-              autocomplete="email"
-              placeholder="ex: joao.silva@agro.com"
-              [class.invalid]="form.controls.email.touched && form.controls.email.invalid"
-            />
-            <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+      <ng-container *ngIf="!isSignupSelectionVisible(); else signupSelection">
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">
+            <span class="material-symbols-outlined">agriculture</span>
           </div>
-          <span class="field-error" *ngIf="form.controls.email.touched && form.controls.email.hasError('required')">
-            Informe seu e-mail.
-          </span>
-          <span class="field-error" *ngIf="form.controls.email.touched && form.controls.email.hasError('email')">
-            Informe um e-mail valido.
-          </span>
-          <span
-            class="field-error"
-            *ngIf="form.controls.email.touched && form.controls.email.errors?.['server'] && !form.controls.email.hasError('required') && !form.controls.email.hasError('email')"
-          >
-            {{ form.controls.email.errors?.['server'] }}
-          </span>
+          <h2>AgroConnect</h2>
         </div>
 
-        <div class="field">
-          <label for="login-password">Senha</label>
-          <div class="input-wrap">
-            <input
-              id="login-password"
-              [type]="isPasswordVisible() ? 'text' : 'password'"
-              formControlName="password"
-              autocomplete="current-password"
-              placeholder="Digite sua senha"
-              [class.invalid]="form.controls.password.touched && form.controls.password.invalid"
-            />
-            <button
-              type="button"
-              class="password-toggle"
-              (click)="togglePasswordVisibility()"
-              [attr.aria-pressed]="isPasswordVisible()"
-              aria-label="Mostrar ou ocultar senha"
+        <div class="panel-heading">
+          <h1>Bem-vindo de volta</h1>
+          <p>
+            Acesse sua conta para conectar-se com os melhores Vendedores e potencializar sua colheita.
+          </p>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <div class="field">
+            <label for="login-email">E-mail</label>
+            <div class="input-wrap">
+              <input
+                id="login-email"
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                placeholder="ex: joao.silva@agro.com"
+                [class.invalid]="form.controls.email.touched && form.controls.email.invalid"
+              />
+              <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+            </div>
+            <span class="field-error" *ngIf="form.controls.email.touched && form.controls.email.hasError('required')">
+              Informe seu e-mail.
+            </span>
+            <span class="field-error" *ngIf="form.controls.email.touched && form.controls.email.hasError('email')">
+              Informe um e-mail valido.
+            </span>
+            <span
+              class="field-error"
+              *ngIf="form.controls.email.touched && form.controls.email.errors?.['server'] && !form.controls.email.hasError('required') && !form.controls.email.hasError('email')"
             >
-              <span class="material-symbols-outlined">
-                {{ isPasswordVisible() ? 'visibility' : 'visibility_off' }}
+              {{ form.controls.email.errors?.['server'] }}
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="login-password">Senha</label>
+            <div class="input-wrap">
+              <input
+                id="login-password"
+                [type]="isPasswordVisible() ? 'text' : 'password'"
+                formControlName="password"
+                autocomplete="current-password"
+                placeholder="Digite sua senha"
+                [class.invalid]="form.controls.password.touched && form.controls.password.invalid"
+              />
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="togglePasswordVisibility()"
+                [attr.aria-pressed]="isPasswordVisible()"
+                aria-label="Mostrar ou ocultar senha"
+              >
+                <span class="material-symbols-outlined">
+                  {{ isPasswordVisible() ? 'visibility' : 'visibility_off' }}
+                </span>
+              </button>
+            </div>
+            <span class="field-error" *ngIf="form.controls.password.touched && form.controls.password.hasError('required')">
+              Informe sua senha.
+            </span>
+            <span class="field-error" *ngIf="form.controls.password.touched && form.controls.password.hasError('minlength')">
+              Sua senha deve ter ao menos 8 caracteres.
+            </span>
+            <span
+              class="field-error"
+              *ngIf="form.controls.password.touched && form.controls.password.errors?.['server'] && !form.controls.password.hasError('required') && !form.controls.password.hasError('minlength')"
+            >
+              {{ form.controls.password.errors?.['server'] }}
+            </span>
+          </div>
+
+          <div class="form-actions">
+            <a class="link" href="#">Esqueci minha senha</a>
+          </div>
+
+          <div class="global-error" *ngIf="errorMessage()" aria-live="polite">
+            {{ errorMessage() }}
+          </div>
+
+          <button type="submit" class="submit" [disabled]="form.invalid || isLoading()">
+            <span>{{ isLoading() ? 'Entrando...' : 'Entrar na plataforma' }}</span>
+            <span class="spinner" *ngIf="isLoading()" aria-hidden="true"></span>
+          </button>
+
+          <div class="divider" aria-hidden="true">
+            <span>Ou continue com</span>
+          </div>
+
+          <button type="button" class="biometric">
+            <span class="material-symbols-outlined" aria-hidden="true">fingerprint</span>
+            Entrar com Biometria
+          </button>
+        </form>
+
+        <div class="panel-footer">
+          <span>Ainda nao tem uma conta?</span>
+          <button type="button" class="link strong link-button" (click)="showSignupSelection()">
+            Cadastrar-se gratuitamente
+          </button>
+        </div>
+
+        <div class="panel-links">
+          <a class="link" href="#">Termos de Uso</a>
+          <span aria-hidden="true">|</span>
+          <a class="link" href="#">Privacidade</a>
+          <span aria-hidden="true">|</span>
+          <a class="link" href="#">Ajuda</a>
+        </div>
+      </ng-container>
+
+      <ng-template #signupSelection>
+        <div class="signup-panel">
+          <div class="brand">
+            <div class="brand-icon" aria-hidden="true">
+              <span class="material-symbols-outlined">agriculture</span>
+            </div>
+            <h2>AgroConnect</h2>
+          </div>
+
+          <div class="signup-heading">
+            <h1>Vamos comecar?</h1>
+            <p>
+              Selecione o tipo de perfil que melhor se adapta as suas necessidades para criar sua conta gratuita.
+            </p>
+          </div>
+
+          <div class="signup-options">
+            <button type="button" class="signup-option" [routerLink]="['/register/farmer']">
+              <span class="signup-option-icon">
+                <span class="material-symbols-outlined">potted_plant</span>
               </span>
+              <span class="signup-option-text">
+                <span class="signup-option-title">Sou Produtor Rural</span>
+                <span class="signup-option-copy">
+                  Desejo comprar defensivos, comparar precos e participar de enquetes do setor.
+                </span>
+              </span>
+              <span class="signup-option-arrow material-symbols-outlined">arrow_forward_ios</span>
+            </button>
+
+            <button type="button" class="signup-option" [routerLink]="['/register/seller']">
+              <span class="signup-option-icon">
+                <span class="material-symbols-outlined">storefront</span>
+              </span>
+              <span class="signup-option-text">
+                <span class="signup-option-title">Sou Vendedor</span>
+                <span class="signup-option-copy">
+                  Sou um vendedor e desejo gerenciar meus produtos e realizar vendas online.
+                </span>
+              </span>
+              <span class="signup-option-arrow material-symbols-outlined">arrow_forward_ios</span>
             </button>
           </div>
-          <span class="field-error" *ngIf="form.controls.password.touched && form.controls.password.hasError('required')">
-            Informe sua senha.
-          </span>
-          <span class="field-error" *ngIf="form.controls.password.touched && form.controls.password.hasError('minlength')">
-            Sua senha deve ter ao menos 8 caracteres.
-          </span>
-          <span
-            class="field-error"
-            *ngIf="form.controls.password.touched && form.controls.password.errors?.['server'] && !form.controls.password.hasError('required') && !form.controls.password.hasError('minlength')"
-          >
-            {{ form.controls.password.errors?.['server'] }}
-          </span>
+
+          <div class="signup-login">
+            <span>Ja possui uma conta?</span>
+            <button type="button" class="link strong link-button" (click)="showLogin()">
+              Fazer login
+            </button>
+          </div>
+
+          <div class="panel-links">
+            <a class="link" href="#">Termos de Uso</a>
+            <span aria-hidden="true">|</span>
+            <a class="link" href="#">Privacidade</a>
+            <span aria-hidden="true">|</span>
+            <a class="link" href="#">Ajuda</a>
+          </div>
         </div>
-
-        <div class="form-actions">
-          <a class="link" href="#">Esqueci minha senha</a>
-        </div>
-
-        <div class="global-error" *ngIf="errorMessage()" aria-live="polite">
-          {{ errorMessage() }}
-        </div>
-
-        <button type="submit" class="submit" [disabled]="form.invalid || isLoading()">
-          <span>{{ isLoading() ? 'Entrando...' : 'Entrar na plataforma' }}</span>
-          <span class="spinner" *ngIf="isLoading()" aria-hidden="true"></span>
-        </button>
-
-        <div class="divider" aria-hidden="true">
-          <span>Ou continue com</span>
-        </div>
-
-        <button type="button" class="biometric">
-          <span class="material-symbols-outlined" aria-hidden="true">fingerprint</span>
-          Entrar com Biometria
-        </button>
-      </form>
-
-      <div class="panel-footer">
-        <span>Ainda nao tem uma conta?</span>
-        <a class="link strong" href="#">Cadastre-se gratuitamente</a>
-      </div>
-
-      <div class="panel-links">
-        <a class="link" href="#">Termos de Uso</a>
-        <span aria-hidden="true">|</span>
-        <a class="link" href="#">Privacidade</a>
-        <span aria-hidden="true">|</span>
-        <a class="link" href="#">Ajuda</a>
-      </div>
+      </ng-template>
     </div>
 
     <div class="login-hero" aria-hidden="true">

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, finalize } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActiveOrganizationStore } from '../../../core/organization/active-organization.store';
@@ -10,7 +10,7 @@ import { SellerCatalogApiService, ProductListItem } from '../services/seller-cat
 @Component({
   selector: 'app-seller-catalog-form-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './seller-catalog-form-page.component.html',
   styleUrls: ['./seller-catalog-form-page.component.scss'],
 })

@@ -26,7 +26,7 @@ export class PublicLayoutComponent {
 
   readonly showChrome = computed(() => {
     const url = this.currentUrl().split('?')[0];
-    return url !== '/login';
+    return !(url === '/login' || url.startsWith('/register'));
   });
 
   constructor() {
